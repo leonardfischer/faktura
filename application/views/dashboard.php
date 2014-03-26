@@ -50,7 +50,7 @@
 				<tbody>
 				<? foreach ($invoices as $invoice): ?>
 					<tr>
-						<td><?=implode('</td><td>', $invoice->get_table_data(array('invoice_no'))) ?></td>
+						<td><?=implode('</td><td>', $invoice->get_table_data(array('invoice_no'))); ?></td>
 					</tr>
 				<? endforeach; ?>
 				</tbody>

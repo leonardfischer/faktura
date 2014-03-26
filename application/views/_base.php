@@ -84,18 +84,6 @@
 		<?php if (Kohana::$environment == Kohana::DEVELOPMENT): ?>
 		<hr />
 
-		<p>
-			<strong>To-dos</strong><br />
-			<ul>
-				<li>Kunden-Filter ggf. mit Ajax</li>
-				<li>Startseite / Dashboard erweitern...</li>
-				<li class="mt10 text-muted">Passwort zurücksetzen</li>
-				<li class="text-muted">Sprache via GUI auswählen</li>
-			</ul>
-		</p>
-
-		<hr />
-
 		<?=View::factory('profiler/stats') ?>
 		<?php endif; ?>
 	</div>

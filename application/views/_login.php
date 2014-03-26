@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 	<meta charset="utf-8">
-	<title>Login - Faktura</title>
+	<title>Login - <?php echo $config->get('title') ?></title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
@@ -40,7 +40,7 @@
 
 				<h2><?=__('Welcome, please login to proceed') ?></h2>
 
-				<form class="well well-sm" method="post">
+				<form class="well well-sm" method="post" action="<?php echo Route::url('user', array('action' => 'login')) ?>">
 
 					<input type="text" class="form-control form-group" placeholder="<?=__('Username') ?>" name="username" required autofocus>
 					<input type="password" class="form-control form-group" placeholder="<?=__('Password') ?>" name="password" required>
@@ -50,9 +50,7 @@
 					</label>
 
 					<?php if (isset($error)): ?>
-					<div class="alert alert-danger">
-						<?=$error ?>
-					</div>
+					<div class="alert alert-danger"><?=$error ?></div>
 					<?php endif; ?>
 
 					<button class="btn btn-lg btn-primary btn-block" type="submit"><?=__('Sign in') ?></button>

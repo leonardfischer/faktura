@@ -49,7 +49,7 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
  * saying "Couldn't find constant Kohana::<INVALID_ENV_NAME>"
  */
 Kohana::$environment = Kohana::DEVELOPMENT;
-Kohana::$environment = Kohana::PRODUCTION;
+// Kohana::$environment = Kohana::PRODUCTION;
 
 /**
  * Initialize Kohana, setting the default options.
@@ -95,9 +95,7 @@ Kohana::modules(array(
 	'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	));
 
-/**
- * Load Base configuration and set some constants.
- */
+// Load Base configuration and set some constants.
 $config = Kohana::$config->load('base');
 
 // Set the default time zone.
@@ -108,67 +106,30 @@ setlocale(LC_ALL, $config['locale']);
 I18n::lang($config['language']);
 
 // Setting some constants.
-define('SYSTEM_VERSION', '1.0');
-
+define('SYSTEM_VERSION', '1.0.0');
 define('ORM_ID', 'id');
 define('ORM_DATE', 'date');
 define('ORM_INT', 'integer');
 define('ORM_FLOAT', 'float');
 define('ORM_STRING', 'string');
 define('ORM_TEXT', 'text');
-
 define('FORM_TYPE_TEXT', 'text');
 define('FORM_TYPE_TEXTAREA', 'textarea');
 define('FORM_TYPE_EMAIL', 'email');
 define('FORM_TYPE_MONEY', 'money');
 define('FORM_TYPE_CHECKBOX', 'checkbox');
 define('FORM_TYPE_DATE', 'date');
-
 define('INVOICE_FILTER_ALL', 'all');
 define('INVOICE_FILTER_OPEN', 'open');
 define('INVOICE_FILTER_REMINDER', 'reminder');
 
-/**
- * Set the routes. Each route must have a minimum of a name, a URI and a set of
- * defaults for the URI.
- */
-Route::set('invoice', 'invoice(/<action>(/<id>))')
-    ->defaults(array(
-        'controller' => 'invoice',
-        'action'     => 'list',
-    ));
+// Set the routes. Each route must have a minimum of a name, a URI and a set of defaults for the URI.
+Route::set('invoice', 'invoice(/<action>(/<id>))')->defaults(array('controller' => 'invoice', 'action' => 'list'))
+	->set('customer', 'customer(/<action>(/<id>))')->defaults(array('controller' => 'customer', 'action' => 'list'))
+	->set('supplier', 'supplier(/<action>(/<id>))')->defaults(array('controller' => 'supplier', 'action' => 'list'))
+	->set('supplier', 'supplier(/<action>(/<id>))')->defaults(array('controller' => 'supplier', 'action' => 'list'))
+	->set('print', 'print/<action>(/<id>(/<misc>))', array('misc' => '.*'))->defaults(array('controller' => 'print'))
+	->set('user', 'user(/<action>(/<id>))')->defaults(array('controller' => 'user', 'action' => 'login'))
+	->set('default', '(<controller>(/<action>(/<id>)))')->defaults(array('controller' => 'dashboard', 'action' => 'index'));
 
-Route::set('customer', 'customer(/<action>(/<id>))')
-	->defaults(array(
-		'controller' => 'customer',
-		'action'     => 'list',
-	));
-
-Route::set('supplier', 'supplier(/<action>(/<id>))')
-	->defaults(array(
-		'controller' => 'supplier',
-		'action'     => 'list',
-	));
-
-Route::set('supplier', 'supplier(/<action>(/<id>))')
-	->defaults(array(
-		'controller' => 'supplier',
-		'action'     => 'list',
-	));
-
-Route::set('print', 'print/<action>(/<id>(/<misc>))', array('misc' => '.*'))
-	->defaults(array(
-		'controller' => 'print'
-	));
-
-Route::set('user', 'user(/<action>(/<id>))')
-	->defaults(array(
-		'controller' => 'user',
-		'action' => 'login'
-	));
-
-Route::set('default', '(<controller>(/<action>(/<id>)))')
-	->defaults(array(
-		'controller' => 'dashboard',
-		'action'     => 'index',
-	));
+View::set_global('config', $config);
