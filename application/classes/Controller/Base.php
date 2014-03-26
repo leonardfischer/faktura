@@ -1,12 +1,22 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ * Controller class "Base"
+ *
+ * @see         Controller_Template  The extended template controller class.
+ * @category    Controller
+ * @package     Faktura
+ * @author      Leonard Fischer <post@leonardfischer.de>
+ * @copyrights  2014 Leonard Fischer
+ * @version     1.0
+ */
 class Controller_Base extends Controller_Template
 {
-    /**
-     * This variable will hold the global View template.
-     * @var  View  page template
-     */
-    public $template = '_base';
+	/**
+	 * This variable will hold the global View template.
+	 * @var  View  page template
+	 */
+	public $template = '_base';
 
 	/**
 	 * This variable will hold the content View template.
@@ -56,9 +66,7 @@ class Controller_Base extends Controller_Template
 			// This foreach loop will collect all the assigned user-roles.
 			$this->user_roles = $this->auth->get_user()->get_roles();
 
-			View::set_global('config', $this->config);
-			View::set_global('user', $this->auth->get_user());
-			View::set_global('user_roles', $this->user_roles);
+			View::set_global(array('user' => $this->auth->get_user(), 'user_roles' => $this->user_roles));
 		} // if
 	} // function
 
@@ -69,7 +77,7 @@ class Controller_Base extends Controller_Template
 	 * @param  ORM      $orm
 	 * @param  integer  $rows_per_page
 	 */
-	protected function ajax_list (ORM $orm, $rows_per_page = 40)
+	protected function ajax_list(ORM $orm, $rows_per_page = 40)
 	{
 		$result = array(
 			'success' => true,
@@ -108,11 +116,11 @@ class Controller_Base extends Controller_Template
 	 * Necessary "after" Method, which assigns some stuff to the template.
 	 */
 	public function after()
-    {
-        $this->template
-	        ->set('content', $this->content)
-            ->set('basedir', Kohana::$base_url);
+	{
+		$this->template
+			->set('content', $this->content)
+			->set('basedir', Kohana::$base_url);
 
-        parent::after();
-    } // function
+		parent::after();
+	} // function
 } // class

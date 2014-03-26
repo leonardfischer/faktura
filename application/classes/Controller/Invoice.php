@@ -1,5 +1,14 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ * Controller class "Invoice"
+ *
+ * @category    Controller
+ * @package     Faktura
+ * @author      Leonard Fischer <post@leonardfischer.de>
+ * @copyrights  2014 Leonard Fischer
+ * @version     1.0
+ */
 class Controller_Invoice extends Controller_Base
 {
 	/**
@@ -230,7 +239,7 @@ class Controller_Invoice extends Controller_Base
 	 *
 	 * @throws  HTTP_Exception_403
 	 */
-	public function action_search ()
+	public function action_search()
 	{
 		if (! $this->request->is_ajax())
 		{
@@ -312,7 +321,7 @@ class Controller_Invoice extends Controller_Base
 	 * @throws  HTTP_Exception_403
 	 * @throws  HTTP_Exception_404
 	 */
-	public function action_get_positions ()
+	public function action_get_positions()
 	{
 		if (! $this->request->is_ajax())
 		{

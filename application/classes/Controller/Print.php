@@ -1,5 +1,14 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ * Controller class "Print"
+ *
+ * @category    Controller
+ * @package     Faktura
+ * @author      Leonard Fischer <post@leonardfischer.de>
+ * @copyrights  2014 Leonard Fischer
+ * @version     1.0
+ */
 class Controller_Print extends Controller_Base
 {
 	/**
@@ -20,6 +29,7 @@ class Controller_Print extends Controller_Base
 	 */
 	const LINES_FOLLOWING_PAGES = 34;
 
+
 	/**
 	 * Necessary "before" Method, which checks if the user is allowed to execute this controller.
 	 */
@@ -37,7 +47,7 @@ class Controller_Print extends Controller_Base
 	/**
 	 * This action will display the "invoice" print template.
 	 */
-	public function action_invoice ()
+	public function action_invoice()
 	{
 		$id = $this->request->param('id');
 
@@ -86,7 +96,7 @@ class Controller_Print extends Controller_Base
 	/**
 	 * This action will display the "delivery note" print template.
 	 */
-	public function action_delivery_note ()
+	public function action_delivery_note()
 	{
 		$id = $this->request->param('id');
 
@@ -128,7 +138,7 @@ class Controller_Print extends Controller_Base
 	/**
 	 * This action will display the "order confirmation" print template.
 	 */
-	public function action_order_confirmation ()
+	public function action_order_confirmation()
 	{
 		$id = $this->request->param('id');
 
@@ -177,7 +187,7 @@ class Controller_Print extends Controller_Base
 	/**
 	 * This action will display the "credit" print template.
 	 */
-	public function action_credit ()
+	public function action_credit()
 	{
 		$id = $this->request->param('id');
 
@@ -235,7 +245,7 @@ class Controller_Print extends Controller_Base
 	/**
 	 * This action will display the "reminder" print template.
 	 */
-	public function action_reminder ()
+	public function action_reminder()
 	{
 		$id = $this->request->param('id');
 

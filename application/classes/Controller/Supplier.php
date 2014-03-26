@@ -1,5 +1,14 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ * Controller class "Supplier"
+ *
+ * @category    Controller
+ * @package     Faktura
+ * @author      Leonard Fischer <post@leonardfischer.de>
+ * @copyrights  2014 Leonard Fischer
+ * @version     1.0
+ */
 class Controller_Supplier extends Controller_Base
 {
 	/**
@@ -147,7 +156,7 @@ class Controller_Supplier extends Controller_Base
 	 *
 	 * @throws  HTTP_Exception_403
 	 */
-	public function action_search ()
+	public function action_search()
 	{
 		if (! $this->request->is_ajax())
 		{

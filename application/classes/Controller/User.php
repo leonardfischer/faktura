@@ -1,5 +1,14 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ * Controller class "User"
+ *
+ * @category    Controller
+ * @package     Faktura
+ * @author      Leonard Fischer <post@leonardfischer.de>
+ * @copyrights  2014 Leonard Fischer
+ * @version     1.0
+ */
 class Controller_User extends Controller_Base
 {
 	/**
@@ -78,7 +87,7 @@ class Controller_User extends Controller_Base
 	/**
 	 * "Edit" action for loading the form template and filling it with data.
 	 */
-	public function action_edit ()
+	public function action_edit()
 	{
 		$id = $this->request->param('id');
 
@@ -139,7 +148,7 @@ class Controller_User extends Controller_Base
 	/**
 	 * "Save" action for creating/updating a user. This will be called via ajax.
 	 */
-	public function action_save ()
+	public function action_save()
 	{
 		if (! $this->request->is_ajax())
 		{
@@ -222,5 +231,5 @@ class Controller_User extends Controller_Base
 
 		// Write the JSON directly to the response body.
 		$this->response->body(json_encode($result));
-	}
+	} // function
 } // class

@@ -1,7 +1,19 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ * Controller class "Dashboard"
+ *
+ * @category    Controller
+ * @package     Faktura
+ * @author      Leonard Fischer <post@leonardfischer.de>
+ * @copyrights  2014 Leonard Fischer
+ * @version     1.0
+ */
 class Controller_Dashboard extends Controller_Base
 {
+	/**
+	 * Index action.
+	 */
 	public function action_index()
 	{
 		$this->content = View::factory('dashboard')
@@ -40,7 +52,7 @@ class Controller_Dashboard extends Controller_Base
 	 *
 	 * @return  Controller_Dashboard
 	 */
-	protected function open_invoices_and_reminders ()
+	protected function open_invoices_and_reminders()
 	{
 		$this->content
 			->set('open_invoices', ORM::factory('invoice')->where('paid_on_date', '=', null)->order_by('id', 'DESC')->count_all())
@@ -55,7 +67,7 @@ class Controller_Dashboard extends Controller_Base
 	 *
 	 * @return  Controller_Dashboard
 	 */
-	protected function invoice_value_last_month ()
+	protected function invoice_value_last_month()
 	{
 		$l_value_last_month = 0;
 
@@ -82,7 +94,7 @@ class Controller_Dashboard extends Controller_Base
 	 *
 	 * @return  Controller_Dashboard
 	 */
-	protected function last_invoices ()
+	protected function last_invoices()
 	{
 		$this->content
 			->set('invoices', ORM::factory('invoice')->order_by('id', 'DESC')->limit(5)->find_all());
