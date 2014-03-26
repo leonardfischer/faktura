@@ -1,0 +1,67 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+a,b,body,div,footer,h1,h2,h3,h4,h5,h6,header,html,i,li,p,pre,small,span,strong,table,tbody,td,tfoot,th,thead,tr,u,ul{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}footer,header{display:block}ul{list-style:none}table{width: 100%;border-collapse:collapse;border-spacing:0}
+
+body {
+	line-height:1.2;
+	font-family: Courier New, Lucida Console, Monospace, Monaco, monospace;
+	font-size: 11pt;
+}
+
+#container {
+	/* margin: 2.25cm; */
+	margin: 1.5cm 1.5cm 3cm;
+}
+
+small {
+	/* font-size: 8pt; */
+	font-size: 6pt;
+	color: #888;
+}
+
+header {
+	padding: 2.25cm 0 2cm;
+	height: 3cm;
+}
+
+h1 {
+	font-size: 18pt;
+}
+
+table.spacing tbody tr td {
+	padding: 0.25cm 0;
+	border-bottom: 1px dotted #aaa;
+}
+
+table.spacing tbody tr:last-child td {
+	border-bottom: none;
+}
+
+.border-top { border-top: 1px solid #000; }
+.border-bottom { border-bottom: 1px solid #000; }
+
+.left { text-align: left; }
+.center { text-align: center; }
+.right { text-align: right; }
+
+.mt5 { margin-top: 0.5cm; }
+.mt10 { margin-top: 1cm; }
+.mt15 { margin-top: 1.5cm; }
+.mt20 { margin-top: 2cm; }
+
+.mb5 { margin-bottom: 0.5cm; }
+.mb10 { margin-bottom: 1cm; }
+.mb15 { margin-bottom: 1.5cm; }
+.mb20 { margin-bottom: 2cm; }
+
+.page-break	{
+	position: relative;
+	page-break-before: always;
+}
+
+div.page-break {
+	height: 4cm;
+}

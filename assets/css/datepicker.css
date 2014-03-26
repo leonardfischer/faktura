@@ -1,0 +1,203 @@
+.datepicker {
+	background: #f5f5f5;
+	border: 1px solid #e3e3e3;
+	height: 225px;
+	line-height: normal;
+	padding: 5px;
+	position: absolute;
+	width: 230px;
+}
+
+.datepicker .header {
+	height: 25px;
+	margin-bottom: 5px;
+	position: relative;
+}
+
+.datepicker .header .title {
+	margin: 0 30px;
+	height: 25px;
+	text-align: center;
+}
+
+.datepicker .header .previous,
+.datepicker .header .next,
+.datepicker .header .closeButton {
+	top: 0;
+	cursor: pointer;
+	overflow: hidden;
+	position: absolute;
+	text-align: center;
+	width: 25px;
+	height: 25px;
+}
+
+.datepicker .header .previous {
+	left: 0;
+}
+
+.datepicker .header .next {
+	right: 0;
+}
+
+.datepicker .header .previous:hover,
+.datepicker .header .title:hover,
+.datepicker .header .next:hover,
+.datepicker .days .week .day:hover,
+.datepicker .months .month:hover,
+.datepicker .years .year:hover {
+	background: #007fff;
+	color: #fff;
+}
+
+.datepicker .days .selected,
+.datepicker .months .selected,
+.datepicker .years .selected {
+	background: #000;
+	color: #fff;
+}
+
+.datepicker .header .closeButton {
+	display: none;
+	right: 0;
+	top: 0;
+}
+
+.datepicker .body {
+	height: 185px;
+	left: 2px;
+	overflow: hidden;
+	position: relative;
+	top: 0;
+	width: 220px;
+}
+
+.datepicker .time {
+	height: 100%;
+	position: relative;
+	width: 100%;
+}
+
+.datepicker .time .hour,
+.datepicker .time .separator,
+.datepicker .time .minutes {
+	background: none repeat scroll 0 0 #ffffff;
+	border: 1px solid #cccccc;
+	font-size: 32px;
+	padding: 2px;
+	position: absolute;
+	text-align: center;
+	top: 10px;
+	width: 50px;
+}
+
+.datepicker .time .hour {
+	left: 15px;
+}
+
+.datepicker .time .separator {
+	background: none repeat scroll 0 0 transparent;
+	border: 0 none;
+	left: 76px;
+	width: 10px;
+}
+
+.datepicker .time .minutes {
+	left: 95px;
+}
+
+.datepicker .time .ok {
+	font-size: 20px;
+	left: 15px;
+	position: absolute;
+	top: 65px;
+	width: 136px;
+}
+
+.datepicker .days .day {
+	float: left;
+	height: 25px;
+	margin: 0 1px 1px 0;
+	overflow: hidden;
+	text-align: center;
+	width: 30px;
+}
+
+.datepicker .days .titles {
+	border-top: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+	height: 15px;
+	margin-bottom: 1px;
+}
+
+.datepicker .days .day0 {
+	margin-right: 0;
+}
+
+.datepicker .days .week5 .day {
+	margin-bottom: 0;
+}
+
+.datepicker .days .week .day {
+	cursor: pointer;
+}
+
+.datepicker .days .otherMonth {
+	color: #999;
+}
+
+.datepicker .months .month {
+	cursor: pointer;
+	float: left;
+	height: 40px;
+	margin: 0 1px 1px 0;
+	overflow: hidden;
+	padding-top: 8px;
+	text-align: center;
+	width: 70px;
+}
+
+.datepicker .months .month3,
+.datepicker .months .month6,
+.datepicker .months .month9,
+.datepicker .months .month12 {
+	margin-right: 0;
+}
+
+.datepicker .months .month10,
+.datepicker .months .month11,
+.datepicker .months .month12 {
+	margin-bottom: 0;
+}
+
+.datepicker .years .year {
+	cursor: pointer;
+	float: left;
+	height: 35px;
+	margin: 0 1px 1px 0;
+	overflow: hidden;
+	padding-top: 7px;
+	text-align: center;
+	width: 52px;
+}
+
+.datepicker .years .year4,
+.datepicker .years .year9,
+.datepicker .years .year14,
+.datepicker .years .year19 {
+	margin-right: 0;
+}
+
+.datepicker .years .year15,
+.datepicker .years .year16,
+.datepicker .years .year17,
+.datepicker .years .year18,
+.datepicker .years .year19 {
+	margin-bottom: 0;
+}
+
+.datepicker .unavailable {
+	background: none repeat scroll 0 0 transparent !important;
+	color: #ffbbbb !important;
+	cursor: default !important;
+}
