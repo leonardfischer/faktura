@@ -98,6 +98,7 @@ return array(
 	'Engineer hour price' => 'Techniker Stundensatz',
 	'Call out price' => 'Anfahrtskosten',
 	'Description' => 'Beschreibung',
+	'No customer data' => 'Keine Kundendaten',
 
 	// Main menu
 	'Invoices' => 'Rechnungen',

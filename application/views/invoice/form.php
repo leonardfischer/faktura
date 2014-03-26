@@ -311,5 +311,6 @@
 		.set('form.loading-message', '<img src="<?=URL::base() ?>assets/img/loading-on-grey.gif" /> <?=__('Loading, please wait...') ?>')
 		.set('form.success-message', '<?=__('The data has been saved') ?>')
 		.set('searchable.min_length', '<?=$config->get('search_minlength', 3); ?>')
-		.set('searchable.placeholder', '<?=__('Search - insert at least :minlength characters'); ?>');
+		.set('searchable.placeholder', '<?=__('Search - insert at least :minlength characters'); ?>')
+		.set('searchable.no-data-message', '<?=__('No customer data'); ?>');
 </script>

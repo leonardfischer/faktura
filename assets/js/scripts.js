@@ -240,6 +240,16 @@ var Searchable = new Class({
 		this.minlength = 3;
 		this.container = new Element('div.searchable-plugin');
 
+		// If no item could be found, we just display "no data".
+		if (this.selection.length === 0) {
+			this.container
+				.grab(new Element('button.dropdown-toggle.btn.btn-block.btn-default', {type: 'button'})
+					.grab(new Element('span', {text: Factura.get('searchable.no-data-message')})));
+			el.setStyle('display', 'none').grab(this.container, 'after');
+
+			return;
+		}
+
 		this.toggler = new Element('button.dropdown-toggle', {type:'button', class:'btn btn-block btn-default', 'data-toggle':'dropdown'})
 			.grab(new Element('i.icon-search'))
 			.grab(new Element('span', {text:this.selection.get('text')}))

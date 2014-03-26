@@ -110,9 +110,9 @@ class Model_User extends Model_Auth_User
 			$this->username,
 			(empty($this->email) ? '<i class="icon-envelope-alt"></i>' : '<a href="mailto:' . $this->email . '" target="_blank" title="' . $this->email . '"><i class="icon-envelope"></i></a>'),
 			$this->last_login(),
-			'<td><div class="btn-group">' .
+			'<div class="btn-group">' .
 				'<a class="btn btn-primary btn-sm" href="' . Route::url('user', array('action' => 'edit', 'id' => $this->id)) . '">' . __('Edit') . '</a>' .
-				'</div></td>'
+				'</div>'
 		);
 	} // function
 
