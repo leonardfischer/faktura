@@ -212,6 +212,10 @@ var Pager = new Class({
 	},
 
 	handle_pager_classes: function () {
+		if (this.options.items === 0) {
+			return;
+		}
+
 		this.options.pager.map(function(el) {
 			el.getElements('li').invoke('removeClass', 'disabled').invoke('removeClass', 'active');
 
