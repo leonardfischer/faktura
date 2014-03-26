@@ -1,11 +1,14 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-/*
- * - Invoice Notice ist obsolet: Eine Mahnung ist eine Rechnung, die nach x Tagen noch nicht bezahlt wurde - Mahnungen werden nicht manuell erstellt
+/**
+ * Model class "Invoice"
  *
- * - Rechnungen um eine Beschreibung ergänzen
+ * @category    Model
+ * @package     Faktura
+ * @author      Leonard Fischer <post@leonardfischer.de>
+ * @copyrights  2014 Leonard Fischer
+ * @version     1.0
  */
-
 class Model_Invoice extends ORM
 {
 	/**

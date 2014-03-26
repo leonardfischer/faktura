@@ -1,5 +1,15 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
+/**
+ * Model class "User"
+ *
+ * @see         Model_Auth_User  The extended Auth model class.
+ * @category    Model
+ * @package     Faktura
+ * @author      Leonard Fischer <post@leonardfischer.de>
+ * @copyrights  2014 Leonard Fischer
+ * @version     1.0
+ */
 class Model_User extends Model_Auth_User
 {
 	/**
