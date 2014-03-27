@@ -61,6 +61,13 @@
 	<div class="col-sm-6 col-md-4">
 		<div class="well well-sm">
 			<h3 class="mt0"><?= __('System status') ?></h3>
+
+			<?php if (count($alerts)): ?>
+			<?php foreach ($alerts as $alert): ?>
+					<div class="alert alert-danger"><?php echo $alert; ?></div>
+			<?php endforeach; ?>
+			<?php endif; ?>
+
 			<table class="table table-striped">
 				<tbody>
 				<tr>

@@ -131,13 +131,19 @@ class Model_Customer extends ORM
 			'label' => 'Engineer hour price',
 			'type' => ORM_FLOAT,
 			'form_type' => FORM_TYPE_MONEY,
-			'form' => true
+			'form' => true,
+			'filters' => array(
+				array('Num::filter_number')
+			)
 		),
 		'call_out_price' => array(
 			'label' => 'Call out price',
 			'type' => ORM_FLOAT,
 			'form_type' => FORM_TYPE_MONEY,
-			'form' => true
+			'form' => true,
+			'filters' => array(
+				array('Num::filter_number')
+			)
 		),
 		'notice' => array(
 			'label' => 'Description',
@@ -159,23 +165,6 @@ class Model_Customer extends ORM
 
 
 	/**
-	 * Updates or Creates the record depending on loaded()
-	 *
-	 * @chainable
-	 * @param  Validation $validation Validation object
-	 * @return ORM
-	 */
-	public function save(Validation $validation = NULL)
-	{
-		// We "format" the money-numbers to a format, the database can handle.
-		$this->engineer_hour_price = Num::filter_number($this->engineer_hour_price);
-		$this->call_out_price = Num::filter_number($this->call_out_price);
-
-		return parent::save($validation);
-	} // function
-
-
-	/**
 	 * Method for retrieving a "Form::select()" ready list of customers.
 	 *
 	 * @return  array
@@ -188,7 +177,12 @@ class Model_Customer extends ORM
 		// Load the customers.
 		foreach ($customers as $customer)
 		{
-			$return[$customer->id] = $customer->company ?: $customer->name;
+			$return[$customer->id] = $customer->company ?: __('Private');
+
+			if (! empty($customer->name))
+			{
+				$return[$customer->id] .= ' - ' . $customer->name;
+			} // if
 		} // foreach
 
 		asort($return);

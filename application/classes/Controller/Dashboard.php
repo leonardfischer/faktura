@@ -110,9 +110,16 @@ class Controller_Dashboard extends Controller_Base
 	 */
 	protected function system_status()
 	{
+		$alerts = array();
 		$profiler = Profiler::application();
 
+		if (!ini_get('short_open_tag'))
+		{
+			$alerts[] = __('Please go to your php.ini file and enable the <code>short_open_tag</code> option!');
+		} // if
+
 		$this->content
+			->set('alerts', $alerts)
 			->set('request_time', $profiler['average']['time'])
 			->set('request_memory', $profiler['average']['memory']);
 

@@ -99,6 +99,7 @@ return array(
 	'Call out price' => 'Anfahrtskosten',
 	'Description' => 'Beschreibung',
 	'No customer data' => 'Keine Kundendaten',
+	'Private' => 'Privat',
 
 	// Main menu
 	'Invoices' => 'Rechnungen',
@@ -143,6 +144,7 @@ return array(
 	'Kohana version' => 'Kohana Version',
 	'Average request time' => 'Durchschnittliche Ladezeit',
 	'Average memory usage' => 'Durchschnittliche Speicherbelastung',
+	'Please go to your php.ini file and enable the <code>short_open_tag</code> option!' => 'Bitte aktivieren Sie die <code>short_open_tag</code> Option in Ihrer php.ini!',
 
 	// Some exception messages
 	'This action may only be called via ajax!' => 'Diese Aktion darf nur via Ajax aufgerufen werden!',

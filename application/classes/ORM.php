@@ -59,6 +59,28 @@ class ORM extends Kohana_ORM
 
 
 	/**
+	 * Filter definitions for validation
+	 *
+	 * @return array
+	 */
+	public function filters()
+	{
+		$filters = array();
+		$properties = $this->get_properties();
+
+		foreach ($properties as $key => $property)
+		{
+			if (isset($property['filters']) && $property['filters'])
+			{
+				$filters[$key] = $property['filters'];
+			} // if
+		} // foreach
+
+		return $filters;
+	} // foreach
+
+
+	/**
 	 * Rule definitions for validation
 	 *
 	 * @return array

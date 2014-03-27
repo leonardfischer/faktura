@@ -89,11 +89,11 @@ Kohana::$config->attach(new Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	'auth'       => MODPATH.'auth',       // Basic authentication
-	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
-	'database'   => MODPATH.'database',   // Database access
-	'orm'        => MODPATH.'orm',        // Object Relationship Mapping
-	));
+	'auth' => MODPATH . 'auth', // Basic authentication
+	// 'cache' => MODPATH.'cache', // Caching with multiple backends
+	'database' => MODPATH . 'database', // Database access
+	'orm' => MODPATH . 'orm', // Object Relationship Mapping
+));
 
 // Load Base configuration and set some constants.
 $config = Kohana::$config->load('base');
@@ -106,7 +106,7 @@ setlocale(LC_ALL, $config['locale']);
 I18n::lang($config['language']);
 
 // Setting some constants.
-define('SYSTEM_VERSION', '1.0.0');
+define('SYSTEM_VERSION', '1.0.1 DEV');
 define('ORM_ID', 'id');
 define('ORM_DATE', 'date');
 define('ORM_INT', 'integer');
