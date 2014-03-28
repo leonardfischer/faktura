@@ -15,8 +15,8 @@
 		// Create a global register.
 		var Factura = new Hash;
 
-		// Define "german" as default JS language.
-		Locale.use('de-DE');
+		// Define the default JS language.
+		Locale.use('<?=$config->get('language'); ?>');
 	</script>
 
 	<link href="<?=$basedir; ?>assets/css/print.css" rel="stylesheet">

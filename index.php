@@ -110,12 +110,29 @@ if (PHP_SAPI == 'cli') // Try and load minion
 }
 else
 {
-	/**
-	 * Execute the main request. A source of the URI can be passed, eg: $_SERVER['PATH_INFO'].
-	 * If no source is specified, the URI will be automatically detected.
-	 */
-	echo Request::factory(TRUE, array(), FALSE)
-		->execute()
-		->send_headers(TRUE)
-		->body();
+	if (file_exists(DOCROOT . 'setup.php'))
+	{
+		/**
+		 * Execute the setup routine.
+		 */
+		echo Request::factory('/setup/', array(), FALSE)
+			->execute()
+			->send_headers(TRUE)
+			->body();
+
+		die;
+	}
+	else
+	{
+		/**
+		 * Execute the main request. A source of the URI can be passed, eg: $_SERVER['PATH_INFO'].
+		 * If no source is specified, the URI will be automatically detected.
+		 */
+		echo Request::factory(TRUE, array(), FALSE)
+			->execute()
+			->send_headers(TRUE)
+			->body();
+
+		die;
+	}
 }
