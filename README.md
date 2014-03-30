@@ -1,18 +1,20 @@
 # Faktura
 This small faktura web-application is built with Kohana in the backend and bootstrap and mootools in the frontend.
 
-## Installation
+## Requirements
  * Enable the PHP short tags in your php.ini (short_open_tag=On)
- * Import the "setup.sql" to your database
- * Configure your database connection inside application/config/database.php
- * Set the "hash_key" option inside application/config/auth.php (and **DO NOT** change it, once a user is created)
- * Set the Cookie SALT in application/classes/Cookie.php
- * Insert a new user in the database -> This may be a bit tricky at the moment, because there is no "install script".
+
+## Installation
+With version 1.1 the Faktura application will bring its own "install wizard". Here you can input your configuration (database, admin user, ...) and let the script do the rest.
+Currently it is not (yet) very user-friendly: meaning, while installing you can't "go back" to change a (maybe misspelled) configuration or start the installation new without risking corrupted data.
 
 ## To-dos
- * Use a template engine (Kostache?)
- * Use templates and multi-language print templates
+ * Improve the installer (implement the "base" configuration and add the "Cookie" class + more user-friendly)
+ * Use a template engine (Kostache, RainTPL, ...?) for the application and the print views - also implement multiple languages
+ * Build in a "master password"
  * More widgets for the dashboard (also refactor the available widgets into single classes and views)
- * Customer filter (inside an invoice) via ajax?
+ * Make the dashboard "customizable"
+ * Customer filter (inside an invoice) via ajax
  * "forgot password" function
+ * Use "master password" to reset the admin user (in case you remove your admin-role)
  * Change the language in the GUI
