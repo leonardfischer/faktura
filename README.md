@@ -8,13 +8,17 @@ This small faktura web-application is built with Kohana in the backend and boots
 With version 1.1 the Faktura application will bring its own "install wizard". Here you can input your configuration (database, admin user, ...) and let the script do the rest.
 Currently it is not (yet) very user-friendly: meaning, while installing you can't "go back" to change a (maybe misspelled) configuration or start the installation new without risking corrupted data.
 
-## To-dos
- * Improve the installer (implement the "base" configuration and add the "Cookie" class + more user-friendly)
- * Use a template engine (Kostache, RainTPL, ...?) for the application and the print views - also implement multiple languages
- * Build in a "master password"
- * More widgets for the dashboard (also refactor the available widgets into single classes and views)
- * Make the dashboard "customizable"
+## To-dos (create issues for these)
  * Customer filter (inside an invoice) via ajax
- * "forgot password" function
  * Use "master password" to reset the admin user (in case you remove your admin-role)
  * Change the language in the GUI
+
+## Framework usage
+The faktura web-application makes use of the following frameworks:
+ * The [Kohana PHP framework](http://kohanaframework.org/) v3.3.1
+ * The [Boostrap CSS framework](http://getbootstrap.com/) v3.1.1 (+ the "Cosmo" theme from [Bootswatch](http://bootswatch.com/cosmo/))
+ * The [MooTools Core javascript framework](http://mootools.net/) v1.4.5
+ * The [MooTools More javascript framework](http://mootools.net/more/) v1.4.0.1
+ * The [MooTools Datepicker](http://mootools.net/forge/p/mootools_datepicker) v1.6.0
+ * [Respond.js](https://github.com/scottjehl/Respond)
+ * The [FontAwesome icon font](http://fortawesome.github.io/Font-Awesome/)
