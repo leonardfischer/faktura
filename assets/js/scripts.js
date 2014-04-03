@@ -284,7 +284,7 @@ var Searchable = new Class({
 
 	filter_list: function (ev) {
 		var el = ev.target,
-			value = el.get('value');
+			value = el.get('value').toLowerCase();
 
 		if (value.clean() == '') {
 			this.popup.getElements('li.searchable').invoke('removeClass', 'hidden');
