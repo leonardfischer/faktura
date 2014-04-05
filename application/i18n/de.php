@@ -113,11 +113,13 @@ return array(
 
 	// User translations
 	'Create new user' => 'Neuen Benutzer erfassen',
-	'Update user ":username"' => 'Benutzere ":username" bearbeiten',
+	'Update user ":username"' => 'Benutzer ":username" bearbeiten',
 	'Confirm password' => 'Passwort bestätigen',
 	'Please do not simply copy and paste!' => 'Bitte kein einfaches kopieren und einfügen!',
 	'User role assignment' => 'Benutzer-Rollen Zuweisung',
 	'Last login' => 'Letzter login',
+	'Additional options' => 'Zusätzliche Optionen',
+	'Selected theme' => 'Gewähltes Design',
 
 	// Translations for the user roles
 	'login' => 'Login',

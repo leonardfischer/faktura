@@ -52,6 +52,13 @@ class Model_User extends Model_Auth_User
 			'type' => ORM_DATE,
 			'form_type' => FORM_TYPE_DATE,
 			'form' => false
+		),
+
+		'theme' => array(
+			'label' => 'Selected theme',
+			'type' => ORM_STRING,
+			'form_type' => FORM_TYPE_SELECT,
+			'form' => true
 		)
 	);
 
@@ -134,5 +141,25 @@ class Model_User extends Model_Auth_User
 		} // foreach
 
 		return $labels;
+	} // function
+
+
+	/**
+	 * This method will return all selectable themes.
+	 *
+	 * @return  array
+	 */
+	public function get_themes()
+	{
+		$return = array();
+		$paths = glob(DOCROOT . 'assets' . DS . 'css' . DS . 'themes' . DS . '*');
+
+		foreach ($paths as $path)
+		{
+			$path = substr(strrchr($path, DS), 1);
+			$return[$path] = ucfirst($path);
+		} // foreach
+
+		return $return;
 	} // function
 } // End User Model

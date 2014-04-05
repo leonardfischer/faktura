@@ -20,7 +20,7 @@
 					<th><?=__('Address'); ?></th>
 					<th><?=__('Email'); ?></th>
 					<th><?=__('Allowance'); ?></th>
-					<th style="width:130px;"><?=__('Action'); ?></th>
+					<th style="width:140px;"><?=__('Action'); ?></th>
 				</tr>
 			</thead>
 			<tbody></tbody>

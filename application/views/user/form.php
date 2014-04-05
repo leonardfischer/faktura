@@ -52,6 +52,29 @@
 			</div>
 		</fieldset>
 
+		<fieldset>
+			<legend><?=__('Additional options') ?></legend>
+
+			<div class="row">
+				<div class="col-sm-6">
+
+					<div class="form-group" data-property="theme">
+						<label class="col-md-4 control-label" for="inputTheme">
+							<?=$properties['theme']['label'] ?><span class="text-danger">*</span>
+						</label>
+						<div class="col-md-8">
+							<?=Form::select('inputTheme', $themes, $theme, array('type' => 'text', 'class' => 'form-control')) ?>
+							<span class="help-inline text-danger hidden"></span>
+						</div>
+					</div>
+
+				</div>
+				<div class="col-sm-6">
+
+				</div>
+			</div>
+		</fieldset>
+
 		<?php if ($is_admin): ?>
 			<fieldset>
 				<legend><?= __('User role assignment') ?></legend>
@@ -119,6 +142,13 @@
 		});
 	}).fireEvent('click');
 	<?php endif; ?>
+
+	$('inputTheme').addEvent('change', function (ev) {
+		var theme = ev.target.get('value');
+
+		$('theme-bootstrap').set('href', '<?=$basedir; ?>assets/css/themes/' + theme + '/bootstrap.min.css');
+		$('theme-addition').set('href', '<?=$basedir; ?>assets/css/themes/' + theme + '/addition.css');
+	});
 
 	// Adding some general data to our dynamic save-logic.
 	Factura

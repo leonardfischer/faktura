@@ -8,7 +8,8 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<link href="<?=$basedir; ?>assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<?=$basedir; ?>assets/css/themes/default/bootstrap.min.css" rel="stylesheet">
+	<link href="<?=$basedir; ?>assets/css/themes/default/addition.css" rel="stylesheet">
 	<link href="<?=$basedir; ?>assets/css/font-awesome.min.css" rel="stylesheet">
 	<link href="<?=$basedir; ?>assets/css/style.css" rel="stylesheet">
 	<link href="<?=$basedir; ?>assets/css/datepicker.css" rel="stylesheet">

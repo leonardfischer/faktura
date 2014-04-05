@@ -23,7 +23,7 @@
 							<?php if ($invoice->is_mandatory('customer_id')): ?><span class="text-danger">*</span><?php endif; ?>
 						</label>
 						<div class="col-md-8">
-							<?=Form::select('inputCustomer_id', $customers, $invoice->customer_id, array('type' => 'text', 'placeholder' => $properties['customer_id']['label'], 'class' => 'form-control searchable')) ?>
+							<?=Form::select('inputCustomer_id', $customers, $invoice->customer_id, array('type' => 'text', 'class' => 'form-control searchable')) ?>
 							<span class="help-inline text-danger hidden"></span>
 						</div>
 					</div>

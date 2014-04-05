@@ -32,7 +32,7 @@
 				<th><?=__('Created at') ?></th>
 				<th><?=__('Paid at') ?></th>
 				<th><?=__('Total') ?></th>
-				<th style="width:130px;"><?=__('Action') ?></th>
+				<th style="width:140px;"><?=__('Action') ?></th>
 			</tr>
 			</thead>
 			<tbody></tbody>

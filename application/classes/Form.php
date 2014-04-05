@@ -16,11 +16,35 @@ class Form extends Kohana_Form
 	 */
 	public static function input($name, $value = NULL, array $attributes = NULL)
 	{
-		// Set the input name.
+		// Set the input id.
 		$attributes['id'] = $name;
 
 		return parent::input($name, $value, $attributes);
 	} // function
+
+
+	/**
+	 * Creates a select form input.
+	 *
+	 *     echo Form::select('country', $countries, $country);
+	 *
+	 * [!!] Support for multiple selected options was added in v3.0.7.
+	 *
+	 * @param   string  $name       input name
+	 * @param   array   $options    available options
+	 * @param   mixed   $selected   selected option string, or an array of selected options
+	 * @param   array   $attributes html attributes
+	 * @return  string
+	 * @uses    HTML::attributes
+	 */
+	public static function select($name, array $options = NULL, $selected = NULL, array $attributes = NULL)
+	{
+		// Set the select id.
+		$attributes['id'] = $name;
+
+		return parent::select($name, $options, $selected, $attributes);
+	} // function
+
 
 	/**
 	 * Creates a textarea form input.

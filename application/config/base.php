@@ -3,6 +3,7 @@
 return array
 (
 	'title' => 'faktura dev',
+	'theme' => 'default',
 
 	// Used for the Kohana bootstrap.
 	'timezone' => 'Europe/Berlin',

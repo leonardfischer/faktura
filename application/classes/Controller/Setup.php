@@ -237,7 +237,7 @@ class Controller_Setup extends Controller_Template
 	 */
 	private function create_config_files ()
 	{
-		$config_path = APPPATH . 'config' . DIRECTORY_SEPARATOR;
+		$config_path = APPPATH . 'config' . DS;
 
 		// Writing the auth.php with a random "hash_key".
 		$auth_tpl = file_get_contents($config_path . 'auth.tpl');

@@ -1,0 +1,33 @@
+.menu h3 a.btn-primary {
+	text-shadow: 1px 1px 0 #000;
+}
+
+/* A few table stylings */
+.table-hide-buttons .btn-group {
+	opacity: 0.25;
+	filter: alpha(opacity = 25);
+}
+
+.table-hide-buttons tr:hover .btn-group {
+	opacity: 1;
+	filter: alpha(opacity = 100);
+}
+
+/* Overwriting standard bootstrap styles */
+h1 a,
+a.h2,
+h1 a:hover,
+a.h2:hover,
+h1 a:active,
+a.h2:active {
+	color: #333;
+	text-decoration: none;
+}
+
+.dropdown-menu > li > a .badge.badge-primary {
+	background-color: #DD4814;
+}
+
+.dropdown-menu > li > a .badge.badge-danger {
+	background-color: #DF382C;
+}

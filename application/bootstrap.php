@@ -107,6 +107,7 @@ I18n::lang($config['language']);
 
 // Setting some constants.
 define('SYSTEM_VERSION', '1.1 DEV');
+define('DS', DIRECTORY_SEPARATOR);
 define('ORM_ID', 'id');
 define('ORM_DATE', 'date');
 define('ORM_INT', 'integer');
@@ -119,6 +120,7 @@ define('FORM_TYPE_EMAIL', 'email');
 define('FORM_TYPE_MONEY', 'money');
 define('FORM_TYPE_CHECKBOX', 'checkbox');
 define('FORM_TYPE_DATE', 'date');
+define('FORM_TYPE_SELECT', 'select');
 define('INVOICE_FILTER_ALL', 'all');
 define('INVOICE_FILTER_OPEN', 'open');
 define('INVOICE_FILTER_REMINDER', 'reminder');

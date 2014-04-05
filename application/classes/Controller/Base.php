@@ -60,13 +60,23 @@ class Controller_Base extends Controller_Template
 			{
 				$this->redirect(Route::url('user', array('action' => 'login')));
 			} // if
+
+			View::set_global('theme', $this->config->get('theme', 'default'));
 		}
 		else
 		{
 			// This foreach loop will collect all the assigned user-roles.
 			$this->user_roles = $this->auth->get_user()->get_roles();
 
-			View::set_global(array('user' => $this->auth->get_user(), 'user_roles' => $this->user_roles));
+			$theme = $this->config->get('theme', 'default');
+
+			// Set the user specific theme, if selected.
+			if ($this->auth->get_user()->theme)
+			{
+				$theme = $this->auth->get_user()->theme;
+			} // if
+
+			View::set_global(array('user' => $this->auth->get_user(), 'user_roles' => $this->user_roles, 'theme' => $theme));
 		} // if
 	} // function
 
@@ -119,7 +129,7 @@ class Controller_Base extends Controller_Template
 	{
 		$this->template
 			->set('content', $this->content)
-			->set('basedir', Kohana::$base_url);
+			->set_global('basedir', Kohana::$base_url);
 
 		parent::after();
 	} // function

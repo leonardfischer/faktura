@@ -66,12 +66,15 @@ class Controller_User extends Controller_Base
 		} // if
 
 		$model = ORM::factory('user');
+		$model->theme = $this->config->get('theme', 'default');
+
 		$is_admin = in_array('admin', $this->user_roles);
 
 		$this->content = View::factory('user/form', array(
 			'title' => __('Create new user'),
 			'user_model' => $model,
 			'properties' => $model->get_properties(),
+			'themes' => $model->get_themes(),
 			'is_admin' => $is_admin,
 			'copy_n_paste' => $this->config->get('password_prevent_copynpaste', true),
 			'ajax_url' => Route::url('user', array('action' => 'save'))
@@ -108,6 +111,7 @@ class Controller_User extends Controller_Base
 			'title' => __('Update user ":username"', array(':username' => $model->username)),
 			'user_model' => $model,
 			'properties' => $model->get_properties(),
+			'themes' => $model->get_themes(),
 			'is_admin' => $is_admin,
 			'copy_n_paste' => $this->config->get('password_prevent_copynpaste', true),
 			'ajax_url' => Route::url('user', array('action' => 'save', 'id' => $id))
@@ -170,6 +174,7 @@ class Controller_User extends Controller_Base
 				'email' => $this->request->post('inputEmail') ?: '',
 				'password' => $this->request->post('inputPassword') ?: '',
 				'password_confirm' => $this->request->post('inputPassword_confirm') ?: '',
+				'theme' => $this->request->post('inputTheme') ?: $this->config->get('theme', 'default'),
 			);
 
 			if ($id > 0)
