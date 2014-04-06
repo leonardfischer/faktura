@@ -112,9 +112,7 @@ else
 {
 	if (file_exists(DOCROOT . 'setup.php'))
 	{
-		/**
-		 * Execute the setup routine.
-		 */
+		// Execute the setup routine.
 		echo Request::factory('/setup/', array(), FALSE)
 			->execute()
 			->send_headers(TRUE)
@@ -122,17 +120,31 @@ else
 
 		die;
 	}
-	else
+	else if (file_exists(DOCROOT . 'update.php'))
 	{
-		/**
-		 * Execute the main request. A source of the URI can be passed, eg: $_SERVER['PATH_INFO'].
-		 * If no source is specified, the URI will be automatically detected.
-		 */
-		echo Request::factory(TRUE, array(), FALSE)
-			->execute()
-			->send_headers(TRUE)
-			->body();
+		$update = include DOCROOT . 'update.php';
 
-		die;
-	}
+		// Only execute the update, when our system version is lower than the one in the update.php
+		if (version_compare(SYSTEM_VERSION, $update['version'], '<'))
+		{
+			// Execute the update routine.
+			echo Request::factory('/update/', array(), FALSE)
+				->execute()
+				->send_headers(TRUE)
+				->body();
+
+			die;
+		} // if
+	} // if
+
+	/**
+	 * Execute the main request. A source of the URI can be passed, eg: $_SERVER['PATH_INFO'].
+	 * If no source is specified, the URI will be automatically detected.
+	 */
+	echo Request::factory(TRUE, array(), FALSE)
+		->execute()
+		->send_headers(TRUE)
+		->body();
+
+	die;
 }

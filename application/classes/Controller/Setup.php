@@ -367,7 +367,7 @@ class Controller_Setup extends Controller_Template
 
 
 	/**
-	 * This final step will rename the "setup.php" to "_setup.php" in case there were no errors.
+	 * This final step will rename the "setup.php" (and "*.sql") to "_finished_setup.php" in case there were no errors.
 	 * This prevents the setup from loading!
 	 *
 	 * @return  Controller_Setup
@@ -376,8 +376,8 @@ class Controller_Setup extends Controller_Template
 	{
 		if (count($this->setup_errors) == 0)
 		{
-			rename(DOCROOT . 'setup.php', DOCROOT . '_unused_setup.php');
-			rename(DOCROOT . 'setup.sql', DOCROOT . '_unused_setup.sql');
+			rename(DOCROOT . 'setup.php', DOCROOT . '_finished_setup.php');
+			rename(DOCROOT . 'setup.sql', DOCROOT . '_finished_setup.sql');
 		} // if
 
 		return $this;
