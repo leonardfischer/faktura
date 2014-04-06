@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-xs-6">
-		<a class="btn btn-success" href="<?=Route::url('user', array('action' => 'new')) ?>"><i class="icon-plus icon-white"></i> <?=__('Create new user') ?></a>
+		<a class="btn btn-success" href="<?=Route::url('user', array('action' => 'new')) ?>"><i class="fa fa-plus"></i> <?=__('Create new user') ?></a>
 	</div>
 	<div class="col-xs-6">
 		<form>
@@ -30,7 +30,7 @@
 
 <div class="row">
 	<div class="col-xs-12">
-		<a class="btn btn-success" href="<?=Route::url('user', array('action' => 'new')) ?>"><i class="icon-plus icon-white"></i> <?=__('Create new user') ?></a>
+		<a class="btn btn-success" href="<?=Route::url('user', array('action' => 'new')) ?>"><i class="fa fa-plus"></i> <?=__('Create new user') ?></a>
 	</div>
 </div>
 
@@ -47,7 +47,7 @@
 			minlength: parseInt('<?=$config->get('search_minlength', 3); ?>'),
 			pager: user_pager,
 			loading_label: '<img src="<?=URL::base() ?>assets/img/loading.gif" /> <?=__('Loading, please wait...') ?>',
-			nothing_found_label: '<i class="mr5 icon-info-sign"></i><?=__('Sorry - no users were found!') ?>',
+			nothing_found_label: '<i class="mr5 fa fa-info-circle"></i><?=__('Sorry - no users were found!') ?>',
 			url: '<?=Route::url('user', array('action' => 'search')) ?>',
 			filter: null
 		});

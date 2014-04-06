@@ -101,7 +101,7 @@
 
 								<div class="col-sm-6 mb10">
 									<div class="input-group">
-										<span class="input-group-addon"><i class="icon-euro"></i></span>
+										<span class="input-group-addon"><i class="fa fa-euro"></i></span>
 										<input type="text" placeholder="<?=__('Cost') ?>" name="inputPositionPrice-<?=$i ?>" class="form-control money" value="<?=number_format($position->price, 2, ',', '') ?>">
 									</div>
 								</div>
@@ -114,7 +114,7 @@
 			</ul>
 
 			<p>
-				<button type="button" class="btn btn-success btn-sm add-position"><i class="icon-plus mr5"></i> <?=__('Add new position') ?></button>
+				<button type="button" class="btn btn-success btn-sm add-position"><i class="fa fa-plus"></i> <?=__('Add new position') ?></button>
 			</p>
 		</fieldset>
 
@@ -123,15 +123,15 @@
 
 			<div class="row">
 				<div class="col-sm-4">
-					<p><a href="<?=Route::url('print', array('action' => 'invoice', 'id' => $invoice->id)) ?>" target="_blank" class="btn btn-block btn-default"><i class="icon-print mr5"></i> <?= __('Print invoice') ?></a></p>
-					<p><a href="<?=Route::url('print', array('action' => 'delivery_note', 'id' => $invoice->id)) ?>" target="_blank" class="btn btn-block btn-default"><i class="icon-print mr5"></i> <?= __('Print delivery note') ?></a></p>
-					<p><a href="<?=Route::url('print', array('action' => 'order_confirmation', 'id' => $invoice->id)) ?>" target="_blank" class="btn btn-block btn-default"><i class="icon-print mr5"></i> <?= __('Print order confirmation') ?></a></p>
+					<p><a href="<?=Route::url('print', array('action' => 'invoice', 'id' => $invoice->id)) ?>" target="_blank" class="btn btn-block btn-default"><i class="fa fa-print mr5"></i> <?= __('Print invoice') ?></a></p>
+					<p><a href="<?=Route::url('print', array('action' => 'delivery_note', 'id' => $invoice->id)) ?>" target="_blank" class="btn btn-block btn-default"><i class="fa fa-print mr5"></i> <?= __('Print delivery note') ?></a></p>
+					<p><a href="<?=Route::url('print', array('action' => 'order_confirmation', 'id' => $invoice->id)) ?>" target="_blank" class="btn btn-block btn-default"><i class="fa fa-print mr5"></i> <?= __('Print order confirmation') ?></a></p>
 				</div>
 				<div class="col-sm-4">
-					<p><a href="<?=Route::url('print', array('action' => 'reminder', 'id' => $invoice->id)) ?>" target="_blank" class="btn btn-block btn-danger"><i class="icon-exclamation-sign mr5"></i> <?= __('Print reminder') ?></a></p>
+					<p><a href="<?=Route::url('print', array('action' => 'reminder', 'id' => $invoice->id)) ?>" target="_blank" class="btn btn-block btn-danger"><i class="fa fa-exclamation-circle mr5"></i> <?= __('Print reminder') ?></a></p>
 				</div>
 				<div class="col-sm-4">
-					<p><button type="button" class="btn btn-block btn-success" id="credit-button"><i class="icon-check-sign mr5"></i> <?= __('Print credit') ?></button></p>
+					<p><button type="button" class="btn btn-block btn-success" id="credit-button"><i class="fa fa-check-circle mr5"></i> <?= __('Print credit') ?></button></p>
 				</div>
 			</div>
 
@@ -154,7 +154,7 @@
 <div id="credit-popup" class="hidden">
 	<div class="row">
 		<div class="col-xs-12">
-			<i class="icon-remove credit-popup-close pull-right mt10 mouse-pointer"></i>
+			<i class="fa fa-times credit-popup-close pull-right mt10 mouse-pointer"></i>
 			<h3><?=__('Please choose the positions, you want to credit') ?></h3>
 			<table class="mt20 table table-striped">
 				<tbody></tbody>
@@ -211,7 +211,7 @@
 				.grab(new Element('span.input-group-addon').grab(new Element('strong').set('text', '#')))
 				.grab(new Element('input.form-control', {type:'text', placeholder:'<?=__('Amount') ?>', value:'1', name:'inputPositionAmount-' + item}))),
 			position_price = new Element('div.col-sm-6.mb10').grab(new Element('div.input-group')
-				.grab(new Element('span.input-group-addon').grab(new Element('i.icon-euro')))
+				.grab(new Element('span.input-group-addon').grab(new Element('i.fa.fa-euro')))
 				.grab(new Element('input.form-control.money', {type:'text', placeholder:'<?=__('Cost') ?>', value:'0,00', name:'inputPositionPrice-' + item})));
 
 		$('invoice-position-list').grab(

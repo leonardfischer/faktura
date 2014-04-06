@@ -42,6 +42,12 @@ class Controller_Setup extends Controller_Template
 	 */
 	public function action_index()
 	{
+		// Only run the setup, if the "setup.php" exists!
+		if (! file_exists(DOCROOT . 'setup.php'))
+		{
+			$this->redirect('/');
+		} // if
+
 		$current_step = $this->request->post('step') ?: 1;
 		$special_step = $this->request->post('special_step') ?: false;
 
@@ -370,7 +376,8 @@ class Controller_Setup extends Controller_Template
 	{
 		if (count($this->setup_errors) == 0)
 		{
-			rename(DOCROOT . 'setup.php', DOCROOT . '_setup.php');
+			rename(DOCROOT . 'setup.php', DOCROOT . '_unused_setup.php');
+			rename(DOCROOT . 'setup.sql', DOCROOT . '_unused_setup.sql');
 		} // if
 
 		return $this;

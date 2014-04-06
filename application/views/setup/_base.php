@@ -9,7 +9,8 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<link href="<?php echo $basedir; ?>assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<?php echo $basedir; ?>assets/css/themes/default/bootstrap.min.css" rel="stylesheet">
+	<link href="<?php echo $basedir; ?>assets/css/themes/default/addition.css" rel="stylesheet">
 	<link href="<?php echo $basedir; ?>assets/css/font-awesome.min.css" rel="stylesheet">
 	<link href="<?php echo $basedir; ?>assets/css/style.css" rel="stylesheet">
 	<link href="<?php echo $basedir; ?>assets/css/datepicker.css" rel="stylesheet">
@@ -46,7 +47,7 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<button type="button" id="next-button" class="btn btn-success pull-right">Next &raquo;</button>
-			<button type="button" id="reload-button" class="btn btn-default"><i class="icon-refresh mr10"></i> Try again</button>
+			<button type="button" id="reload-button" class="btn btn-default"><i class="fa fa-refresh mr10"></i> Try again</button>
 		</div>
 	</div>
 </div>

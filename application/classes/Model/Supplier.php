@@ -117,7 +117,7 @@ class Model_Supplier extends ORM
 			$this->name,
 			$this->company,
 			$this->street . ' ' . $this->street_no . '<br />' . $this->zip_code . ' ' . $this->city,
-			(empty($this->email) ? '<i class="icon-envelope-alt"></i>' : '<a href="mailto:' . $this->email . '" target="_blank" title="' . $this->email . '"><i class="icon-envelope"></i></a>'),
+			($this->email ? '<a href="mailto:' . $this->email . '" target="_blank" title="' . $this->email . '"><i class="fa fa-envelope"></i></a>' : '<i class="fa fa-envelope-o"></i>'),
 			'<div class="btn-group"><a class="btn btn-primary btn-sm" href="' . Route::url('supplier', array('action' => 'edit', 'id' => $this->id)) . '">' . __('Edit') . '</a></div>'
 		);
 	} // function

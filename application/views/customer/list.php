@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-xs-6">
-		<a class="btn btn-success" href="<?=Route::url('customer', array('action' => 'new')) ?>"><i class="icon-plus icon-white"></i> <?=__('Create new customer') ?></a>
+		<a class="btn btn-success" href="<?=Route::url('customer', array('action' => 'new')) ?>"><i class="fa fa-plus"></i> <?=__('Create new customer') ?></a>
 	</div>
 	<div class="col-xs-6">
 		<form>
@@ -31,7 +31,7 @@
 
 <div class="row">
 	<div class="col-xs-12">
-		<a class="btn btn-success" href="<?=Route::url('customer', array('action' => 'new')) ?>"><i class="icon-plus icon-white"></i> <?=__('Create new customer') ?></a>
+		<a class="btn btn-success" href="<?=Route::url('customer', array('action' => 'new')) ?>"><i class="fa fa-plus"></i> <?=__('Create new customer') ?></a>
 	</div>
 </div>
 

@@ -45,12 +45,12 @@
 					<div class="dropdown pull-right">
 						<button class="btn btn-success dropdown-toggle btn-sm">Optionen <span class="caret"></span></button>
 						<ul class="dropdown-menu">
-							<li><a href="<?=Route::url('user', array('action' => 'edit/' . $user->id)) ?>" title="<?=__('Profile') ?>"><i class="icon-user"></i> <?=__('Profile') ?></a></li>
+							<li><a href="<?=Route::url('user', array('action' => 'edit/' . $user->id)) ?>" title="<?=__('Profile') ?>"><i class="fa fa-user"></i> <?=__('Profile') ?></a></li>
 							<?php if (in_array('admin', $user_roles)): ?>
-							<li><a href="<?=Route::url('user', array('action' => 'list')) ?>" title="<?=__('Profile') ?>"><i class="icon-group"></i> <?=__('User administration') ?></a></li>
+							<li><a href="<?=Route::url('user', array('action' => 'list')) ?>" title="<?=__('Profile') ?>"><i class="fa fa-group"></i> <?=__('User administration') ?></a></li>
 							<?php endif; ?>
 							<li class="divider"></li>
-							<li><a href="<?=Route::url('user', array('action' => 'logout')) ?>" title="<?=__('Logout') ?>"><i class="icon-signout"></i> <?=__('Logout') ?></a></li>
+							<li><a href="<?=Route::url('user', array('action' => 'logout')) ?>" title="<?=__('Logout') ?>"><i class="fa fa-sign-out"></i> <?=__('Logout') ?></a></li>
 						</ul>
 					</div>
 				</div>
@@ -62,19 +62,19 @@
 		<div class="row menu">
 			<div class="col-sm-4">
 				<?php if (in_array('admin', $user_roles) || in_array('invoices', $user_roles)): ?>
-				<h3><a href="<?=Route::url('invoice') ?>" class="btn btn-lg btn-block<?=((strpos($_SERVER['REQUEST_URI'], Route::url('invoice')) === 0) ? ' btn-primary' : ' btn-default') ?>"><i class="icon-file-text-alt"></i> <?=__('Invoices') ?></a></h3>
+				<h3><a href="<?=Route::url('invoice') ?>" class="btn btn-lg btn-block<?=((strpos($_SERVER['REQUEST_URI'], Route::url('invoice')) === 0) ? ' btn-primary' : ' btn-default') ?>"><i class="fa fa-file-text-o"></i> <?=__('Invoices') ?></a></h3>
 				<?php endif; ?>
 			</div>
 
 			<div class="col-sm-4">
 				<?php if (in_array('admin', $user_roles) || in_array('customers', $user_roles)): ?>
-				<h3><a href="<?=Route::url('customer') ?>" class="btn btn-lg btn-block<?=((strpos($_SERVER['REQUEST_URI'], Route::url('customer')) === 0) ? ' btn-primary' : ' btn-default') ?>"><i class="icon-group"></i> <?=__('Customers') ?></a></h3>
+				<h3><a href="<?=Route::url('customer') ?>" class="btn btn-lg btn-block<?=((strpos($_SERVER['REQUEST_URI'], Route::url('customer')) === 0) ? ' btn-primary' : ' btn-default') ?>"><i class="fa fa-group"></i> <?=__('Customers') ?></a></h3>
 				<?php endif; ?>
 			</div>
 
 			<div class="col-sm-4">
 				<?php if (in_array('admin', $user_roles) || in_array('suppliers', $user_roles)): ?>
-				<h3><a href="<?=Route::url('supplier') ?>" class="btn btn-lg btn-block<?=((strpos($_SERVER['REQUEST_URI'], Route::url('supplier')) === 0) ? ' btn-primary' : ' btn-default') ?>"><i class="icon-truck"></i> <?=__('Supplier') ?></a></h3>
+				<h3><a href="<?=Route::url('supplier') ?>" class="btn btn-lg btn-block<?=((strpos($_SERVER['REQUEST_URI'], Route::url('supplier')) === 0) ? ' btn-primary' : ' btn-default') ?>"><i class="fa fa-truck"></i> <?=__('Supplier') ?></a></h3>
 				<?php endif; ?>
 			</div>
 		</div>

@@ -202,13 +202,13 @@ class Model_Customer extends ORM
 			$this->name,
 			$this->company,
 			$this->street . ' ' . $this->street_no . '<br />' . $this->zip_code . ' ' . $this->city,
-			'<a href="mailto:' . $this->email . '" target="_blank" title="' . $this->email . '"><i class="icon-envelope"></i></a>',
-			($this->allowance > 0 ? '<i class="icon-ok"></i> ' . $this->allowance . '%' : '<i class="icon-remove"></i>'),
+			($this->email ? '<a href="mailto:' . $this->email . '" target="_blank" title="' . $this->email . '"><i class="fa fa-envelope"></i></a>' : '<i class="fa fa-envelope-o"></i>'),
+			($this->allowance > 0 ? '<i class="fa fa-check"></i> ' . $this->allowance . '%' : '<i class="fa fa-times"></i>'),
 			'<div class="btn-group">' .
 				'<a class="btn btn-primary btn-sm" href="' . Route::url('customer', array('action' => 'edit', 'id' => $this->id)) . '">' . __('Edit') . '</a>' .
 				'<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>' .
 				'<ul class="dropdown-menu">' .
-				'<li><a href="' . Route::url('invoice', array('action' => 'new')) . '?customer_id=' . $this->id . '"><i class="icon-plus"></i>&nbsp;&nbsp;' . __('Create new invoice') . '</a></li>' .
+				'<li><a href="' . Route::url('invoice', array('action' => 'new')) . '?customer_id=' . $this->id . '"><i class="fa fa-plus"></i>&nbsp;&nbsp;' . __('Create new invoice') . '</a></li>' .
 				'</ul>' .
 				'</div>'
 		);

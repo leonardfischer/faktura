@@ -29,7 +29,7 @@ $right_column = array_slice($properties, $property_count);
 							}
 							elseif($property['form_type'] == FORM_TYPE_MONEY)
 							{
-								echo '<div class="input-group"><span class="input-group-addon"><i class="icon-euro"></i></span>' . Form::input('input' . ucfirst($key), $customer->get($key), array('type' => 'text', 'placeholder' => $property['label'], 'class' => 'form-control money')) . '</div>';
+								echo '<div class="input-group"><span class="input-group-addon"><i class="fa fa-euro"></i></span>' . Form::input('input' . ucfirst($key), $customer->get($key), array('type' => 'text', 'placeholder' => $property['label'], 'class' => 'form-control money')) . '</div>';
 							}
 							elseif($property['form_type'] == FORM_TYPE_EMAIL)
 							{
@@ -64,7 +64,7 @@ $right_column = array_slice($properties, $property_count);
 								}
 								elseif($property['form_type'] == FORM_TYPE_MONEY)
 								{
-									echo '<div class="input-group"><span class="input-group-addon"><i class="icon-euro"></i></span>' . Form::input('input' . ucfirst($key), $customer->get($key), array('type' => 'text', 'placeholder' => $property['label'], 'class' => 'form-control money')) . '</div>';
+									echo '<div class="input-group"><span class="input-group-addon"><i class="fa fa-euro"></i></span>' . Form::input('input' . ucfirst($key), $customer->get($key), array('type' => 'text', 'placeholder' => $property['label'], 'class' => 'form-control money')) . '</div>';
 								}
 								elseif($property['form_type'] == FORM_TYPE_EMAIL)
 								{

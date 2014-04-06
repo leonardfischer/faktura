@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-xs-6">
-		<a class="btn btn-success" href="<?=Route::url('invoice', array('action' => 'new')) ?>"><i class="icon-plus icon-white"></i> <?=__('Create new invoice') ?></a>
+		<a class="btn btn-success" href="<?=Route::url('invoice', array('action' => 'new')) ?>"><i class="fa fa-plus"></i> <?=__('Create new invoice') ?></a>
 
 		<div class="btn-group ">
 			<button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
@@ -54,7 +54,7 @@
 			minlength: parseInt('<?=$config->get('search_minlength', 3); ?>'),
 			pager: invoice_pager,
 			loading_label: '<img src="<?=URL::base() ?>assets/img/loading.gif" /> <?=__('Loading, please wait...') ?>',
-			nothing_found_label: '<i class="mr5 icon-info-sign"></i><?=__('Sorry - no invoices were found!') ?>',
+			nothing_found_label: '<i class="mr5 fa fa-info-circle"></i><?=__('Sorry - no invoices were found!') ?>',
 			url: '<?=Route::url('invoice', array('action' => 'search')) ?>',
 			filter: '<?=$filter ?>'
 		});

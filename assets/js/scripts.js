@@ -184,7 +184,7 @@ var Pager = new Class({
 
 						this.render_current_page();
 					} else {
-						tbody.grab(new Element('tr').grab(new Element('td.text-danger', {colspan:6, html:'<i class="mr5 icon-exclamation-sign"></i>' + json.message})));
+						tbody.grab(new Element('tr').grab(new Element('td.text-danger', {colspan:6, html:'<i class="mr5 fa fa-exclamation-circle"></i>' + json.message})));
 					}
 
 				}.bind(this)}).send();
@@ -251,7 +251,7 @@ var Searchable = new Class({
 		}
 
 		this.toggler = new Element('button.dropdown-toggle', {type:'button', class:'btn btn-block btn-default', 'data-toggle':'dropdown'})
-			.grab(new Element('i.icon-search'))
+			.grab(new Element('i.fa.fa-search'))
 			.grab(new Element('span', {text:this.selection.get('text')}))
 			.addEvent('click', function (ev) {
 				if (this.container.toggleClass('open').hasClass('open')) {
