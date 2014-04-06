@@ -84,7 +84,7 @@
 				return;
 			}
 
-			Factura.set('adminuser', {
+			Faktura.set('adminuser', {
 				username:username.value,
 				password:password.value,
 				email:email.value

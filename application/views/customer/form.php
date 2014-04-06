@@ -130,7 +130,7 @@ $right_column = array_slice($properties, $property_count);
 <?php endif; ?>
 
 <script type="text/javascript">
-	Factura
+	Faktura
 		.set('customer-form', 'form-invoice')
 		.set('form.ajax_url', '<?=$ajax_url ?>')
 		.set('form.loading-message', '<img src="<?=URL::base() ?>assets/img/loading-on-grey.gif" /> <?=__('Loading, please wait...') ?>')

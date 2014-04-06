@@ -19,7 +19,7 @@
 	<script src="<?php echo $basedir; ?>assets/js/respond.js"></script>
 	<script>
 		// Create a global register.
-		var Factura = new Hash;
+		var Faktura = new Hash;
 
 		// Define "german" as default JS language.
 		Locale.use('<?=$config->get('language'); ?>');
@@ -53,7 +53,7 @@
 </div>
 
 <script>
-	Factura.set('current-step', 1);
+	Faktura.set('current-step', 1);
 
 	window.disable_next_button = function () {
 		$('next-button')
@@ -72,7 +72,7 @@
 	$('reload-button').addEvent('click', function () {
 		new Request.HTML({
 			url: '?',
-			data: {step:Factura.get('current-step'), factura_data:Factura.toQueryString()},
+			data: {step:Faktura.get('current-step'), faktura_data:Faktura.toQueryString()},
 			update: $('content-area')
 		}).send();
 	});
@@ -80,10 +80,10 @@
 	$('next-button').addEvent('click', function () {
 		new Request.HTML({
 			url: '?',
-			data: {step:(Factura.get('current-step') + 1), factura_data:Factura.toQueryString()},
+			data: {step:(Faktura.get('current-step') + 1), faktura_data:Faktura.toQueryString()},
 			update: $('content-area'),
 			onSuccess: function () {
-				Factura.set('current-step', (Factura.get('current-step') + 1));
+				Faktura.set('current-step', (Faktura.get('current-step') + 1));
 			}
 		}).send();
 	});

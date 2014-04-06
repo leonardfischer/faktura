@@ -16,7 +16,7 @@ window.addEvent('domready', function() {
                     .removeClass('hidden')
                     .setStyle('backgroundColor', '#aaa')
                     .setStyle('color', '#fff')
-                    .set('html', Factura.get('form.loading-message'));
+                    .set('html', Faktura.get('form.loading-message'));
 
             this.addClass('disabled');
 
@@ -29,13 +29,13 @@ window.addEvent('domready', function() {
                 }
             });
 
-            if (! Factura.has('form.ajax_url')) {
+            if (! Faktura.has('form.ajax_url')) {
                 alert('No ajax URL defined!');
                 return;
             }
 
             new Request.JSON({
-                url: Factura.get('form.ajax_url'),
+                url: Faktura.get('form.ajax_url'),
                 data: data,
                 onSuccess: function(json){
                     var property;
@@ -50,7 +50,7 @@ window.addEvent('domready', function() {
                     $$('.help-inline:not(.hidden)').addClass('hidden');
 
                     if (json.success) {
-                        message.addClass('alert-success').set('text', Factura.get('form.success-message'));
+                        message.addClass('alert-success').set('text', Faktura.get('form.success-message'));
 
 	                    if (json.data !== null && json.data.clean() != '') {
 		                    document.location.href = json.data;
@@ -83,8 +83,8 @@ window.addEvent('domready', function() {
         });
     }
 
-    if (Factura.get('form.name') !== null) {
-        $(Factura.get('form.name')).addEvent('keyup:relay(input.money)', function () {
+    if (Faktura.get('form.name') !== null) {
+        $(Faktura.get('form.name')).addEvent('keyup:relay(input.money)', function () {
             this.set('value', this.get('value').replace(/[^,\.\d]*/g, ''))
         });
     }
@@ -244,7 +244,7 @@ var Searchable = new Class({
 		if (this.selection.length === 0) {
 			this.container
 				.grab(new Element('button.dropdown-toggle.btn.btn-block.btn-default', {type: 'button'})
-					.grab(new Element('span', {text: Factura.get('searchable.no-data-message')})));
+					.grab(new Element('span', {text: Faktura.get('searchable.no-data-message')})));
 			el.setStyle('display', 'none').grab(this.container, 'after');
 
 			return;
@@ -261,9 +261,9 @@ var Searchable = new Class({
 
 		var list_filter = new Element('input.filter.form-control.input-sm').addEvent('keyup:pause(350)', this.filter_list.bind(this));
 
-		if (Factura.has('searchable.min_length') && Factura.has('searchable.placeholder')) {
-			this.minlength = parseInt(Factura.get('searchable.min_length'));
-			list_filter.set('placeholder', Factura.get('searchable.placeholder').replace(':minlength', this.minlength));
+		if (Faktura.has('searchable.min_length') && Faktura.has('searchable.placeholder')) {
+			this.minlength = parseInt(Faktura.get('searchable.min_length'));
+			list_filter.set('placeholder', Faktura.get('searchable.placeholder').replace(':minlength', this.minlength));
 		}
 
 		this.popup = new Element('ul.dropdown-menu')

@@ -28,7 +28,7 @@ class Controller_Update extends Controller_Template
 	 * This array will hold data, sent from the frontend.
 	 * @var  array
 	 */
-	private $factura_data = array();
+	private $faktura_data = array();
 
 	/**
 	 * This array will hold all the errors, which occur during the final update step.
@@ -62,7 +62,7 @@ class Controller_Update extends Controller_Template
 		$special_step = $this->request->post('special_step') ?: false;
 
 		// This function works like "http_build_query()" - but backwards.
-		parse_str($this->request->post('factura_data'), $this->factura_data);
+		parse_str($this->request->post('faktura_data'), $this->faktura_data);
 
 		if ($special_step)
 		{

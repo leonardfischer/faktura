@@ -81,7 +81,7 @@
 					console.log(json);
 
 					if (json.success) {
-						Factura.set('db.config', json.data);
+						Faktura.set('db.config', json.data);
 						$('check-database-result')
 							.addClass('alert-success')
 							.removeClass('alert-danger')

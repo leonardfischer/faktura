@@ -26,7 +26,7 @@
 	<script src="<?=$basedir; ?>assets/js/scripts.js"></script>
 	<script>
 		// Create a global register.
-		var Factura = new Hash;
+		var Faktura = new Hash;
 
 		// Define the default JS language.
 		Locale.use('<?=$config->get('language'); ?>');

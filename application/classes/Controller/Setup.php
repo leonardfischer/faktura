@@ -28,7 +28,7 @@ class Controller_Setup extends Controller_Template
 	 * This array will hold data, sent from the frontend.
 	 * @var  array
 	 */
-	private $factura_data = array();
+	private $faktura_data = array();
 
 	/**
 	 * This array will hold all the errors, which occur during the final setup step.
@@ -52,7 +52,7 @@ class Controller_Setup extends Controller_Template
 		$special_step = $this->request->post('special_step') ?: false;
 
 		// This function works like "http_build_query()" - but backwards.
-		parse_str($this->request->post('factura_data'), $this->factura_data);
+		parse_str($this->request->post('faktura_data'), $this->faktura_data);
 
 		if ($special_step)
 		{
@@ -258,10 +258,10 @@ class Controller_Setup extends Controller_Template
 			'%username%',
 			'%password%'
 		), array(
-			$this->factura_data['db_config']['hostname'],
-			$this->factura_data['db_config']['database'],
-			$this->factura_data['db_config']['username'],
-			$this->factura_data['db_config']['password']
+			$this->faktura_data['db_config']['hostname'],
+			$this->faktura_data['db_config']['database'],
+			$this->faktura_data['db_config']['username'],
+			$this->faktura_data['db_config']['password']
 		), $database_tpl);
 		file_put_contents($config_path . 'database.php', $database_content);
 
@@ -279,7 +279,7 @@ class Controller_Setup extends Controller_Template
 		$mysqli = $this->connect_db();
 
 		// If we have not thrown any exceptions yet, we're good to go!
-		$success = $mysqli->query('CREATE DATABASE IF NOT EXISTS ' . $mysqli->escape_string($this->factura_data['db_config']['database']) . ' CHARACTER SET utf8 COLLATE utf8_general_ci;;');
+		$success = $mysqli->query('CREATE DATABASE IF NOT EXISTS ' . $mysqli->escape_string($this->faktura_data['db_config']['database']) . ' CHARACTER SET utf8 COLLATE utf8_general_ci;;');
 
 		if (! $success)
 		{
@@ -301,7 +301,7 @@ class Controller_Setup extends Controller_Template
 	{
 		$mysqli = $this->connect_db();
 
-		$mysqli->query('USE ' . $mysqli->escape_string($this->factura_data['db_config']['database']) . ';');
+		$mysqli->query('USE ' . $mysqli->escape_string($this->faktura_data['db_config']['database']) . ';');
 
 		$sql_dump = file_get_contents(DOCROOT . 'setup.sql');
 
@@ -338,10 +338,10 @@ class Controller_Setup extends Controller_Template
 		try
 		{
 			$admin = ORM::factory('user')->create_user(array(
-				'username' => $this->factura_data['adminuser']['username'],
-				'password' => $this->factura_data['adminuser']['password'],
-				'password_confirm' => $this->factura_data['adminuser']['password'],
-				'email' => $this->factura_data['adminuser']['email']
+				'username' => $this->faktura_data['adminuser']['username'],
+				'password' => $this->faktura_data['adminuser']['password'],
+				'password_confirm' => $this->faktura_data['adminuser']['password'],
+				'email' => $this->faktura_data['adminuser']['email']
 			), array(
 				'username',
 				'password',
@@ -391,7 +391,7 @@ class Controller_Setup extends Controller_Template
 	 */
 	private function connect_db ()
 	{
-		$mysqli = new mysqli($this->factura_data['db_config']['hostname'], $this->factura_data['db_config']['username'], $this->factura_data['db_config']['password']);
+		$mysqli = new mysqli($this->faktura_data['db_config']['hostname'], $this->faktura_data['db_config']['username'], $this->faktura_data['db_config']['password']);
 
 		// Check connection.
 		if ($mysqli->connect_errno)

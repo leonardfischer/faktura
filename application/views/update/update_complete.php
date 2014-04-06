@@ -5,7 +5,7 @@
 
 		<?php if (count($errors) == 0): ?>
 			<div class="alert alert-success">No errors occured, during the update!</div>
-			<a href="<?php echo $basedir; ?>">Please click here to start up the Faktura.</a>
+			<p><a href="<?php echo $basedir; ?>">Please empty your browser cache and click here to start up the Faktura.</a><br />If you are experiencing style or javascript errors, try to reload a few times and clear your cache (CTRL+F5)</p>
 		<?php else: ?>
 			<table class="table table-striped">
 				<?php foreach ($errors as $error): ?>

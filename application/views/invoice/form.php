@@ -305,7 +305,7 @@
 	window.addEventListener('resize', responsive_popup);
 
 	// Adding some general data to our dynamic save-logic.
-	Factura
+	Faktura
 		.set('form.name', 'invoice-form')
 		.set('form.ajax_url', '<?=$ajax_url ?>')
 		.set('form.loading-message', '<img src="<?=URL::base() ?>assets/img/loading-on-grey.gif" /> <?=__('Loading, please wait...') ?>')
