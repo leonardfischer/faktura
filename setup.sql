@@ -96,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `logins` int(10) unsigned NOT NULL DEFAULT '0',
   `last_login` int(10) unsigned DEFAULT NULL,
   `theme` varchar(255) NOT NULL,
+  `theme_options` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_username` (`username`),
   UNIQUE KEY `uniq_email` (`email`)
