@@ -8,6 +8,11 @@ return array(
 			'if' => 'field-exists:users.theme,type:varchar',
 			'then' => '',
 			'else' => 'ALTER TABLE `users` ADD `theme` VARCHAR(255) NOT NULL;'
+		),
+		array(
+			'if' => 'field-exists:users.theme_options,type:text',
+			'then' => '',
+			'else' => 'ALTER TABLE `users` ADD `theme_options` TEXT NOT NULL;'
 		)
 	),
 	'changelog' => array(
