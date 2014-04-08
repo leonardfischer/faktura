@@ -106,7 +106,7 @@ setlocale(LC_ALL, $config['locale']);
 I18n::lang($config['language']);
 
 // Setting some constants.
-define('SYSTEM_VERSION', '1.1 DEV');
+define('SYSTEM_VERSION', '1.1.0');
 define('DS', DIRECTORY_SEPARATOR);
 define('ORM_ID', 'id');
 define('ORM_DATE', 'date');
