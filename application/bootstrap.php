@@ -25,14 +25,6 @@ else
 spl_autoload_register(array('Kohana', 'auto_load'));
 
 /**
- * Optionally, you can enable a compatibility auto-loader for use with
- * older modules that have not been updated for PSR-0.
- *
- * It is recommended to not enable this unless absolutely necessary.
- */
-//spl_autoload_register(array('Kohana', 'auto_load_lowercase'));
-
-/**
  * Enable the Kohana auto-loader for unserialization.
  *
  * @link http://www.php.net/manual/function.spl-autoload-call
@@ -48,8 +40,7 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
  * Note: If you supply an invalid environment name, a PHP warning will be thrown
  * saying "Couldn't find constant Kohana::<INVALID_ENV_NAME>"
  */
-Kohana::$environment = Kohana::DEVELOPMENT;
-// Kohana::$environment = Kohana::PRODUCTION;
+Kohana::$environment = Kohana::PRODUCTION;
 
 /**
  * Initialize Kohana, setting the default options.
