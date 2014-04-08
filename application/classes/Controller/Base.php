@@ -68,15 +68,16 @@ class Controller_Base extends Controller_Template
 			// This foreach loop will collect all the assigned user-roles.
 			$this->user_roles = $this->auth->get_user()->get_roles();
 
-			$theme = $this->config->get('theme', 'default');
+			// Set the user specific theme and options, if selected.
+			$theme = $this->auth->get_user()->theme ?: $this->config->get('theme', 'default');
+			$theme_options = json_decode($this->auth->get_user()->theme_options, true) ?: $this->config->get('theme_options', array());
 
-			// Set the user specific theme, if selected.
-			if ($this->auth->get_user()->theme)
-			{
-				$theme = $this->auth->get_user()->theme;
-			} // if
-
-			View::set_global(array('user' => $this->auth->get_user(), 'user_roles' => $this->user_roles, 'theme' => $theme));
+			View::set_global(array(
+				'user' => $this->auth->get_user(),
+				'user_roles' => $this->user_roles,
+				'theme' => $theme,
+				'theme_options' => $theme_options
+			));
 		} // if
 	} // function
 

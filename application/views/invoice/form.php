@@ -234,7 +234,10 @@
 					credit_popup = $('credit-popup'),
 					i;
 
+				<?php if ($theme_options['popup_blur']): ?>
 				$('main-container').removeClass('blur-off').addClass('blur');
+				<?php endif; ?>
+
 				credit_popup.getElement('tbody').set('html', '')
 
 				if (json.success) {
@@ -269,7 +272,10 @@
 	$$('.credit-popup-close').invoke('addEvent', 'click', function () {
 		$('popup').addClass('hidden');
 		$('overlay').addClass('hidden');
+
+		<?php if ($theme_options['popup_blur']): ?>
 		$('main-container').removeClass('blur').addClass('blur-off');
+		<?php endif; ?>
 	});
 
 	// Also, add a single empty position if there is none.

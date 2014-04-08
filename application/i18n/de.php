@@ -120,6 +120,8 @@ return array(
 	'Last login' => 'Letzter login',
 	'Additional options' => 'Zusätzliche Optionen',
 	'Selected theme' => 'Gewähltes Design',
+	'Use transparency in tables' => 'Transparente Schaltflächen in Tabellen',
+	'Use blur effect when opening popups' => 'Unschärfe-Effekt bei Popups',
 
 	// Translations for the user roles
 	'login' => 'Login',

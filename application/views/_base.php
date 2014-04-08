@@ -90,6 +90,6 @@
 		<?php endif; ?>
 	</div>
 	<div id="overlay" class="hidden"></div>
-	<div id="popup" class="hidden container"></div>
+	<div id="popup" class="hidden container well"></div>
 </body>
 </html>

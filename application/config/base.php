@@ -4,6 +4,10 @@ return array
 (
 	'title' => 'faktura dev',
 	'theme' => 'default',
+	'theme_options' => array(
+		'table_transparency' => true,
+		'popup_blur' => true
+	),
 
 	// Used for the Kohana bootstrap.
 	'timezone' => 'Europe/Berlin',

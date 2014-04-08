@@ -67,6 +67,7 @@ class Controller_User extends Controller_Base
 
 		$model = ORM::factory('user');
 		$model->theme = $this->config->get('theme', 'default');
+		$model->theme_options = json_encode($this->config->get('theme_options', array()));
 
 		$is_admin = in_array('admin', $this->user_roles);
 
@@ -106,6 +107,8 @@ class Controller_User extends Controller_Base
 
 		$model = ORM::factory('user')->where('id', '=', $id)->find();
 		$is_admin = in_array('admin', $this->user_roles);
+
+		$model->theme_options = $model->theme_options ?: json_encode($this->config->get('theme_options', array()));
 
 		$this->content = View::factory('user/form', array(
 			'title' => __('Update user ":username"', array(':username' => $model->username)),
@@ -175,6 +178,7 @@ class Controller_User extends Controller_Base
 				'password' => $this->request->post('inputPassword') ?: '',
 				'password_confirm' => $this->request->post('inputPassword_confirm') ?: '',
 				'theme' => $this->request->post('inputTheme') ?: $this->config->get('theme', 'default'),
+				'theme_options' => $this->request->post('inputTheme_options') ?: '{}',
 			);
 
 			if ($id > 0)

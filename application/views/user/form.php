@@ -63,14 +63,29 @@
 							<?=$properties['theme']['label'] ?><span class="text-danger">*</span>
 						</label>
 						<div class="col-md-8">
-							<?=Form::select('inputTheme', $themes, $theme, array('type' => 'text', 'class' => 'form-control')) ?>
+							<?=Form::select('inputTheme', $themes, $user_model->theme, array('type' => 'text', 'class' => 'form-control')) ?>
 							<span class="help-inline text-danger hidden"></span>
 						</div>
 					</div>
 
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-4 col-sm-offset-2">
 
+					<div class="checkbox">
+						<label>
+							<?=Form::checkbox('inputTheme_table_transparency', null, false, array('class' => 'theme-checkbox')) ?>
+							<?=__('Use transparency in tables') ?>
+						</label>
+					</div>
+
+					<div class="checkbox">
+						<label>
+							<?=Form::checkbox('inputTheme_popup_blur', null, false, array('class' => 'theme-checkbox')) ?>
+							<?=__('Use blur effect when opening popups') ?>
+						</label>
+					</div>
+
+					<?=Form::hidden('inputTheme_options', $user_model->theme_options) ?>
 				</div>
 			</div>
 		</fieldset>
@@ -148,6 +163,21 @@
 
 		$('theme-bootstrap').set('href', '<?=$basedir; ?>assets/css/themes/' + theme + '/bootstrap.min.css');
 		$('theme-addition').set('href', '<?=$basedir; ?>assets/css/themes/' + theme + '/addition.css');
+	});
+
+	// Populate the theme options.
+	var theme_options = JSON.decode($('inputTheme_options').get('value') || '{}'), op;
+
+	for (op in theme_options) {
+		if (theme_options.hasOwnProperty(op) && theme_options[op]) {
+			$('inputTheme_' + op).set('checked', true);
+		}
+	}
+
+	$$('input.theme-checkbox').invoke('addEvent', 'change', function () {
+		theme_options[this.id.substr(11)] = this.checked;
+
+		$('inputTheme_options').set('value', JSON.encode(theme_options));
 	});
 
 	// Adding some general data to our dynamic save-logic.

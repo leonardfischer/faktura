@@ -24,7 +24,7 @@
 <div class="row">
 	<div class="col-xs-12">
 		<ul class="pagination pagination-sm pull-right"></ul>
-		<table id="invoice-list" class="table table-striped table-hide-buttons mt20">
+		<table id="invoice-list" class="table table-striped mt20">
 			<thead>
 			<tr>
 				<th><?=__('Invoice no.') ?></th>
@@ -58,4 +58,8 @@
 			url: '<?=Route::url('invoice', array('action' => 'search')) ?>',
 			filter: '<?=$filter ?>'
 		});
+
+	<?php if ($theme_options['table_transparency']): ?>
+	$('invoice-list').addClass('table-hide-buttons');
+	<?php endif; ?>
 </script>

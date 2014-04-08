@@ -59,6 +59,12 @@ class Model_User extends Model_Auth_User
 			'type' => ORM_STRING,
 			'form_type' => FORM_TYPE_SELECT,
 			'form' => true
+		),
+		'theme_options' => array(
+			'label' => 'Theme options',
+			'type' => ORM_TEXT,
+			'form_type' => FORM_TYPE_TEXT,
+			'form' => false
 		)
 	);
 

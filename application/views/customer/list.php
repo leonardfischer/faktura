@@ -12,7 +12,7 @@
 <div class="row">
 	<div class="col-xs-12">
 		<ul class="pagination pagination-sm pull-right"></ul>
-		<table id="customer-list" class="table table-striped table-hide-buttons mt20 searchable">
+		<table id="customer-list" class="table table-striped mt20 searchable">
 			<thead>
 				<tr>
 					<th><?=__('Contact person'); ?></th>
@@ -52,4 +52,8 @@
 			url: '<?=Route::url('customer', array('action' => 'search')) ?>',
 			filter: null
 		});
+
+	<?php if ($theme_options['table_transparency']): ?>
+	$('customer-list').addClass('table-hide-buttons');
+	<?php endif; ?>
 </script>

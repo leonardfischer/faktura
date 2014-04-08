@@ -132,7 +132,7 @@ class Controller_Update extends Controller_Template
 		}
 		else
 		{
-			$requirements['PHP short tags'] = '<span class="text-success"><i class="fa fa-check"></i> switched on</span>';
+			$requirements['PHP short tags'] = '<span class="text-success"><i class="fa fa-check"></i> Switched on</span>';
 		} // if
 
 		$this->content = View::factory('update/intro')

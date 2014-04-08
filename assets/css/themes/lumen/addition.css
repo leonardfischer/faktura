@@ -3,8 +3,8 @@
 }
 
 /* Small fix for the main menu icons */
-.menu h3 a.btn i[class^="icon-"],
-.menu h3 a.btn i[class*="icon-"] {
+.menu h3 a.btn i.fa,
+.menu h3 a.btn i.fa {
 	font-size: 120%;
 }
 
