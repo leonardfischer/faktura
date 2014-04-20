@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-xs-12">
-		<h2>Step 3. Define your admin-user</h2>
+		<h2>Step 4. Define your admin-user</h2>
 		<p>Nearly there! Now you need to input the login, password and email information for your admin-user.</p>
 
 		<form class="form-horizontal" method="post" id="database-form">

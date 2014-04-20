@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-xs-12">
-		<h2>Step 2. Input your database configuration</h2>
+		<h2>Step 3. Input your database configuration</h2>
 		<p>Please input your database configuration, so the system can install the necessary data.</p>
 		<p><strong>Attention!</strong> The given MySQL user needs permission to create databases and tables!</p>
 
@@ -33,7 +33,7 @@
 					</div>
 
 					<div class="col-sm-6">
-						<button id="check-database-connection" type="button" class="btn btn-default btn-block">Check connection</button>
+						<button id="check-database-connection" type="button" class="btn btn-primary btn-block">Check connection</button>
 
 						<div id="check-database-result" class="alert hide mt15"></div>
 					</div>

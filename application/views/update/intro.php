@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-xs-12">
 		<h2>Step 1. Introduction</h2>
-		<p>Welcome to the Faktura update wizard. Here we will update your Faktura version from your current <?=SYSTEM_VERSION ?> to <?=$update['version'] ?>!</p>
+		<p>Welcome to the Faktura update wizard. Here we will update your Faktura version from your current <?=$config->get('version') ?> to <?=$update['version'] ?>!</p>
 		<p><strong>Attention!</strong> Please do not reload your browser tab during the complete update procedure or your installation may corrupt.</p>
 
 		<table class="table table-striped">

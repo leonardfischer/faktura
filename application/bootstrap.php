@@ -41,6 +41,7 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
  * saying "Couldn't find constant Kohana::<INVALID_ENV_NAME>"
  */
 Kohana::$environment = Kohana::PRODUCTION;
+Kohana::$environment = Kohana::DEVELOPMENT;
 
 /**
  * Initialize Kohana, setting the default options.
@@ -97,7 +98,6 @@ setlocale(LC_ALL, $config['locale']);
 I18n::lang($config['language']);
 
 // Setting some constants.
-define('SYSTEM_VERSION', '1.1.0');
 define('DS', DIRECTORY_SEPARATOR);
 define('ORM_ID', 'id');
 define('ORM_DATE', 'date');

@@ -136,6 +136,7 @@ class Controller_Update extends Controller_Template
 		} // if
 
 		$this->content = View::factory('update/intro')
+			->set('config', Kohana::$config->load('base'))
 			->set('requirements', $requirements)
 			->set('errors', $errors);
 	} // function
@@ -156,11 +157,50 @@ class Controller_Update extends Controller_Template
 	private function init_update ()
 	{
 		$this
+			->update_config()
 			->update_database()
 			->cleanup_update();
 
 		$this->content = View::factory('update/update_complete')
 			->set('errors', $this->update_errors);
+	} // function
+
+
+	/**
+	 * This method will be used to update the configuration files.
+	 *
+	 * @return  Controller_Update
+	 */
+	private function update_config ()
+	{
+		$config_path = APPPATH . 'config' . DS;
+
+		$base_config = include $config_path . 'base.php';
+
+		// Writing the base.php with the input data (or default values).
+		$base_tpl = file_get_contents($config_path . 'base.tpl');
+		$base_content = str_replace(array(
+			'%version%',
+			'%title%',
+			'%theme%',
+			'%timezone%',
+			'%locale%',
+			'%language%',
+			'%rows_per_page%',
+			'%invoice_start_no%'
+		), array(
+			$this->update['version'],
+			(isset($base_config['title']) ? $base_config['title'] : 'Faktura'),
+			(isset($base_config['theme']) ? $base_config['theme'] : 'default'),
+			(isset($base_config['timezone']) ? $base_config['timezone'] : 'Europe/Berlin'),
+			(isset($base_config['locale']) ? $base_config['locale'] : 'de_DE.utf-8'),
+			(isset($base_config['language']) ? $base_config['language'] : 'de-DE'),
+			(isset($base_config['rows_per_page']) ? $base_config['rows_per_page'] : 40),
+			(isset($base_config['invoice_no_start']) ? $base_config['invoice_no_start'] : 1),
+		), $base_tpl);
+		file_put_contents($config_path . 'base.php', $base_content);
+
+		return $this;
 	} // function
 
 

@@ -125,7 +125,7 @@ else
 		$update = include DOCROOT . 'update.php';
 
 		// Only execute the update, when our system version is lower than the one in the update.php
-		if (version_compare(SYSTEM_VERSION, $update['version'], '<'))
+		if (version_compare(Kohana::$config->load('base')->get('version'), $update['version'], '<'))
 		{
 			// Execute the update routine.
 			echo Request::factory('/update/', array(), FALSE)

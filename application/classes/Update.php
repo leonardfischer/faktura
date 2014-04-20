@@ -17,14 +17,14 @@ class Update
 		{
 			if (self::process_query_condition($query['if']))
 			{
-				if (! empty($query['then']))
+				if (isset($query['then']) && ! empty($query['then']))
 				{
 					$return[] = $query['then'];
 				} // if
 			}
 			else
 			{
-				if (! empty($query['else']))
+				if (isset($query['else']) && ! empty($query['else']))
 				{
 					$return[] = $query['else'];
 				} // if

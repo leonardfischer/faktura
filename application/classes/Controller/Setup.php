@@ -80,14 +80,18 @@ class Controller_Setup extends Controller_Template
 					break;
 
 				case 2:
-					$this->database_config();
+					$this->base_config();
 					break;
 
 				case 3:
-					$this->define_admin_user();
+					$this->database_config();
 					break;
 
 				case 4:
+					$this->define_admin_user();
+					break;
+
+				case 5:
 					$this->init_setup();
 					break;
 			} // switch
@@ -121,6 +125,29 @@ class Controller_Setup extends Controller_Template
 		$this->content
 			->set('short_tags', $short_tags_off ?: $ok)
 			->set('errors', $errors);
+	} // function
+
+
+	/**
+	 * In this step the user can input his "base" configuration.
+	 */
+	private function base_config ()
+	{
+		$themes = array();
+		$paths = glob(DOCROOT . 'assets' . DS . 'css' . DS . 'themes' . DS . '*');
+
+		foreach ($paths as $path)
+		{
+			$path = substr(strrchr($path, DS), 1);
+			$themes[$path] = ucfirst($path);
+		} // foreach
+
+		$this->content = View::factory('setup/base_config')
+			->set('themes', $themes)
+			->set('languages', array(
+				'de-DE' => 'German',
+				'en_US' => 'English'
+			));
 	} // function
 
 
@@ -244,6 +271,27 @@ class Controller_Setup extends Controller_Template
 	private function create_config_files ()
 	{
 		$config_path = APPPATH . 'config' . DS;
+
+		// Writing the base.php with the input data (or default values).
+		$base_tpl = file_get_contents($config_path . 'base.tpl');
+		$base_content = str_replace(array(
+			'%title%',
+			'%theme%',
+			'%timezone%',
+			'%locale%',
+			'%language%',
+			'%rows_per_page%',
+			'%invoice_start_no%'
+		), array(
+			$this->faktura_data['base']['inputName'] ?: 'Faktura',
+			$this->faktura_data['base']['inputTheme'] ?: 'default',
+			$this->faktura_data['base']['inputTimezone'],
+			$this->faktura_data['base']['inputLocale'],
+			$this->faktura_data['base']['inputLanguage'],
+			intval($this->faktura_data['base']['inputRowsPerPage']),
+			intval($this->faktura_data['base']['inputInvoiceStartNo'])
+		), $base_tpl);
+		file_put_contents($config_path . 'base.php', $base_content);
 
 		// Writing the auth.php with a random "hash_key".
 		$auth_tpl = file_get_contents($config_path . 'auth.tpl');
