@@ -138,8 +138,10 @@ return array(
 	// Dashboard translations
 	'New customers and invoices in :month' => 'Neue Kunden und Rechnungen im :month',
 	'In the last month <strong>:new_customers new customers</strong> and <strong>:new_invoices new invoices</strong> have been created.' => 'Im letzten Monat wurden <strong>:new_customers neue Kunden</strong> so wie <strong>:new_invoices neue Rechnungen</strong> erfasst.',
-	'Open invoices and reminders' => 'Offene Rechnungen und Mahnungen',
-	'Currently there are <strong>:open_invoices open invoices</strong> and <strong class=":color">:reminder_invoices reminder</strong>!' => 'Aktuell gibt es <strong>:open_invoices offene Rechnungen</strong> und <strong class=":color">:reminder_invoices Mahnungen</strong>!',
+	'Open invoices' => 'Offene Rechnungen',
+	'No open invoices' => 'Keine offene Rechnungen',
+	'Open reminders' => 'Offene Mahnungen',
+	'No open reminders' => 'Keine offene Mahnungen',
 	'Invoice value of :month' => 'Wert der Rechnungen aus :month',
 	'The value of the paid invoices created last month is <strong>:money</strong>!' => 'Der Wert der bezahlten Rechnungen des letzten Monats liegt bei <strong>:money</strong>!',
 	'The last invoices' => 'Die letzten Rechnungen',

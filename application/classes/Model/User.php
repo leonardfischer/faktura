@@ -13,6 +13,17 @@
 class Model_User extends Model_Auth_User
 {
 	/**
+	 * A user has many tokens and roles
+	 *
+	 * @var array Relationhips
+	 */
+	protected $_has_many = array(
+		'user_tokens' => array('model' => 'User_Token'),
+		'roles' => array('model' => 'Role', 'through' => 'roles_users'),
+		'widgets' => array('model' => 'Widget')
+	);
+
+	/**
 	 * Array of all our model properties.
 	 * @var  array
 	 */
