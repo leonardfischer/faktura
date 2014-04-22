@@ -136,8 +136,10 @@ return array(
 	'Allows the user to perform actions in the "suppliers" area' => 'Darf Aktionen im "Lieferanten" Bereich ausführen',
 
 	// Dashboard translations
-	'New customers and invoices in :month' => 'Neue Kunden und Rechnungen im :month',
-	'In the last month <strong>:new_customers new customers</strong> and <strong>:new_invoices new invoices</strong> have been created.' => 'Im letzten Monat wurden <strong>:new_customers neue Kunden</strong> so wie <strong>:new_invoices neue Rechnungen</strong> erfasst.',
+	'New customers in :month' => 'Neue Kunden im :month',
+	'New invoices in :month' => 'Neue Rechnungen im :month',
+	'In the last month <strong>:customers new customers</strong> have been created.' => 'Im letzten Monat wurden <strong>:customers neue Kunden</strong> erfasst.',
+	'In the last month <strong>:invoices new invoices</strong> have been created.' => 'Im letzten Monat wurden <strong>:invoices neue Rechnungen</strong> erfasst.',
 	'Open invoices' => 'Offene Rechnungen',
 	'No open invoices' => 'Keine offene Rechnungen',
 	'Open reminders' => 'Offene Mahnungen',
@@ -150,7 +152,8 @@ return array(
 	'Kohana version' => 'Kohana Version',
 	'Average request time' => 'Durchschnittliche Ladezeit',
 	'Average memory usage' => 'Durchschnittliche Speicherbelastung',
-	'Please go to your php.ini file and enable the <code>short_open_tag</code> option!' => 'Bitte aktivieren Sie die <code>short_open_tag</code> Option in Ihrer php.ini!',
+	'Configure the dashboard' => 'Dashboard konfigurieren',
+	'Configure this widget' => 'Dieses Widget konfigurieren',
 
 	// Some exception messages
 	'This action may only be called via ajax!' => 'Diese Aktion darf nur via Ajax aufgerufen werden!',

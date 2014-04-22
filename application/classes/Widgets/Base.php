@@ -105,6 +105,17 @@ abstract class Widgets_Base
 
 
 	/**
+	 * This method returns the width of the current widget.
+	 *
+	 * @return  integer
+	 */
+	public function get_width()
+	{
+		return (int) static::WIDTH;
+	} // function
+
+
+	/**
 	 * Method for initializing the widget.
 	 *
 	 * @return  self
@@ -117,7 +128,10 @@ abstract class Widgets_Base
 	 *
 	 * @return  self
 	 */
-	abstract public function config();
+	public function config()
+	{
+		return $this;
+	} // function
 
 
 	/**
@@ -127,6 +141,6 @@ abstract class Widgets_Base
 	 */
 	public function render()
 	{
-		return View::factory(static::TEMPLATE, $this->template_data);
+		return View::factory(static::TEMPLATE, $this->template_data)->set('self', $this);
 	} // function
 } // class

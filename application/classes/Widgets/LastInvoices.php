@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Widget class "Open reminders"
+ * Widget class "Last invoices"
  *
  * @category    Widgets
  * @package     Faktura
@@ -10,17 +10,17 @@
  * @version     1.0
  * @since       1.2
  */
-class Widgets_OpenReminders extends Widgets_Base
+class Widgets_LastInvoices extends Widgets_Base
 {
 	/**
 	 * The widgets name.
 	 */
-	const NAME = 'Open reminders';
+	const NAME = 'The last invoices';
 
 	/**
 	 * The widgets template
 	 */
-	const TEMPLATE = 'widgets/open_reminders';
+	const TEMPLATE = 'widgets/last_invoices';
 
 	/**
 	 * Defines, if this widget is configurable.
@@ -30,7 +30,8 @@ class Widgets_OpenReminders extends Widgets_Base
 	/**
 	 * Defines, how wide this widget is.
 	 */
-	const WIDTH = 1;
+	const WIDTH = 2;
+
 
 	/**
 	 * Method for initializing the widget.
@@ -40,7 +41,7 @@ class Widgets_OpenReminders extends Widgets_Base
 	public function init()
 	{
 		$this->template_data = array(
-			'invoices' => ORM::factory('invoice')->get_reminder_invoices()->find_all()
+			'invoices' => ORM::factory('invoice')->order_by('id', 'DESC')->limit(5)->find_all()
 		);
 
 		return $this;

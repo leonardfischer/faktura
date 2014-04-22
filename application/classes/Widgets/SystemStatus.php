@@ -28,6 +28,11 @@ class Widgets_SystemStatus extends Widgets_Base
 	const CONFIGURABLE = false;
 
 	/**
+	 * Defines, how wide this widget is.
+	 */
+	const WIDTH = 1;
+
+	/**
 	 * Method for initializing the widget.
 	 *
 	 * @return  self
@@ -42,16 +47,5 @@ class Widgets_SystemStatus extends Widgets_Base
 		);
 
 		return $this;
-	} // function
-
-
-	/**
-	 * Method for handling the widget configuration.
-	 *
-	 * @return  self
-	 */
-	public function config()
-	{
-		;
 	} // function
 } // class

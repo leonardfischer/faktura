@@ -133,3 +133,14 @@ div.searchable-plugin ul input.filter {
 	-o-transition:all 0.15s ease-in-out;
 	transition:all 0.15s ease-in-out;
 }
+
+.widget-container:hover .controls {
+	display: block;
+}
+
+.widget-container .controls {
+	display: none;
+	position: absolute;
+	right: 20px;
+	top: 5px;
+}

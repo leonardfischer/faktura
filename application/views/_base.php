@@ -9,8 +9,8 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<link href="<?=$basedir; ?>assets/css/themes/<?=$theme ?>/bootstrap.min.css" rel="stylesheet" id="theme-bootstrap">
-	<link href="<?=$basedir; ?>assets/css/themes/<?=$theme ?>/addition.css" rel="stylesheet" id="theme-addition">
+	<link href="<?=$basedir; ?>assets/css/themes/<?=$theme; ?>/bootstrap.min.css" rel="stylesheet" id="theme-bootstrap">
+	<link href="<?=$basedir; ?>assets/css/themes/<?=$theme; ?>/addition.css" rel="stylesheet" id="theme-addition">
 	<link href="<?=$basedir; ?>assets/css/font-awesome.min.css" rel="stylesheet">
 	<link href="<?=$basedir; ?>assets/css/style.css" rel="stylesheet">
 	<link href="<?=$basedir; ?>assets/css/datepicker.css" rel="stylesheet">

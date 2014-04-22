@@ -1,3 +1,5 @@
+<h4 class="mt0"><?=$self->get_name() ?></h4>
+
 <table class="table table-striped">
 	<tbody>
 	<tr>

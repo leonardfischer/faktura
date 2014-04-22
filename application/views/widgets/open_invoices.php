@@ -1,3 +1,5 @@
+<h4 class="mt0"><?=$self->get_name() ?></h4>
+
 <? if($invoices->count()): ?>
 	<div class="alert alert-danger mb0"><?=$invoices->count() ?> <?= __('Open invoices') ?>!</div>
 
