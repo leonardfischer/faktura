@@ -154,7 +154,6 @@
 <div id="credit-popup" class="hidden">
 	<div class="row">
 		<div class="col-xs-12">
-			<i class="fa fa-times credit-popup-close pull-right mt10 mouse-pointer"></i>
 			<h3><?=__('Please choose the positions, you want to credit') ?></h3>
 			<table class="mt20 table table-striped">
 				<tbody></tbody>
@@ -164,7 +163,7 @@
 	<div class="row">
 		<div class="col-xs-12 form-group">
 			<a id="credit-print-button" target="_blank" class="btn btn-success" href="<?=Route::url('print', array('action' => 'credit', 'id' => $invoice->id)) ?>"><?=__('Print credit') ?></a>
-			<button class="btn btn-default credit-popup-close"><?=__('Cancel') ?></button>
+			<button class="btn btn-default popup-close"><?=__('Cancel') ?></button>
 		</div>
 	</div>
 </div>
@@ -229,14 +228,8 @@
 		new Request.JSON({
 			url: '<?=$credit_popup_ajax_url ?>',
 			onSuccess: function(json){
-				var popup = $('popup').removeClass('hidden'),
-					overlay = $('overlay').removeClass('hidden'),
-					credit_popup = $('credit-popup'),
+				var credit_popup = $('credit-popup'),
 					i;
-
-				<?php if ($theme_options['popup_blur']): ?>
-				$('main-container').removeClass('blur-off').addClass('blur');
-				<?php endif; ?>
 
 				credit_popup.getElement('tbody').set('html', '')
 
@@ -260,7 +253,7 @@
 						);
 				}
 
-				popup.grab(credit_popup.removeClass('hidden'));
+				ModalPopup.grab(credit_popup.removeClass('hidden')).open();
 			}
 		}).send();
 	});
@@ -269,46 +262,10 @@
 		this.set('href', '<?=Route::url('print', array('action' => 'credit', 'id' => $invoice->id)) ?>/' + $('credit-popup').getElements('input.position:checked').invoke('get', 'value').join())
 	});
 
-	$$('.credit-popup-close').invoke('addEvent', 'click', function () {
-		$('popup').addClass('hidden');
-		$('overlay').addClass('hidden');
-
-		<?php if ($theme_options['popup_blur']): ?>
-		$('main-container').removeClass('blur').addClass('blur-off');
-		<?php endif; ?>
-	});
-
 	// Also, add a single empty position if there is none.
 	if ($('invoice-position-list').getElements('li').length == 0) {
 		$$('button.add-position').fireEvent('click');
 	}
-
-	var responsive_popup = function () {
-		var width = window.getSize().x;
-
-		if (width >= 950) {
-			$('popup').set('style', null);
-		} else if (width > 650 && width < 950) {
-			$('popup').set('styles', {
-				width: 600,
-				marginLeft: -300,
-				left: '50%'
-			});
-		} else {
-			$('popup').set('styles', {
-				width: '100%',
-				marginLeft: 0,
-				left: 0
-			});
-		}
-	};
-
-	// Once the DOM is ready, trigger the "responsive_popup" function.
-	window.addEvent('domready', function() {
-		responsive_popup();
-	});
-
-	window.addEventListener('resize', responsive_popup);
 
 	// Adding some general data to our dynamic save-logic.
 	Faktura

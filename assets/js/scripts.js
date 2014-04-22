@@ -99,6 +99,11 @@ window.addEvent('domready', function() {
 	$$('select.searchable').each(function (el) {
 		new Searchable(el);
 	});
+
+	// Once the DOM is ready, trigger the "responsive_popup" function.
+	ModalPopup.initialize().responsive();
+
+	window.addEventListener('resize', ModalPopup.responsive);
 });
 
 // This pager class can be used for tables, filled by a controller + model.
@@ -391,3 +396,92 @@ var AjaxTableSearch = new Class({
 		this.options.pager.options.pager.invoke('removeClass', 'disabled');
 	}
 });
+
+// This class should be used for modal popups.
+var ModalPopup = {
+	initialize: function () {
+		this.overlay = $('overlay');
+		this.popup = $('popup');
+		this.popup_content = $('popup-content');
+
+		this.popup.addEvent('click:relay(.popup-close)', ModalPopup.close.bind(this));
+
+		return this;
+	},
+
+	open: function () {
+		if (Faktura.get('modal.blur')) {
+			$('main-container').removeClass('blur-off').addClass('blur');
+		}
+
+		this.overlay.removeClass('hidden');
+		this.popup.removeClass('hidden');
+
+		return this;
+	},
+
+	close: function () {
+		if (Faktura.get('modal.blur')) {
+			$('main-container').addClass('blur-off').removeClass('blur');
+		}
+
+		this.overlay.addClass('hidden');
+		this.popup.addClass('hidden');
+
+		return this;
+	},
+
+	grab: function (element) {
+		this.popup_content.grab(element)
+
+		return this;
+	},
+
+	load: function (url, data, callback) {
+		new Request.JSON({
+			url: url,
+			data: data,
+			onSuccess: function (json) {
+				if (json.success) {
+					this.popup_content.set('html', json.data);
+				} else {
+					this.popup_content.set('html', json.message);
+				}
+
+				if (typeOf(callback) === 'function') {
+					callback.call(this);
+				}
+			}.bind(this),
+			onFailure: function (text) {
+				this.popup_content.set('html', text.responseText);
+				if (typeOf(callback) === 'function') {
+					callback.call(this);
+				}
+			}.bind(this)
+		}).send();
+
+		return this;
+	},
+
+	responsive: function () {
+		var width = window.getSize().x;
+
+		if (width >= 950) {
+			this.popup.set('style', null);
+		} else if (width > 650 && width < 950) {
+			this.popup.set('styles', {
+				width: 600,
+				marginLeft: -300,
+				left: '50%'
+			});
+		} else {
+			this.popup.set('styles', {
+				width: '100%',
+				marginLeft: 0,
+				left: 0
+			});
+		}
+
+		return this;
+	}
+};

@@ -28,6 +28,8 @@
 		// Create a global register.
 		var Faktura = new Hash;
 
+		Faktura.set('modal.blur', <?php echo ($theme_options['popup_blur'] ? 'true' : 'false') ?>);
+
 		// Define the default JS language.
 		Locale.use('<?=$config->get('language'); ?>');
 	</script>
@@ -90,6 +92,9 @@
 		<?php endif; ?>
 	</div>
 	<div id="overlay" class="hidden"></div>
-	<div id="popup" class="hidden container well"></div>
+	<div id="popup" class="hidden container well">
+		<i class="fa fa-times popup-close pull-right mouse-pointer"></i>
+		<div id="popup-content"></div>
+	</div>
 </body>
 </html>
