@@ -12,19 +12,23 @@
 <div class="row">
 	<div class="col-xs-12">
 		<ul class="pagination pagination-sm pull-right"></ul>
-		<table id="customer-list" class="table table-striped mt20 searchable">
-			<thead>
-				<tr>
-					<th><?=__('Contact person'); ?></th>
-					<th><?=__('Company'); ?></th>
-					<th><?=__('Address'); ?></th>
-					<th><?=__('Email'); ?></th>
-					<th><?=__('Allowance'); ?></th>
-					<th style="width:140px;"><?=__('Action'); ?></th>
-				</tr>
-			</thead>
-			<tbody></tbody>
-		</table>
+
+		<div class="table-responsive">
+			<table id="customer-list" class="table table-striped mt20 searchable">
+				<thead>
+					<tr>
+						<th><?=__('Contact person'); ?></th>
+						<th><?=__('Company'); ?></th>
+						<th><?=__('Address'); ?></th>
+						<th><?=__('Email'); ?></th>
+						<th><?=__('Allowance'); ?></th>
+						<th style="width:140px;"><?=__('Action'); ?></th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+
 		<ul class="pagination pagination-sm pull-right"></ul>
 	</div>
 </div>

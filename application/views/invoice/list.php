@@ -24,19 +24,23 @@
 <div class="row">
 	<div class="col-xs-12">
 		<ul class="pagination pagination-sm pull-right"></ul>
-		<table id="invoice-list" class="table table-striped mt20">
-			<thead>
-			<tr>
-				<th><?=__('Invoice no.') ?></th>
-				<th><?=__('Customer / Contact person') ?></th>
-				<th><?=__('Created at') ?></th>
-				<th><?=__('Paid at') ?></th>
-				<th><?=__('Total') ?></th>
-				<th style="width:140px;"><?=__('Action') ?></th>
-			</tr>
-			</thead>
-			<tbody></tbody>
-		</table>
+
+		<div class="table-responsive">
+			<table id="invoice-list" class="table table-striped mt20">
+				<thead>
+				<tr>
+					<th><?=__('Invoice no.') ?></th>
+					<th><?=__('Customer / Contact person') ?></th>
+					<th><?=__('Created at') ?></th>
+					<th><?=__('Paid at') ?></th>
+					<th><?=__('Total') ?></th>
+					<th style="width:140px;"><?=__('Action') ?></th>
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+
 		<ul class="pagination pagination-sm pull-right"></ul>
 	</div>
 </div>

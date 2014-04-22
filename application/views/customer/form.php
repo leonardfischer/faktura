@@ -100,32 +100,34 @@ $right_column = array_slice($properties, $property_count);
 <div class="col-xs-12">
 	<h2><?=__('The last 20 invoices of this customer')?></h2>
 
-	<table class="table table-striped table-hide-buttons mt20">
-		<thead>
-		<tr>
-			<th><?=__('Invoice no.') ?></th>
-			<th><?=__('Created at') ?></th>
-			<th><?=__('Paid at') ?></th>
-			<th><?=__('Total') ?></th>
-			<th style="width:130px;"><?=__('Action') ?></th>
-		</tr>
-		</thead>
-		<tbody>
-		<?php foreach ($invoices as $invoice): ?>
+	<div class="table-responsive">
+		<table class="table table-striped table-hide-buttons mt20">
+			<thead>
 			<tr>
-				<td><?=$invoice->invoice_no ?></td>
-				<td><?=$invoice->invoice_date() ?></td>
-				<td><?=$invoice->paid_on_date() ?></td>
-				<td><?=$invoice->calculate_total() ?></td>
-				<td>
-					<div class="btn-group">
-						<a class="btn btn-primary btn-sm" href="<?=Route::url('invoice', array('action' => 'edit', 'id' => $invoice->id)) ?>"><?=__('Edit') ?></a>
-					</div>
-				</td>
+				<th><?=__('Invoice no.') ?></th>
+				<th><?=__('Created at') ?></th>
+				<th><?=__('Paid at') ?></th>
+				<th><?=__('Total') ?></th>
+				<th style="width:130px;"><?=__('Action') ?></th>
 			</tr>
-		<?php endforeach; ?>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+			<?php foreach ($invoices as $invoice): ?>
+				<tr>
+					<td><?=$invoice->invoice_no ?></td>
+					<td><?=$invoice->invoice_date() ?></td>
+					<td><?=$invoice->paid_on_date() ?></td>
+					<td><?=$invoice->calculate_total() ?></td>
+					<td>
+						<div class="btn-group">
+							<a class="btn btn-primary btn-sm" href="<?=Route::url('invoice', array('action' => 'edit', 'id' => $invoice->id)) ?>"><?=__('Edit') ?></a>
+						</div>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+	</div>
 </div>
 <?php endif; ?>
 

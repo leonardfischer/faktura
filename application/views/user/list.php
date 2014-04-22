@@ -12,18 +12,22 @@
 <div class="row">
 	<div class="col-xs-12">
 		<ul class="pagination pagination-sm pull-right"></ul>
-		<table id="user-list" class="table table-striped mt20 searchable">
-			<thead>
-			<tr>
-				<th><?=__('ID'); ?></th>
-				<th><?=__('Username'); ?></th>
-				<th><?=__('Email'); ?></th>
-				<th><?=__('Last login'); ?></th>
-				<th style="width:130px;"><?=__('Action'); ?></th>
-			</tr>
-			</thead>
-			<tbody></tbody>
-		</table>
+
+		<div class="table-responsive">
+			<table id="user-list" class="table table-striped mt20 searchable">
+				<thead>
+				<tr>
+					<th><?=__('ID'); ?></th>
+					<th><?=__('Username'); ?></th>
+					<th><?=__('Email'); ?></th>
+					<th><?=__('Last login'); ?></th>
+					<th style="width:130px;"><?=__('Action'); ?></th>
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+
 		<ul class="pagination pagination-sm pull-right"></ul>
 	</div>
 </div>
