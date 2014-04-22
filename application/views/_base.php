@@ -28,7 +28,7 @@
 		// Create a global register.
 		var Faktura = new Hash;
 
-		Faktura.set('modal.blur', <?php echo ($theme_options['popup_blur'] ? 'true' : 'false') ?>);
+		Faktura.set('modal.blur', <?php echo ((isset($theme_options['popup_blur']) && $theme_options['popup_blur']) ? 'true' : 'false') ?>);
 
 		// Define the default JS language.
 		Locale.use('<?=$config->get('language'); ?>');

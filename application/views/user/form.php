@@ -63,7 +63,7 @@
 							<?=$properties['theme']['label'] ?><span class="text-danger">*</span>
 						</label>
 						<div class="col-md-8">
-							<?=Form::select('inputTheme', $themes, $user_model->theme, array('type' => 'text', 'class' => 'form-control')) ?>
+							<?=Form::select('inputTheme', $themes, $user_model->theme, array('class' => 'form-control')) ?>
 							<span class="help-inline text-danger hidden"></span>
 						</div>
 					</div>
