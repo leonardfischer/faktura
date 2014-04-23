@@ -431,6 +431,21 @@ var ModalPopup = {
 		return this;
 	},
 
+	execute_javascript: function () {
+		var scripts = this.popup_content.getElements('script'),
+			i;
+
+		if (scripts.length > 0) {
+			for (i in scripts) {
+				if (scripts.hasOwnProperty(i)) {
+					Browser.exec(scripts[i].innerHTML);
+				}
+			}
+		}
+
+		return this;
+	},
+
 	grab: function (element) {
 		this.popup_content.grab(element)
 

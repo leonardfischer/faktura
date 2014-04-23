@@ -9,6 +9,7 @@
 textarea { resize: vertical; }
 
 .mouse-pointer { cursor: pointer; }
+.mouse-move-vertical { cursor: ns-resize; }
 
 .mt0 { margin-top: 0; }
 .mt5 { margin-top: 5px; }
@@ -134,6 +135,14 @@ div.searchable-plugin ul input.filter {
 	transition:all 0.15s ease-in-out;
 }
 
+#widget-sortable li button {
+	display:none;
+}
+
+#widget-sortable li:hover button {
+	display:block;
+}
+
 .widget-container:hover .controls {
 	display: block;
 }
@@ -143,4 +152,20 @@ div.searchable-plugin ul input.filter {
 	position: absolute;
 	right: 20px;
 	top: 5px;
+}
+
+/* Some helper classes from lil'b - https://github.com/ItsJonQ/lil-b */
+
+/**
+ * .no-select
+ * This helper class disables selection for selectors. This is handy for
+ * navigations, links, headers, buttons, etc..
+ */
+.no-select {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }

@@ -163,7 +163,7 @@
 	<div class="row">
 		<div class="col-xs-12 form-group">
 			<a id="credit-print-button" target="_blank" class="btn btn-success" href="<?=Route::url('print', array('action' => 'credit', 'id' => $invoice->id)) ?>"><?=__('Print credit') ?></a>
-			<button class="btn btn-default popup-close"><?=__('Cancel') ?></button>
+			<button type="button" class="btn btn-default popup-close"><?=__('Cancel') ?></button>
 		</div>
 	</div>
 </div>

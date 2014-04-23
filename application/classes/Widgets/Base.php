@@ -72,6 +72,30 @@ abstract class Widgets_Base
 
 
 	/**
+	 * This method returns all available widgets.
+	 *
+	 * @return  array
+	 */
+	public static function find_all ()
+	{
+		$return = array();
+		$widget_classes = glob(APPPATH . 'classes' . DS . 'Widgets' . DS . '*');
+
+		foreach ($widget_classes as $widget_class)
+		{
+			if (strpos($widget_class, 'Base.php') > 0)
+			{
+				continue;
+			} // if
+
+			$return[] = strstr(substr(strrchr($widget_class, DS), 1), '.', true);
+		} // foreach
+
+		return $return;
+	} // function
+
+
+	/**
 	 * Method for returning the widget name.
 	 *
 	 * @return  string

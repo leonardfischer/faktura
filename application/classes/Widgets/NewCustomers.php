@@ -36,10 +36,16 @@ class Widgets_NewCustomers extends Widgets_Base
 	/**
 	 * Method for returning the widget name.
 	 *
+	 * @param   boolean $raw
 	 * @return  string
 	 */
-	public function get_name()
+	public function get_name($raw = false)
 	{
+		if ($raw)
+		{
+			return parent::get_name();
+		} // if
+
 		return __('New customers in :month', array(':month' => strftime('%B', strtotime('-1 MONTH'))));
 	} // function
 
