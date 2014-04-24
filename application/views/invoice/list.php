@@ -25,7 +25,7 @@
 	<div class="col-xs-12">
 		<ul class="pagination pagination-sm pull-right"></ul>
 
-		<div class="table-responsive">
+		<div class="table-responsive clearfix">
 			<table id="invoice-list" class="table table-striped mt20">
 				<thead>
 				<tr>

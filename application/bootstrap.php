@@ -59,7 +59,6 @@ if (isset($_SERVER['SERVER_PROTOCOL']))
  * saying "Couldn't find constant Kohana::<INVALID_ENV_NAME>"
  */
 Kohana::$environment = Kohana::PRODUCTION;
-Kohana::$environment = Kohana::DEVELOPMENT;
 
 /**
  * Initialize Kohana, setting the default options.
