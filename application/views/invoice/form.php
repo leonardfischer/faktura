@@ -253,7 +253,7 @@
 						);
 				}
 
-				ModalPopup.grab(credit_popup.removeClass('hidden')).open();
+				ModalPopup.grab(credit_popup.removeClass('hidden').clone()).open();
 			}
 		}).send();
 	});

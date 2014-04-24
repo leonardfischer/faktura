@@ -49,7 +49,7 @@
 	});
 
 	$('dashboard-config').addEvent('click', function () {
-		ModalPopup.load('<?=Route::url('default', array('action' => 'dashboard_config'))?>', {}, function () {
+		ModalPopup.load_json('<?=Route::url('default', array('action' => 'dashboard_config'))?>', {}, function () {
 			// After loading we want to open the modal popup.
 			ModalPopup.open();
 

@@ -100,7 +100,7 @@
 			}
 
 			// Remove the element.
-			$li.remove();
+			$li.dispose();
 		});
 	});
 </script>

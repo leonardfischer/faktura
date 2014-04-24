@@ -36,6 +36,7 @@ return array(
 
 	// Invoice form translations.
 	'Create new invoice' => 'Neue Rechnung erfassen',
+	'N/A' => 'N/A',
 	'All' => 'Alle',
 	'Open' => 'Offen',
 	'Reminder' => 'Mahnung',

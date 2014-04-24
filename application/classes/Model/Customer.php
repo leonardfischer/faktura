@@ -183,11 +183,16 @@ class Model_Customer extends ORM
 			{
 				$return[$customer->id] .= ' - ' . $customer->name;
 			} // if
+
+			if (! empty($customer->city))
+			{
+				$return[$customer->id] .= ' (' . $customer->city . ')';
+			} // if
 		} // foreach
 
 		asort($return);
 
-		return $return;
+		return array(0 => __('N/A')) + $return;
 	} // function
 
 

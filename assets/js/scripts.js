@@ -409,6 +409,18 @@ var ModalPopup = {
 		return this;
 	},
 
+	is_open: function () {
+		return (! (this.overlay.hasClass('hidden') && this.popup.hasClass('hidden')));
+	},
+
+	toggle: function () {
+		if (this.is_open()) {
+			this.close.call(this);
+		} else {
+			this.open.call(this);
+		}
+	},
+
 	open: function () {
 		if (Faktura.get('modal.blur')) {
 			$('main-container').removeClass('blur-off').addClass('blur');
@@ -447,12 +459,29 @@ var ModalPopup = {
 	},
 
 	grab: function (element) {
-		this.popup_content.grab(element)
+		this.popup_content.set('html', '').grab(element);
 
 		return this;
 	},
 
-	load: function (url, data, callback) {
+	load_html: function (url, data, callback) {
+		new Request.HTML({
+			url: url,
+			data: data,
+			onSuccess: function (tree, elements, html) {
+				console.log(html);
+				this.popup_content.set('html', html);
+
+				if (typeOf(callback) === 'function') {
+					callback.call(this);
+				}
+			}.bind(this)
+		}).send();
+
+		return this;
+	},
+
+	load_json: function (url, data, callback) {
 		new Request.JSON({
 			url: url,
 			data: data,
