@@ -137,7 +137,9 @@ return array(
 
 	// Dashboard translations
 	'New customers in :month' => 'Neue Kunden im :month',
+	'New customers' => 'Neue Kunden',
 	'New invoices in :month' => 'Neue Rechnungen im :month',
+	'New invoices' => 'Neue Rechnungen',
 	'In the last month <strong>:customers new customers</strong> have been created.' => 'Im letzten Monat wurden <strong>:customers neue Kunden</strong> erfasst.',
 	'In the last month <strong>:invoices new invoices</strong> have been created.' => 'Im letzten Monat wurden <strong>:invoices neue Rechnungen</strong> erfasst.',
 	'Open invoices' => 'Offene Rechnungen',
@@ -154,6 +156,8 @@ return array(
 	'Average memory usage' => 'Durchschnittliche Speicherbelastung',
 	'Configure the dashboard' => 'Dashboard konfigurieren',
 	'Configure this widget' => 'Dieses Widget konfigurieren',
+	'Select a widget' => 'Widget auswahl',
+	'Add this widget' => 'Widget hinzufügen',
 
 	// Some exception messages
 	'This action may only be called via ajax!' => 'Diese Aktion darf nur via Ajax aufgerufen werden!',

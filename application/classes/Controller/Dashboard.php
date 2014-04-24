@@ -17,15 +17,8 @@ class Controller_Dashboard extends Controller_Base
 	public function action_index()
 	{
 		$this->content = View::factory('dashboard')
-			->set('last_month', strftime('%B', strtotime('-1 MONTH')))
-			->set('last_login', strftime('%d.%B %Y um %H:%m Uhr', $this->auth->get_user()->last_login));
-
-		$this
-			->new_customers_and_invoices_last_month()
-			->open_invoices_and_reminders()
-			->invoice_value_last_month()
-			->last_invoices()
-			->system_status();
+			->set('last_login', strftime('%d.%B %Y um %H:%m Uhr', $this->auth->get_user()->last_login))
+			->set('widgets', $this->process_user_widgets());
 
 		$this->template
 			->set('content', $this->content);
@@ -33,96 +26,157 @@ class Controller_Dashboard extends Controller_Base
 
 
 	/**
-	 * Retrieves the number of new customers and invoices of the last month.
-	 *
-	 * @return  Controller_Dashboard
+	 * Ajax action for loading the widgets.
 	 */
-	protected function new_customers_and_invoices_last_month()
+	public function action_ajax ()
 	{
-		$this->content
-			->set('new_customers', ORM::factory('customer')->where('created_at', 'BETWEEN', array(date('Y-m-01', strtotime('-1 MONTH')), date('Y-m-00')))->count_all())
-			->set('new_invoices', ORM::factory('invoice')->where('created_at', 'BETWEEN', array(date('Y-m-01', strtotime('-1 MONTH')), date('Y-m-00')))->count_all());
+		$return = array(
+			'success' => true,
+			'data' => null,
+			'message' => null
+		);
 
-		return $this;
-	} // function
+		$this->auto_render = false;
 
-
-	/**
-	 * Method for summing up all open invoices and reminders
-	 *
-	 * @return  Controller_Dashboard
-	 */
-	protected function open_invoices_and_reminders()
-	{
-		$this->content
-			->set('open_invoices', ORM::factory('invoice')->where('paid_on_date', '=', null)->order_by('id', 'DESC')->count_all())
-			->set('reminder_invoices', ORM::factory('invoice')->get_reminder_invoices()->count_all());
-
-		return $this;
-	} // function
-
-
-	/**
-	 * Method for calculating the value of the paid invoices, which were created last month.
-	 *
-	 * @return  Controller_Dashboard
-	 */
-	protected function invoice_value_last_month()
-	{
-		$l_value_last_month = 0;
-
-		// Get all invoices of the last month, which have been paid.
-		$l_invoices = ORM::factory('invoice')
-			->where('paid_on_date', '!=', null)
-			->where('invoice_date', 'BETWEEN', array(date('Y-m-01', strtotime('-1 MONTH')), date('Y-m-00')))
-			->find_all();
-
-		foreach ($l_invoices as $l_invoice)
+		try
 		{
-			$l_value_last_month += $l_invoice->calculate_total(true, true);
+			if (! $this->request->is_ajax())
+			{
+				throw new HTTP_Exception_304('__This is a AJAX action only!');
+			} // if
+
+			$widget_class = $this->request->post('identifier');
+			$widget_config = $this->request->post('config') ?: array();
+
+			$return['data'] = trim(utf8_encode(Widgets_Base::factory($widget_class, $widget_config)->init()->render()));
+		}
+		catch (Exception $e)
+		{
+			$return['success'] = false;
+			$return['message'] = $e->getMessage();
+		} // try
+
+		$this->response->body(json_encode($return));
+	} // function
+
+
+	/**
+	 * Method for displaying the dashboard configuration.
+	 */
+	protected function action_dashboard_config ()
+	{
+		$return = array(
+			'success' => true,
+			'data' => null,
+			'message' => null
+		);
+
+		$this->auto_render = false;
+
+		try
+		{
+			if (! $this->request->is_ajax())
+			{
+				throw new HTTP_Exception_304('__This is a AJAX action only!');
+			} // if
+
+			$available_widgets = array();
+			$widgets = $this->process_user_widgets();
+
+			foreach (Widgets_Base::find_all() as $widget)
+			{
+				$available_widgets[$widget] = Widgets_Base::factory($widget)->get_name(true);
+			} // foreach
+
+			$view = View::factory('dashboard_config')
+				->set('available_widgets', $available_widgets)
+				->set('widgets', $widgets);
+
+			$return['data'] = trim($view);
+		}
+		catch (Exception $e)
+		{
+			$return['success'] = false;
+			$return['message'] = $e->getMessage();
+		} // try
+
+		$this->response->body(json_encode($return));
+	} // function
+
+
+	/**
+	 * Method for saving the dashboard configuration
+	 */
+	public function action_dashboard_save ()
+	{
+		$return = array(
+			'success' => true,
+			'data' => null,
+			'message' => null
+		);
+
+		$this->auto_render = false;
+
+		try
+		{
+			$widgets = json_decode($this->request->post('widgets'), true);
+			$deletions = json_decode($this->request->post('deletions'), true);
+			$user_id = (int) $this->auth->get_user()->id;
+
+			if (count($deletions))
+			{
+				DB::delete('widgets')->where('id', 'IN', $deletions)->execute();
+			} // if
+
+			if (count($widgets))
+			{
+				foreach ($widgets as $i => $widget)
+				{
+					$sorting = (int) substr($i, 5);
+
+					$widget_orm = ORM::factory('widget');
+
+					if (is_numeric($widget['id']))
+					{
+						$widget_orm = $widget_orm->where('id', '=', $widget['id'])->find();
+					} // if
+
+					$widget_orm->values(array(
+						'widget' => $widget['widget'],
+						'user_id' => $user_id,
+						'sorting' => $sorting
+					))->save();
+				} // foreach
+			} // if
+		}
+		catch (Exception $e)
+		{
+			$return['success'] = false;
+			$return['message'] = $e->getMessage();
+		} // try
+
+		$this->response->body(json_encode($return));
+	} // function
+
+
+	/**
+	 * Method for preparing the users widgets.
+	 *
+	 * @return  array
+	 */
+	protected function process_user_widgets ()
+	{
+		$return = array();
+		$widgets = $this->auth->get_user()->widgets->order_by('sorting', 'ASC')->find_all();
+
+		foreach ($widgets as $widget)
+		{
+			$return[] = array(
+				'instance' => Widgets_Base::factory($widget->widget, $widget->config),
+				'data' => $widget
+			);
 		} // foreach
 
-		$this->content
-			->set('money', '&euro; ' . number_format(round($l_value_last_month, 2), 2, ',', ''));
-
-		return $this;
-	} // function
-
-
-	/**
-	 * Method for displaying the last few invoices.
-	 *
-	 * @return  Controller_Dashboard
-	 */
-	protected function last_invoices()
-	{
-		$this->content
-			->set('invoices', ORM::factory('invoice')->order_by('id', 'DESC')->limit(5)->find_all());
-
-		return $this;
-	} // function
-
-
-	/**
-	 * Method for displaying some basic system status numbers.
-	 *
-	 * @return  Controller_Dashboard
-	 */
-	protected function system_status()
-	{
-		$alerts = array();
-		$profiler = Profiler::application();
-
-		if (!ini_get('short_open_tag'))
-		{
-			$alerts[] = __('Please go to your php.ini file and enable the <code>short_open_tag</code> option!');
-		} // if
-
-		$this->content
-			->set('alerts', $alerts)
-			->set('request_time', $profiler['average']['time'])
-			->set('request_memory', $profiler['average']['memory']);
-
-		return $this;
+		return $return;
 	} // function
 } // class

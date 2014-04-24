@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-xs-12 mt20">
-		<button type="button" class="btn btn-primary pull-right" title="<?=__('Configure the dashboard') ?>">
+		<button type="button" id="dashboard-config" class="btn btn-primary pull-right" title="<?=__('Configure the dashboard') ?>">
 			<i class="fa fa-cog mouse-pointer"></i>
 		</button>
 
@@ -12,7 +12,7 @@
 
 <div id="dashboard" class="row">
 	<?php foreach ($widgets as $widget): ?>
-		<div class="col-sm-<?=($widget['instance']->get_width() * 6) ?> col-md-<?=($widget['instance']->get_width() * 4) ?> widget-container">
+		<div class="col-xs-12 col-sm-<?=($widget['instance']->get_width() * 6) ?> col-md-<?=($widget['instance']->get_width() * 4) ?> widget-container">
 			<? if ($widget['instance']->is_configurable()): ?>
 			<div class="controls">
 				<button class="btn btn-sm btn-primary" type="button" title="<?=__('Configure this widget') ?>">
@@ -41,7 +41,20 @@
 				} else {
 					$widget.set('html', new Element('p.alert.alert-danger').set('html', json.message));
 				}
+			},
+			onError:function(text) {
+				$widget.set('html', new Element('p.alert.alert-danger').set('html', json.message));
 			}
 		}).send();
+	});
+
+	$('dashboard-config').addEvent('click', function () {
+		ModalPopup.load('<?=Route::url('default', array('action' => 'dashboard_config'))?>', {}, function () {
+			// After loading we want to open the modal popup.
+			ModalPopup.open();
+
+			// And execute the loaded javascript.
+			ModalPopup.execute_javascript();
+		});
 	});
 </script>
