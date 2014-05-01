@@ -240,7 +240,7 @@ var Pager = new Class({
 // This class can be used with "select" fields.
 var Searchable = new Class({
 	initialize: function (el) {
-		this.element = el;
+		this.element = (typeOf(el) === 'string') ? $(el) : el;
 		this.selection = this.element.getSelected();
 		this.minlength = 3;
 		this.container = new Element('div.searchable-plugin');
@@ -250,7 +250,7 @@ var Searchable = new Class({
 			this.container
 				.grab(new Element('button.dropdown-toggle.btn.btn-block.btn-default', {type: 'button'})
 					.grab(new Element('span', {text: Faktura.get('searchable.no-data-message')})));
-			el.setStyle('display', 'none').grab(this.container, 'after');
+			this.element.setStyle('display', 'none').grab(this.container, 'after');
 
 			return;
 		}
@@ -284,7 +284,7 @@ var Searchable = new Class({
 
 		this.popup.addEvent('click', this.select_item.bind(this));
 
-		el.setStyle('display', 'none').grab(this.container, 'after');
+		this.element.setStyle('display', 'none').grab(this.container, 'after');
 	},
 
 	filter_list: function (ev) {
