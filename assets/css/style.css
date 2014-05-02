@@ -88,7 +88,7 @@ div.searchable-plugin ul input.filter {
 	top: 15px;
 	left: 50%;
 	width: 800px;
-	max-height: 600px;
+	max-height: 640px;
 	overflow-y: auto;
 	overflow-x: hidden;
 	margin-left: -400px;
