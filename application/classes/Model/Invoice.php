@@ -232,6 +232,51 @@ class Model_Invoice extends ORM
 
 
 	/**
+	 * This method will perform a search for the given searchphrase.
+	 *
+	 * @param   string  $searchphrase
+	 * @param   mixed   $wordsplit
+	 * @return  Database_Result
+	 */
+	public function search ($searchphrase, $wordsplit = false)
+	{
+		if ($wordsplit === false)
+		{
+			$searchwords = array($searchphrase);
+		}
+		else if ($wordsplit === true)
+		{
+			$searchwords = explode(Kohana::$config->load('base')->get('search_wordsplit', ' '), $searchphrase);
+		}
+		else
+		{
+			// If we get a something else than a string, we use the parameter as splitter.
+			$searchwords = explode($wordsplit, $searchphrase);
+		} // if
+
+		foreach ($searchwords as $searchword)
+		{
+			$searchword = trim($searchword);
+
+			if (empty($searchword))
+			{
+				continue;
+			} // if
+
+			// Here we work with brackets for matching.
+			$this->and_where_open()
+				->where('invoice_no', 'LIKE', '%' . $searchword . '%')
+				->or_where('shipping_address', 'LIKE', '%' . $searchword . '%')
+				->or_where('invoice_date', 'LIKE', '%' . $searchword . '%')
+				->or_where('paid_on_date', 'LIKE', '%' . $searchword . '%')
+				->and_where_close();
+		} // foreach
+
+		return $this->find_all();
+	} // function
+
+
+	/**
 	 * This method will return all "reminder" invoices: Older than 1 month and not (yet) paid.
 	 *
 	 * @return  Model_Invoice

@@ -261,8 +261,8 @@ class Controller_Invoice extends Controller_Base
 			$invoice_result = array();
 
 			// Here we collect the data from all necessary tables.
-			$invoices = ORM::factory('invoice')->where('invoice_no', 'LIKE', '%' . $search . '%')->find_all();
-			$customer_invoices = ORM::factory('customer')->where('company', 'LIKE', '%' . $search . '%')->find_all();
+			$invoices = ORM::factory('invoice')->search($search, true);
+			$customer_invoices = ORM::factory('customer')->search($search, false);
 			$positions = ORM::factory('invoicePosition')->where('description', 'LIKE', '%' . $search . '%')->find_all();
 
 			foreach ($invoices as $invoice)
