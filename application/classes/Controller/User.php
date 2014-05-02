@@ -241,4 +241,44 @@ class Controller_User extends Controller_Base
 		// Write the JSON directly to the response body.
 		$this->response->body(json_encode($result));
 	} // function
+
+
+	/**
+	 * Search action, works with a search string and given filter.
+	 *
+	 * @throws  HTTP_Exception_403
+	 */
+	public function action_search()
+	{
+		if (! $this->request->is_ajax())
+		{
+			throw new HTTP_Exception_403(__('This action may only be called via ajax!'));
+		} // if
+
+		$minlength = $this->config->get('search_minlength', 3);
+		$search = trim($this->request->post('search'));
+		$exclude = $this->request->post('exclude') ?: array();
+
+		$result = array(
+			'success' => true,
+			'message' => null,
+			'data' => null
+		);
+
+		if (! empty($search) && strlen($search) >= $minlength)
+		{
+			$customers = ORM::factory('user')->search($search, true);
+
+			foreach ($customers as $customer)
+			{
+				// We only want the related invoice.
+				$result['data'][] = $customer->get_table_data($exclude);
+			} // foreach
+		} // if
+
+		$this->auto_render = false;
+
+		// Write the JSON directly to the response body.
+		$this->response->body(json_encode($result));
+	} // function
 } // class

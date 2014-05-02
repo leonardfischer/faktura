@@ -125,19 +125,71 @@ class Model_User extends Model_Auth_User
 	/**
 	 * This method will return an array, which will serve as a HTML row for the frontend.
 	 *
+	 * @param   array  $exclude
 	 * @return  array
 	 */
-	public function get_table_data ()
+	public function get_table_data($exclude = array())
 	{
-		return array(
-			$this->id,
-			$this->username,
-			($this->email ? '<a href="mailto:' . $this->email . '" target="_blank" title="' . $this->email . '"><i class="fa fa-envelope"></i></a>' : '<i class="fa fa-envelope-o"></i>'),
-			$this->last_login(),
-			'<div class="btn-group">' .
+		$return = array(
+			'_id' => $this->id,
+			'id' => $this->id,
+			'username' => $this->username,
+			'email' => ($this->email ? '<a href="mailto:' . $this->email . '" target="_blank" title="' . $this->email . '"><i class="fa fa-envelope"></i></a>' : '<i class="fa fa-envelope-o"></i>'),
+			'last_login' => $this->last_login(),
+			'action' => '<div class="btn-group">' .
 				'<a class="btn btn-primary btn-sm" href="' . Route::url('user', array('action' => 'edit', 'id' => $this->id)) . '">' . __('Edit') . '</a>' .
 				'</div>'
 		);
+
+		foreach ($exclude as $key)
+		{
+			unset($return[$key]);
+		} // foreach
+
+		return $return;
+	} // function
+
+
+	/**
+	 * This method will perform a search for the given searchphrase.
+	 *
+	 * @param   string  $searchphrase
+	 * @param   mixed   $wordsplit
+	 * @return  Database_Result
+	 */
+	public function search ($searchphrase, $wordsplit = false)
+	{
+		if ($wordsplit === false)
+		{
+			$searchwords = array($searchphrase);
+		}
+		else if ($wordsplit === true)
+		{
+			$searchwords = explode(Kohana::$config->load('base')->get('search_wordsplit', ' '), $searchphrase);
+		}
+		else
+		{
+			// If we get a something else than a string, we use the parameter as splitter.
+			$searchwords = explode($wordsplit, $searchphrase);
+		} // if
+
+		foreach ($searchwords as $searchword)
+		{
+			$searchword = trim($searchword);
+
+			if (empty($searchword))
+			{
+				continue;
+			} // if
+
+			// Here we work with brackets for matching.
+			$this->and_where_open()
+				->where('email', 'LIKE', '%' . $searchword . '%')
+				->or_where('username', 'LIKE', '%' . $searchword . '%')
+				->and_where_close();
+		} // foreach
+
+		return $this->find_all();
 	} // function
 
 
