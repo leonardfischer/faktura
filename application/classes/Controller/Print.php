@@ -83,13 +83,17 @@ class Controller_Print extends Controller_Base
 			} // if
 		} // foreach
 
-		$this->content = View::factory('print/invoice', array(
+		$smarty = new TPL();
+
+		$smarty->assign(array(
 			'invoice' => $model,
 			'customer' => $model->customer,
 			'pages' => $pages,
 			'carryover' => $carryover,
 			'total' => $model->calculate_total(true)
 		));
+
+		$this->content = $smarty->fetch('print/invoice.tpl');
 	} // function
 
 
@@ -127,11 +131,15 @@ class Controller_Print extends Controller_Base
 			} // if
 		} // foreach
 
-		$this->content = View::factory('print/delivery_note', array(
+		$smarty = new TPL();
+
+		$smarty->assign(array(
 			'invoice' => $model,
 			'customer' => $model->customer,
 			'pages' => $pages
 		));
+
+		$this->content = $smarty->fetch('print/delivery_note.tpl');
 	} // function
 
 

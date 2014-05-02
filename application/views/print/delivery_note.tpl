@@ -1,15 +1,15 @@
 <header>
 	<small>Company address</small><br />
-	<?php if (! empty($invoice->shipping_address)): ?>
+	{if !empty($invoice->shipping_address)}
 		<?=nl2br($invoice->shipping_address) ?>
-	<?php else: ?>
-		<?php if (! empty($customer->company)) echo $customer->company . '<br />'; ?>
-		<?php if (! empty($customer->name)) echo $customer->name . '<br />'; ?>
-		<?php if (! empty($customer->addition)) echo $customer->addition . '<br />'; ?>
-		<?php if (! empty($customer->addition2)) echo $customer->addition2 . '<br />'; ?>
-		<?=$customer->street . ' ' . $customer->street_no ?><br />
-		<?=$customer->zip_code . ' ' . $customer->city ?><br />
-	<?php endif; ?>
+	{else}
+		{if !empty($customer->company)}{$customer->company}<br />{/if}
+		{if !empty($customer->name)}{$customer->name}<br />{/if}
+		{if !empty($customer->addition)}{$customer->addition}<br />{/if}
+		{if !empty($customer->addition2)}{$customer->addition2}<br />{/if}
+		{$customer->street} {$customer->street_no}<br />
+		{$customer->zip_code} {$customer->city}<br />
+    {/if}
 </header>
 
 <h1>Lieferschein</h1>
@@ -25,19 +25,19 @@
 	</thead>
 	<tbody class="border-top">
 	<tr>
-		<td class="left"><?=date('d.m.Y') ?></td>
-		<td class="left"><?=date('d.m.Y', strtotime($invoice->invoice_date)) ?></td>
-		<td class="left"><?=date('d.m.Y') ?></td>
-		<td class="right"><?=$invoice->invoice_no ?></td>
+		<td class="left">{date('d.m.Y')}</td>
+		<td class="left">{date('d.m.Y', strtotime($invoice->invoice_date))}</td>
+		<td class="left">{date('d.m.Y')}</td>
+		<td class="right">{$invoice->invoice_no}</td>
 	</tr>
 	</tbody>
 </table>
 
 <p>Wir liefern Ihnen wie folgt:</p>
 
-<?php foreach ($pages as $page_no => $page) : ?>
+{foreach $pages as $page_no => $page}
 
-<?php if ($page_no > 1): ?>
+{if $page_no > 1}
 <div class="page-break"></div>
 
 <table class="mt5 mb5">
@@ -49,13 +49,13 @@
 	</colgroup>
 	<tbody>
 	<tr>
-		<td>Seite <?=$page_no ?></td>
-		<td>RE-Nummer <?=$invoice->invoice_no ?></td>
-		<td>Datum <?=date('d.m.Y') ?></td>
+		<td>Seite {$page_no}</td>
+		<td>RE-Nummer {$invoice->invoice_no}</td>
+		<td>Datum {date('d.m.Y')}</td>
 	</tr>
 	</tbody>
 </table>
-<?php endif; ?>
+{/if}
 
 <table class="mt5 spacing position-tables">
 	<colgroup>
@@ -69,15 +69,15 @@
 	</tr>
 	</thead>
 	<tbody class="border-top">
-	<?php foreach ($page as $position) : ?>
+	{foreach $page as $position}
 	<tr>
-		<td class="left"><?=number_format($position['amount'], 2, '.', '') ?></td>
-		<td class="left"><?=$position['description'] ?></td>
+		<td class="left">{number_format($position.amount, 2, '.', '')}</td>
+		<td class="left">{$position.description}</td>
 	</tr>
-	<?php endforeach ?>
+    {/foreach}
 	</tbody>
 </table>
-<?php endforeach ?>
+{/foreach}
 
 <p class="mt20">Unterschrift Empfänger: ___________________________________</p>
 
