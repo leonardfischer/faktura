@@ -109,7 +109,8 @@ window.addEvent('domready', function() {
 // This pager class can be used for tables, filled by a controller + model.
 var Pager = new Class({
 	options: {
-		exclude:[]
+		exclude:[],
+		selection: false
 	},
 	initialize: function (options) {
 		this.options = options;
@@ -206,9 +207,17 @@ var Pager = new Class({
 			if (this.page_data[this.options.current_page].hasOwnProperty(i)) {
 				row = new Element('tr');
 
+				if (this.page_data[this.options.current_page][i].hasOwnProperty('_id')) {
+					row.set('data-id', this.page_data[this.options.current_page][i]['_id']);
+
+					if (this.options.selection && this.options.selection == this.page_data[this.options.current_page][i]['_id']) {
+						row.addClass('success');
+					}
+				}
+
 				for (i2 in this.page_data[this.options.current_page][i]) {
-					if (this.page_data[this.options.current_page][i].hasOwnProperty(i2)) {
-						row.grab(new Element('td', {html:this.page_data[this.options.current_page][i][i2]}))
+					if (this.page_data[this.options.current_page][i].hasOwnProperty(i2) && i2.substr(0, 1) !== '_') {
+						row.grab(new Element('td', {html:this.page_data[this.options.current_page][i][i2], 'data-prop':i2}))
 					}
 				}
 
