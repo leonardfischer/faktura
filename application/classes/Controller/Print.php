@@ -83,7 +83,7 @@ class Controller_Print extends Controller_Base
 			} // if
 		} // foreach
 
-		$smarty = new TPL();
+		$smarty = TPL::instance();
 
 		$smarty->assign(array(
 			'invoice' => $model,
@@ -131,7 +131,7 @@ class Controller_Print extends Controller_Base
 			} // if
 		} // foreach
 
-		$smarty = new TPL();
+		$smarty = TPL::instance();
 
 		$smarty->assign(array(
 			'invoice' => $model,
@@ -182,13 +182,17 @@ class Controller_Print extends Controller_Base
 			} // if
 		} // foreach
 
-		$this->content = View::factory('print/order_confirmation', array(
+		$smarty = TPL::instance();
+
+		$smarty->assign(array(
 			'invoice' => $model,
 			'customer' => $model->customer,
 			'pages' => $pages,
 			'carryover' => $carryover,
 			'total' => $model->calculate_total(true)
 		));
+
+		$this->content = $smarty->fetch('print/order_confirmation.tpl');
 	} // function
 
 

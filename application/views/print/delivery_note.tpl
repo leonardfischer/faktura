@@ -81,7 +81,6 @@
 
 <p class="mt20">Unterschrift Empfänger: ___________________________________</p>
 
-
 <script>
 	window.addEvent('domready', function() {
 		// Prepare the print view (break pages etc.)
