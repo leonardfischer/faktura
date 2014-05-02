@@ -74,6 +74,7 @@ return array(
 	'Actions' => 'Aktionen',
 	'Loading, please wait...' => 'Lade, Bitte warten...',
 	'Save' => 'Speichern',
+	'Accept' => 'Übernehmen',
 	'Edit' => 'Bearbeiten',
 	'Search' => 'Suche',
 	'Search - insert at least :minlength characters' => 'Suche - mindestens :minlength Zeichen',
@@ -101,6 +102,7 @@ return array(
 	'Description' => 'Beschreibung',
 	'No customer data' => 'Keine Kundendaten',
 	'Private' => 'Privat',
+	'Customer browser' => 'Kundenbrowser',
 
 	// Main menu
 	'Invoices' => 'Rechnungen',

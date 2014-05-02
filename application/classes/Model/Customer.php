@@ -183,11 +183,6 @@ class Model_Customer extends ORM
 			{
 				$return[$customer->id] .= ' - ' . $customer->name;
 			} // if
-
-			if (! empty($customer->city))
-			{
-				$return[$customer->id] .= ' (' . $customer->city . ')';
-			} // if
 		} // foreach
 
 		asort($return);
@@ -199,17 +194,19 @@ class Model_Customer extends ORM
 	/**
 	 * This method will return an array, which will serve as a HTML row for the frontend.
 	 *
+	 * @param   array  $exclude
 	 * @return  array
 	 */
-	public function get_table_data ()
+	public function get_table_data ($exclude = array())
 	{
-		return array(
-			$this->name,
-			$this->company,
-			$this->street . ' ' . $this->street_no . '<br />' . $this->zip_code . ' ' . $this->city,
-			($this->email ? '<a href="mailto:' . $this->email . '" target="_blank" title="' . $this->email . '"><i class="fa fa-envelope"></i></a>' : '<i class="fa fa-envelope-o"></i>'),
-			($this->allowance > 0 ? '<i class="fa fa-check"></i> ' . $this->allowance . '%' : '<i class="fa fa-times"></i>'),
-			'<div class="btn-group">' .
+		$return = array(
+			'_id' => $this->id,
+			'name' => $this->name,
+			'company' => $this->company,
+			'address' => $this->street . ' ' . $this->street_no . '<br />' . $this->zip_code . ' ' . $this->city,
+			'email' => ($this->email ? '<a href="mailto:' . $this->email . '" target="_blank" title="' . $this->email . '"><i class="fa fa-envelope"></i></a>' : '<i class="fa fa-envelope-o"></i>'),
+			'allowance' => ($this->allowance > 0 ? '<i class="fa fa-check"></i> ' . $this->allowance . '%' : '<i class="fa fa-times"></i>'),
+			'action' => '<div class="btn-group">' .
 				'<a class="btn btn-primary btn-sm" href="' . Route::url('customer', array('action' => 'edit', 'id' => $this->id)) . '">' . __('Edit') . '</a>' .
 				'<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>' .
 				'<ul class="dropdown-menu">' .
@@ -217,5 +214,12 @@ class Model_Customer extends ORM
 				'</ul>' .
 				'</div>'
 		);
+
+		foreach ($exclude as $key)
+		{
+			unset($return[$key]);
+		} // foreach
+
+		return $return;
 	} // function
 } // class

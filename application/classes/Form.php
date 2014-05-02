@@ -16,8 +16,15 @@ class Form extends Kohana_Form
 	 */
 	public static function input($name, $value = NULL, array $attributes = NULL)
 	{
-		// Set the input id.
-		$attributes['id'] = $name;
+		if (isset($attributes['id']) && $attributes['id'] === false)
+		{
+			unset($attributes['id']);
+		}
+		else
+		{
+			// Set the input id.
+			$attributes['id'] = $name;
+		} // if
 
 		return parent::input($name, $value, $attributes);
 	} // function

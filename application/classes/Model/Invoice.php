@@ -211,6 +211,7 @@ class Model_Invoice extends ORM
 	public function get_table_data ($exclude = array())
 	{
 		$return = array(
+			'_id' => $this->id,
 			'invoice_no' => $this->invoice_no,
 			'customer' => '<a href="' . Route::url('customer', array('action' => 'edit', 'id' => $this->customer->id)) . '">' . ($this->customer->company ?: $this->customer->name) . '</a>',
 			'invoice_date' => $this->invoice_date(),

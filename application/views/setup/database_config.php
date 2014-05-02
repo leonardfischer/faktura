@@ -78,8 +78,6 @@
 					database:database.value
 				},
 				onSuccess: function(json){
-					console.log(json);
-
 					if (json.success) {
 						Faktura.set('db.config', json.data);
 						$('check-database-result')
