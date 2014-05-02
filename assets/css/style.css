@@ -97,6 +97,11 @@ div.searchable-plugin ul input.filter {
 	z-index: 1000;
 }
 
+#popup-data-table-container {
+	height: 450px;
+	overflow-y: scroll;
+}
+
 #overlay {
 	background-color: rgba(0, 0, 0, .4);
 	position: fixed;

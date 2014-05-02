@@ -12,7 +12,8 @@
 		<ul class="pagination pagination-sm pull-right"></ul>
 
 		<div class="col-xs-12 table-responsive">
-			<table class="table table-striped mouse-pointer" id="data-table">
+			<div id="popup-data-table-container" class="mt10 mb10">
+			<table class="table table-striped mouse-pointer" id="popup-data-table">
 				<? if (isset($table_header) && is_array($table_header)): ?>
 					<thead>
 					<tr>
@@ -36,6 +37,7 @@
 				<? endforeach ?>
 				</tbody>
 			</table>
+			</div>
 		</div>
 
 		<ul class="pagination pagination-sm pull-right"></ul>
@@ -50,7 +52,7 @@
 </div>
 
 <script type="text/javascript">
-	var browser_table_search = new AjaxTableSearch($('browser-ajax-search'), $('data-table'), {
+	var browser_table_search = new AjaxTableSearch($('browser-ajax-search'), $('popup-data-table'), {
 			minlength: parseInt('<?=$config->get('search_minlength', 3); ?>'),
 			pager: false,
 			loading_label: '<img src="<?=URL::base() ?>assets/img/loading.gif" /> <?=__('Loading, please wait...') ?>',
@@ -62,7 +64,7 @@
 		});
 
 	$('browser-save-button').addEvent('click', function () {
-		var selection = $('data-table').getElement('tr.success');
+		var selection = $('popup-data-table').getElement('tr.success');
 		<? if ($receiver): ?>
 		if (selection) {
 			$('<?=$receiver ?>').set('value', selection.get('data-id'));
@@ -71,9 +73,11 @@
 		ModalPopup.close();
 	});
 
-	$('data-table').addEvent('click:relay(td)', function (ev) {
-		$('data-table').getElements('tr.success').invoke('removeClass', 'success');
+	$('popup-data-table').addEvent('click:relay(td)', function (ev) {
+		$('popup-data-table').getElements('tr.success').invoke('removeClass', 'success');
 
 		browser_table_search.options.selection = ev.target.getParent('tr').addClass('success').get('data-id');
 	});
+
+	$('browser-ajax-search').focus();
 </script>
