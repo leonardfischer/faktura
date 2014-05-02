@@ -102,6 +102,7 @@ Kohana::modules(array(
 	// 'cache' => MODPATH.'cache', // Caching with multiple backends
 	'database' => MODPATH . 'database', // Database access
 	'orm' => MODPATH . 'orm', // Object Relationship Mapping
+	'smarty' => MODPATH . 'smarty', // Smarty template engine
 ));
 
 // Load Base configuration and set some constants.
@@ -115,7 +116,6 @@ setlocale(LC_ALL, $config['locale']);
 I18n::lang($config['language']);
 
 // Setting some constants.
-define('DS', DIRECTORY_SEPARATOR);
 define('ORM_ID', 'id');
 define('ORM_DATE', 'date');
 define('ORM_INT', 'integer');
