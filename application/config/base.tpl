@@ -22,6 +22,7 @@ return array
 	'date_format_form' => '%d.%m.%Y',
 
 	'search_minlength' => 3,
+	'search_wordsplit' => '%search_wordsplit%',
 	'rows_per_page' => %rows_per_page%,
 	'invoice_no_start' => %invoice_start_no%,
 

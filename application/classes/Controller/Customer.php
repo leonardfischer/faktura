@@ -189,7 +189,7 @@ class Controller_Customer extends Controller_Base
 		} // if
 
 		$minlength = $this->config->get('search_minlength', 3);
-		$search = $this->request->post('search');
+		$search = trim($this->request->post('search'));
 		$exclude = $this->request->post('exclude') ?: array();
 
 		$result = array(
@@ -200,15 +200,26 @@ class Controller_Customer extends Controller_Base
 
 		if (! empty($search) && strlen($search) >= $minlength)
 		{
-			// Here we collect the data from all necessary tables.
-			$customers = ORM::factory('customer')
-				->where('name', 'LIKE', '%' . $search . '%')
-				->or_where('company', 'LIKE', '%' . $search . '%')
-				->or_where('email', 'LIKE', '%' . $search . '%')
-				->or_where('street', 'LIKE', '%' . $search . '%')
-				->or_where('zip_code', 'LIKE', '%' . $search . '%')
-				->or_where('city', 'LIKE', '%' . $search . '%')
-				->find_all();
+			// Searching by multiple words:
+			$search = explode($this->config->get('search_wordsplit', ' '), $search);
+			$customers = ORM::factory('customer');
+
+			foreach ($search as $searchword)
+			{
+				$searchword = trim($searchword);
+
+				// Here we work with brackets for matching.
+				$customers->and_where_open()
+					->where('name', 'LIKE', '%' . $searchword . '%')
+					->or_where('company', 'LIKE', '%' . $searchword . '%')
+					->or_where('email', 'LIKE', '%' . $searchword . '%')
+					->or_where('street', 'LIKE', '%' . $searchword . '%')
+					->or_where('zip_code', 'LIKE', '%' . $searchword . '%')
+					->or_where('city', 'LIKE', '%' . $searchword . '%')
+					->and_where_close();
+			} // foreach
+
+			$customers = $customers->find_all();
 
 			foreach ($customers as $customer)
 			{

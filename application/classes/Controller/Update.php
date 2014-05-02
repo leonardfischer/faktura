@@ -186,6 +186,7 @@ class Controller_Update extends Controller_Template
 			'%timezone%',
 			'%locale%',
 			'%language%',
+			'%search_wordsplit%',
 			'%rows_per_page%',
 			'%invoice_start_no%'
 		), array(
@@ -195,6 +196,7 @@ class Controller_Update extends Controller_Template
 			(isset($base_config['timezone']) ? $base_config['timezone'] : 'Europe/Berlin'),
 			(isset($base_config['locale']) ? $base_config['locale'] : 'de_DE.utf-8'),
 			(isset($base_config['language']) ? $base_config['language'] : 'de-DE'),
+			(isset($base_config['search_wordsplit']) ? $base_config['search_wordsplit'] : ' '),
 			(isset($base_config['rows_per_page']) ? $base_config['rows_per_page'] : 40),
 			(isset($base_config['invoice_no_start']) ? $base_config['invoice_no_start'] : 1),
 		), $base_tpl);
