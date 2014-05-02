@@ -175,11 +175,7 @@ class Controller_Supplier extends Controller_Base
 		if (! empty($search) && strlen($search) >= $minlength)
 		{
 			// Here we collect the data from all necessary tables.
-			$suppliers = ORM::factory('supplier')
-				->where('name', 'LIKE', '%' . $search . '%')
-				->or_where('company', 'LIKE', '%' . $search . '%')
-				->or_where('email', 'LIKE', '%' . $search . '%')
-				->find_all();
+			$suppliers = ORM::factory('supplier')->search($search, true);
 
 			foreach ($suppliers as $supplier)
 			{

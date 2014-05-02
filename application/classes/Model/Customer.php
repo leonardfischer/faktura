@@ -222,4 +222,51 @@ class Model_Customer extends ORM
 
 		return $return;
 	} // function
+
+
+	/**
+	 * This method will perform a search for the given searchphrase.
+	 *
+	 * @param   string  $searchphrase
+	 * @param   mixed   $wordsplit
+	 * @return  Database_Result
+	 */
+	public function search ($searchphrase, $wordsplit = false)
+	{
+		if ($wordsplit === false)
+		{
+			$searchwords = array($searchphrase);
+		}
+		else if ($wordsplit === true)
+		{
+			$searchwords = explode(Kohana::$config->load('base')->get('search_wordsplit', ' '), $searchphrase);
+		}
+		else
+		{
+			// If we get a something else than a string, we use the parameter as splitter.
+			$searchwords = explode($wordsplit, $searchphrase);
+		} // if
+
+		foreach ($searchwords as $searchword)
+		{
+			$searchword = trim($searchword);
+
+			if (empty($searchword))
+			{
+				continue;
+			} // if
+
+			// Here we work with brackets for matching.
+			$this->and_where_open()
+				->where('name', 'LIKE', '%' . $searchword . '%')
+				->or_where('company', 'LIKE', '%' . $searchword . '%')
+				->or_where('email', 'LIKE', '%' . $searchword . '%')
+				->or_where('street', 'LIKE', '%' . $searchword . '%')
+				->or_where('zip_code', 'LIKE', '%' . $searchword . '%')
+				->or_where('city', 'LIKE', '%' . $searchword . '%')
+				->and_where_close();
+		} // foreach
+
+		return $this->find_all();
+	} // function
 } // class

@@ -200,26 +200,7 @@ class Controller_Customer extends Controller_Base
 
 		if (! empty($search) && strlen($search) >= $minlength)
 		{
-			// Searching by multiple words:
-			$search = explode($this->config->get('search_wordsplit', ' '), $search);
-			$customers = ORM::factory('customer');
-
-			foreach ($search as $searchword)
-			{
-				$searchword = trim($searchword);
-
-				// Here we work with brackets for matching.
-				$customers->and_where_open()
-					->where('name', 'LIKE', '%' . $searchword . '%')
-					->or_where('company', 'LIKE', '%' . $searchword . '%')
-					->or_where('email', 'LIKE', '%' . $searchword . '%')
-					->or_where('street', 'LIKE', '%' . $searchword . '%')
-					->or_where('zip_code', 'LIKE', '%' . $searchword . '%')
-					->or_where('city', 'LIKE', '%' . $searchword . '%')
-					->and_where_close();
-			} // foreach
-
-			$customers = $customers->find_all();
+			$customers = ORM::factory('customer')->search($search, true);
 
 			foreach ($customers as $customer)
 			{
