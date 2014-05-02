@@ -88,7 +88,7 @@ class Controller_Dashboard extends Controller_Base
 				$available_widgets[$widget] = Widgets_Base::factory($widget)->get_name(true);
 			} // foreach
 
-			$view = View::factory('dashboard_config')
+			$view = View::factory('popups/dashboard_config')
 				->set('available_widgets', $available_widgets)
 				->set('widgets', $widgets);
 
