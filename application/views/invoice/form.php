@@ -23,8 +23,15 @@
 							<?php if ($invoice->is_mandatory('customer_id')): ?><span class="text-danger">*</span><?php endif; ?>
 						</label>
 						<div class="col-md-8">
-							<?=Form::select('inputCustomer_id', $customers, $invoice->customer_id, array('type' => 'text', 'class' => 'form-control searchable')) ?>
-							<span class="help-inline text-danger hidden"></span>
+							<div class="input-group">
+								<?= Form::select('inputCustomer_id', $customers, $invoice->customer_id, array('class' => 'form-control')) ?>
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default" id="customer-browser">
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
+								<span class="help-inline text-danger hidden"></span>
+							</div>
 						</div>
 					</div>
 
@@ -266,6 +273,15 @@
 	if ($('invoice-position-list').getElements('li').length == 0) {
 		$$('button.add-position').fireEvent('click');
 	}
+
+	// Process the customer browser
+	$('customer-browser').addEvent('click', function () {
+		ModalPopup.load_html('<?=Route::url('customer', array('action' => 'browser')) ?>', {receiver:'inputCustomer_id', selection:$('inputCustomer_id').getSelected()[0].get('value')}, function (js) {
+			ModalPopup.open();
+
+			Browser.exec(js);
+		});
+	});
 
 	// Adding some general data to our dynamic save-logic.
 	Faktura

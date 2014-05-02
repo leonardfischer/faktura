@@ -108,6 +108,9 @@ window.addEvent('domready', function() {
 
 // This pager class can be used for tables, filled by a controller + model.
 var Pager = new Class({
+	options: {
+		exclude:[]
+	},
 	initialize: function (options) {
 		this.options = options;
 
@@ -180,9 +183,9 @@ var Pager = new Class({
 		} else {
 			new Request.JSON({
 				url: '?',
-				data: {page:this.options.current_page},
+				data: {page:this.options.current_page, exclude:this.options.exclude},
 				onSuccess: function(json){
-					var i, i2, tbody = this.options.target.getElement('tbody').set('html', ''), row;
+					var i, tbody = this.options.target.getElement('tbody').set('html', '');
 
 					if (json.success) {
 						this.page_data[this.options.current_page] = json.data;
@@ -324,9 +327,14 @@ var Searchable = new Class({
 
 // This class can be used in addition to a Pageable table.
 var AjaxTableSearch = new Class({
+	options: {
+		exclude:[],
+		selection:false
+	},
 	initialize: function (searchfield, table, options) {
 		this.searchfield = searchfield;
 		this.table = table;
+		this.original_table = this.table.clone();
 		this.options = options;
 
 		this.options.cols = this.table.getElements('thead th').length;
@@ -351,7 +359,7 @@ var AjaxTableSearch = new Class({
 
 		new Request.JSON({
 			url: this.options.url,
-			data: {search: search, filter: this.options.filter},
+			data: {search: search, filter: this.options.filter, exclude:this.options.exclude},
 			onSuccess: function (json) {
 				var i, i2, row;
 
@@ -366,9 +374,17 @@ var AjaxTableSearch = new Class({
 
 								row = new Element('tr');
 
+								if (json.data[i].hasOwnProperty('_id')) {
+									row.set('data-id', json.data[i]['_id']);
+
+									if (this.options.selection && this.options.selection == json.data[i]['_id']) {
+										row.addClass('success');
+									}
+								}
+
 								for (i2 in json.data[i]) {
-									if (json.data[i].hasOwnProperty(i2)) {
-										row.grab(new Element('td', {html:json.data[i][i2]}));
+									if (json.data[i].hasOwnProperty(i2) && i2.substr(0, 1) !== '_') {
+										row.grab(new Element('td', {html:json.data[i][i2], 'data-prop':i2}));
 									}
 								}
 
@@ -385,15 +401,39 @@ var AjaxTableSearch = new Class({
 	restore_table: function () {
 		// This should be used to display the "normal" table including the pager.
 		this.enable_pager();
-		this.options.pager.get_current_page_data();
+
+		if (this.options.pager) {
+			this.options.pager.get_current_page_data();
+		} else {
+			var original_parts = this.original_table.clone().getChildren(), i;
+
+			this.table.set('html', '');
+
+			// This is a fallback...
+			for (i in original_parts) {
+				if (original_parts.hasOwnProperty(i) && typeOf(original_parts[i]) === 'element') {
+					this.table.grab(original_parts[i]);
+				}
+			}
+
+			// In case the selection has been reset, we update the visual representation.
+			if (this.options.selection) {
+				this.table.getElements('tr.success').invoke('removeClass', 'success');
+				this.table.getElement('tr[data-id="' + this.options.selection + '"]').addClass('success');
+			}
+		}
 	},
 
 	disable_pager: function () {
-		this.options.pager.options.pager.invoke('addClass', 'disabled');
+		if (this.options.pager) {
+			this.options.pager.options.pager.invoke('addClass', 'disabled');
+		}
 	},
 
 	enable_pager: function () {
-		this.options.pager.options.pager.invoke('removeClass', 'disabled');
+		if (this.options.pager) {
+			this.options.pager.options.pager.invoke('removeClass', 'disabled');
+		}
 	}
 });
 
@@ -426,6 +466,8 @@ var ModalPopup = {
 			$('main-container').removeClass('blur-off').addClass('blur');
 		}
 
+		document.body.addClass('modal-open');
+
 		this.overlay.removeClass('hidden');
 		this.popup.removeClass('hidden');
 
@@ -436,6 +478,8 @@ var ModalPopup = {
 		if (Faktura.get('modal.blur')) {
 			$('main-container').addClass('blur-off').removeClass('blur');
 		}
+
+		document.body.removeClass('modal-open');
 
 		this.overlay.addClass('hidden');
 		this.popup.addClass('hidden');
@@ -468,12 +512,12 @@ var ModalPopup = {
 		new Request.HTML({
 			url: url,
 			data: data,
-			onSuccess: function (tree, elements, html) {
-				console.log(html);
+			evalScripts: false,
+			onSuccess: function (tree, elements, html, responseJavaScript) {
 				this.popup_content.set('html', html);
 
 				if (typeOf(callback) === 'function') {
-					callback.call(this);
+					callback.call(this, responseJavaScript);
 				}
 			}.bind(this)
 		}).send();

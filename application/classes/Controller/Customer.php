@@ -151,6 +151,31 @@ class Controller_Customer extends Controller_Base
 	} // function
 
 
+	public function action_browser ()
+	{
+		$selection = $this->request->post('selection') ?: 0;
+		$receiver = $this->request->post('receiver') ?: false;
+
+		$this->auto_render = false;
+
+		$orm = ORM::factory('customer');
+		$labels = $orm->labels();
+
+		$browser_content = View::factory('popups/browser', array(
+			'title' => __('Customer browser'),
+			'receiver' => $receiver,
+			'selection' => $selection,
+			'table_header' => array($labels['name'], $labels['company'], __('Address')),
+			'exclude' => array('action', 'allowance', 'email'),
+			'search_url' => Route::url('customer', array('action' => 'search')),
+			'data' => $orm->find_all(),
+			'data_count' => $orm->count_all(),
+		));
+
+		$this->response->body($browser_content);
+	} // function
+
+
 	/**
 	 * Search action, works with a search string and given filter.
 	 *
@@ -165,6 +190,7 @@ class Controller_Customer extends Controller_Base
 
 		$minlength = $this->config->get('search_minlength', 3);
 		$search = $this->request->post('search');
+		$exclude = $this->request->post('exclude') ?: array();
 
 		$result = array(
 			'success' => true,
@@ -179,12 +205,15 @@ class Controller_Customer extends Controller_Base
 				->where('name', 'LIKE', '%' . $search . '%')
 				->or_where('company', 'LIKE', '%' . $search . '%')
 				->or_where('email', 'LIKE', '%' . $search . '%')
+				->or_where('street', 'LIKE', '%' . $search . '%')
+				->or_where('zip_code', 'LIKE', '%' . $search . '%')
+				->or_where('city', 'LIKE', '%' . $search . '%')
 				->find_all();
 
 			foreach ($customers as $customer)
 			{
 				// We only want the related invoice.
-				$result['data'][] = $customer->get_table_data();
+				$result['data'][] = $customer->get_table_data($exclude);
 			} // foreach
 		} // if
 
