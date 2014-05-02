@@ -109,17 +109,26 @@ class Model_Supplier extends ORM
 	/**
 	 * This method will return an array, which will serve as a HTML row for the frontend.
 	 *
+	 * @param   array  $exclude
 	 * @return  array
 	 */
-	public function get_table_data()
+	public function get_table_data($exclude = array())
 	{
-		return array(
-			$this->name,
-			$this->company,
-			$this->street . ' ' . $this->street_no . '<br />' . $this->zip_code . ' ' . $this->city,
-			($this->email ? '<a href="mailto:' . $this->email . '" target="_blank" title="' . $this->email . '"><i class="fa fa-envelope"></i></a>' : '<i class="fa fa-envelope-o"></i>'),
-			'<div class="btn-group"><a class="btn btn-primary btn-sm" href="' . Route::url('supplier', array('action' => 'edit', 'id' => $this->id)) . '">' . __('Edit') . '</a></div>'
+		$return =  array(
+			'_id' => $this->id,
+			'name' => $this->name,
+			'company' => $this->company,
+			'address' => $this->street . ' ' . $this->street_no . '<br />' . $this->zip_code . ' ' . $this->city,
+			'email' => ($this->email ? '<a href="mailto:' . $this->email . '" target="_blank" title="' . $this->email . '"><i class="fa fa-envelope"></i></a>' : '<i class="fa fa-envelope-o"></i>'),
+			'action' => '<div class="btn-group"><a class="btn btn-primary btn-sm" href="' . Route::url('supplier', array('action' => 'edit', 'id' => $this->id)) . '">' . __('Edit') . '</a></div>'
 		);
+
+		foreach ($exclude as $key)
+		{
+			unset($return[$key]);
+		} // foreach
+
+		return $return;
 	} // function
 
 
