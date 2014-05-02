@@ -8,11 +8,6 @@ This small faktura web-application is built with Kohana in the backend and boots
 With version 1.1 the Faktura application will bring its own "install wizard". Here you can input your configuration (database, admin user, ...) and let the script do the rest.
 Currently it is not (yet) very user-friendly: meaning, while installing you can't "go back" to change a (maybe misspelled) configuration or start the installation new without risking corrupted data.
 
-## To-dos (create issues for these)
- * Customer filter (inside an invoice) via ajax
- * Use "master password" to reset the admin user (in case you remove your admin-role)
- * Change the language in the GUI
-
 ## Framework usage
 The faktura web-application makes use of the following frameworks:
  * The [Kohana PHP framework](http://kohanaframework.org/) v3.3.1
@@ -22,3 +17,4 @@ The faktura web-application makes use of the following frameworks:
  * The [MooTools Datepicker](http://mootools.net/forge/p/mootools_datepicker) v1.6.0
  * [Respond.js](https://github.com/scottjehl/Respond)
  * The [FontAwesome icon font](http://fortawesome.github.io/Font-Awesome/) v4.0.3
+ * The [Smarty template engine](http://www.smarty.net/) v3.1.18
