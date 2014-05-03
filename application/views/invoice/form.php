@@ -169,7 +169,7 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-12 form-group">
-			<a id="credit-print-button" target="_blank" class="btn btn-success" href="<?=Route::url('print', array('action' => 'credit', 'id' => $invoice->id)) ?>"><?=__('Print credit') ?></a>
+			<a target="_blank" class="btn btn-success credit-print-button" href="<?=Route::url('print', array('action' => 'credit', 'id' => $invoice->id)) ?>"><?=__('Print credit') ?></a>
 			<button type="button" class="btn btn-default popup-close"><?=__('Cancel') ?></button>
 		</div>
 	</div>
@@ -260,13 +260,13 @@
 						);
 				}
 
-				ModalPopup.grab(credit_popup.removeClass('hidden').clone()).open();
+				ModalPopup.grab(credit_popup.clone().removeClass('hidden')).open();
+
+				$('popup-content').getElement('a.credit-print-button').addEvent('click', function () {
+					this.set('href', '<?=Route::url('print', array('action' => 'credit', 'id' => $invoice->id)) ?>/' + $('popup-content').getElements('input.position:checked').invoke('get', 'value').join())
+				});
 			}
 		}).send();
-	});
-
-	$('credit-print-button').addEvent('click', function () {
-		this.set('href', '<?=Route::url('print', array('action' => 'credit', 'id' => $invoice->id)) ?>/' + $('credit-popup').getElements('input.position:checked').invoke('get', 'value').join())
 	});
 
 	// Also, add a single empty position if there is none.
