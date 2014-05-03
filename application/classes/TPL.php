@@ -16,11 +16,15 @@ class TPL extends Smarty
 	{
 		parent::__construct();
 
-		$this->setTemplateDir(APPPATH . 'views' . DS);
+		$this->setTemplateDir(APPPATH . 'templates' . DS);
 		$this->setCompileDir(APPPATH . 'cache' . DS . 'tpl_c' . DS);
 		$this->setConfigDir(APPPATH . 'config' . DS);
 		$this->setCacheDir(APPPATH . 'cache' . DS . 'tpl' . DS);
 
+		// We use the current language as compile ID.
+		$this->compile_id = I18n::lang();
+
+		// We register some plugins (for forms and special GUI elements).
 		$this->registerPlugin('function', 'form', array(&$this, 'process_form'));
 
 		$this->caching = Smarty::CACHING_LIFETIME_CURRENT;
