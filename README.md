@@ -18,3 +18,4 @@ The faktura web-application makes use of the following frameworks:
  * [Respond.js](https://github.com/scottjehl/Respond)
  * The [FontAwesome icon font](http://fortawesome.github.io/Font-Awesome/) v4.0.3
  * The [Smarty template engine](http://www.smarty.net/) v3.1.18
+ * The [Swift Mailer library](http://swiftmailer.org/) v5.2.0

@@ -16,6 +16,15 @@ return array
 	'locale' => '%locale%',
 	'language' => '%language%',
 
+    // Mailer configuration, will be used for "reset password" function
+    'mail_faktura' => 'noreply@example.com',
+    'mail_transport' => 'mail', // Possible options are "mail", "sendmail" and "smtp"
+    'mail_smtp_host' => 'localhost',
+    'mail_smtp_port' => '25',
+    'mail_smtp_user' => '',
+    'mail_smtp_pass' => '',
+    'mail_sendmail_command' => '/usr/sbin/sendmail -bs',
+
 	// @see  http://php.net/strftime for more information.
 	'date_format_list' => '%d.%B %Y',
 	'date_format_list_with_time' => '%d.%B %Y %H:%m',
