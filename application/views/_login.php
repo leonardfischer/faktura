@@ -41,24 +41,42 @@
 
 				<h2><?=__('Welcome, please login to proceed') ?></h2>
 
-				<form class="well well-sm" method="post" action="<?php echo Route::url('user', array('action' => 'login')) ?>">
+				<div class="well well-sm">
+					<div id="login-form">
+						<form method="post" action="<?php echo Route::url('user', array('action' => 'login')) ?>">
+							<input type="text" class="form-control form-group" placeholder="<?=__('Username') ?>" name="username" required autofocus>
+							<input type="password" class="form-control form-group" placeholder="<?=__('Password') ?>" name="password" required>
 
-					<input type="text" class="form-control form-group" placeholder="<?=__('Username') ?>" name="username" required autofocus>
-					<input type="password" class="form-control form-group" placeholder="<?=__('Password') ?>" name="password" required>
+							<label class="checkbox">
+								<input type="checkbox" value="remember-me" name="remember"> <?=__('Remember me') ?>
+							</label>
 
-					<label class="checkbox">
-						<input type="checkbox" value="remember-me" name="remember"> <?=__('Remember me') ?>
-					</label>
+							<?php if (isset($error)): ?>
+							<div class="alert alert-danger"><?=$error ?></div>
+							<?php endif; ?>
 
-					<?php if (isset($error)): ?>
-					<div class="alert alert-danger"><?=$error ?></div>
-					<?php endif; ?>
+							<button class="btn btn-lg btn-primary btn-block mb20" type="submit"><?=__('Sign in') ?></button>
+							<a href="#" id="forgot-password-toggle"><i class="fa fa-frown-o"></i> <?=__('I forgot my password') ?></a>
+						</form>
+					</div>
 
-					<button class="btn btn-lg btn-primary btn-block" type="submit"><?=__('Sign in') ?></button>
-				</form>
-
+					<div id="forgot-password-form" style="display:none;">
+						<form method="post" action="<?php echo Route::url('user', array('action' => 'reset_password')) ?>">
+							<input type="text" class="form-control form-group" placeholder="<?=__('Email') ?>" name="email" required autofocus>
+							<p><?=__('By clicking the "Reset my password" button your password will be changed by the system and sent to you by the given email address.') ?></p>
+							<button class="btn btn-lg btn-primary btn-block" type="submit"><?=__('Reset my password') ?></button>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+
+	<script>
+		$('forgot-password-toggle').addEvent('click', function () {
+			$('login-form').dissolve();
+			$('forgot-password-form').reveal();
+		});
+	</script>
 </body>
 </html>

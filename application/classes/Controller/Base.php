@@ -56,7 +56,7 @@ class Controller_Base extends Controller_Template
 
 		if (! $this->auth->logged_in())
 		{
-			if ($this->request->action() != 'login')
+			if ($this->request->action() != 'login' && $this->request->action() != 'reset_password')
 			{
 				$this->redirect(Route::url('user', array('action' => 'login')));
 			} // if

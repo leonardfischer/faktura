@@ -281,4 +281,75 @@ class Controller_User extends Controller_Base
 		// Write the JSON directly to the response body.
 		$this->response->body(json_encode($result));
 	} // function
+
+
+	/**
+	 * "Reset password" action for when a user forgets his or her password.
+	 */
+	public function action_reset_password ()
+	{
+		// Get the given email address and check if any user can be found.
+		$email = $this->request->post('email');
+
+		if (empty($email))
+		{
+			$this->redirect(Route::url('user', array('action' => 'login')));
+		} // if
+
+		$user = ORM::factory('user')->where('email', 'like', $email)->find();
+		$success = $user->loaded();
+		$error_message = '';
+
+		if ($success)
+		{
+			switch ($this->config->get('mail_transport', 'mail'))
+			{
+				default:
+				case 'mail':
+					$transport = Swift_MailTransport::newInstance();
+					break;
+
+				case 'sendmail':
+					$success = function_exists('proc_open');
+
+					$transport = Swift_SendmailTransport::newInstance('command');
+					break;
+
+				case 'smtp':
+					$success = function_exists('proc_open');
+
+					$transport = Swift_SmtpTransport::newInstance($this->config->get('mail_smtp_host', 'localhost'), $this->config->get('mail_smtp_port', 25))
+						->setUsername($this->config->get('mail_smtp_user'))
+						->setPassword($this->config->get('mail_smtp_pass'));
+					break;
+			} // switch
+
+			$message = Swift_Message::newInstance('Subject', 'body')
+				->setFrom(array($this->config->get('mail_faktura', 'noreply@example.com') => $this->config->get('title', 'Faktura')))
+				->setTo(array($user->email => $user->username));
+
+			if ($success)
+			{
+				if (! Swift_Mailer::newInstance($transport)->send($message))
+				{
+					$success = false;
+					$error_message = 'The password-reset mail could not be sent. Please contact your administrator!';
+				} // if
+			}
+			else
+			{
+				$error_message = 'The necessary "proc_*" functions are not available in your PHP environment.';
+			} // if
+		}
+		else
+		{
+			$error_message = 'The given email address could not be found!';
+		} // if
+
+		$this->template = View::factory('user/reset_password', array(
+			'success' => $success,
+			'headline' => __($success ? 'The password has been reset' : 'An error occured, while resetting the password'),
+			'error_message' => __($error_message)
+		));
+	} // function
 } // class

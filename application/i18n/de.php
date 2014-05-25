@@ -26,13 +26,21 @@ return array(
 	':field does not match the required format' => ':field stimmt nicht mit dem benötigten Format überein',
 	':field must be a url' => ':field muss eine URL beinhalten',
 
-	// Login translations.
+	// Login / reset password translations.
 	'Welcome, please login to proceed' => 'Willkommen, bitte loggen Sie sich ein',
 	'Username' => 'Benutzername',
 	'Password' => 'Passwort',
 	'Sign in' => 'Einloggen',
 	'Remember me' => 'Automatisch einloggen',
 	'The username / password combination does not exist!' => 'Die eingegebene Benutzer / Passwort kombination existiert nicht!',
+	'I forgot my password' => 'Ich habe mein Passwort vergessen',
+	'By clicking the "Reset my password" button your password will be changed by the system and sent to you by the given email address.' => 'Durch das klicken der "Mein Passwort zurücksetzen" Schaltfläche wird Ihr Passwort durch das System geändert und Ihnen an Ihre hinterlegte E-Mail-Adresse geschickt.',
+	'Reset my password' => 'Mein Passwort zurücksetzen',
+	'Your password has been reset' => 'Ihr Passwort wurde zurückgesetzt',
+	'An error occured, while resetting the password' => 'Während das Passwort zurückgesetzt wurde ist ein Fehler aufgetreten',
+	'The password-reset mail could not be sent. Please contact your administrator!' => 'Die Passwort-zurücksetzen Mail konnte nicht gesendet werden. Bitte kontaktieren Sie Ihren Administrator.',
+	'The necessary "proc_*" functions are not available in your PHP environment.' => 'Die notwendigen "proc_*" Funktionen sind in Ihrer PHP Installation nicht verfügbar.',
+	'The given email address could not be found!' => 'Die eingegebene E-Mail-Adresse konnte im System nicht gefunden werden!',
 
 	// Invoice form translations.
 	'Create new invoice' => 'Neue Rechnung erfassen',
