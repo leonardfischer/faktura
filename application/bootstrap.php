@@ -103,6 +103,7 @@ Kohana::modules(array(
 	'database' => MODPATH . 'database', // Database access
 	'orm' => MODPATH . 'orm', // Object Relationship Mapping
 	'smarty' => MODPATH . 'smarty', // Smarty template engine
+	'swiftmailer' => MODPATH . 'swiftmailer', // Swift Mailer library
 ));
 
 // Load Base configuration and set some constants.

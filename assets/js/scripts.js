@@ -101,9 +101,11 @@ window.addEvent('domready', function() {
 	});
 
 	// Once the DOM is ready, trigger the "responsive_popup" function.
-	ModalPopup.initialize().responsive();
+	if (Faktura.get('modal.init')) {
+		ModalPopup.initialize().responsive();
 
-	window.addEventListener('resize', ModalPopup.responsive);
+		window.addEventListener('resize', ModalPopup.responsive);
+	}
 });
 
 // This pager class can be used for tables, filled by a controller + model.
