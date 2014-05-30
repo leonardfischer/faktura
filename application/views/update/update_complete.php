@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-xs-12">
-		<h2>Step 3. Update complete!</h2>
+		<h2>Step 4. Update complete!</h2>
 		<p>Please check the beneath, if everything went well. If not, try to re-run the setup!</p>
 
 		<?php if (count($errors) == 0): ?>

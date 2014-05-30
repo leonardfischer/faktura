@@ -218,7 +218,7 @@ class Model_User extends Model_Auth_User
 	 *
 	 * @return  array
 	 */
-	public function get_themes()
+	public static function get_themes()
 	{
 		$return = array();
 		$paths = glob(DOCROOT . 'assets' . DS . 'css' . DS . 'themes' . DS . '*');

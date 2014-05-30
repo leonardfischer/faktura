@@ -78,6 +78,12 @@
 	});
 
 	$('next-button').addEvent('click', function () {
+		var form = $$('form');
+
+		if (form.length > 0) {
+			Faktura.set('form_data', form[0].toQueryString().parseQueryString())
+		}
+
 		new Request.HTML({
 			url: '?',
 			data: {step:(Faktura.get('current-step') + 1), faktura_data:Faktura.toQueryString()},

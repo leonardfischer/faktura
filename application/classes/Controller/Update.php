@@ -42,6 +42,41 @@ class Controller_Update extends Controller_Template
 	 */
 	private $update = array();
 
+	/**
+	 * This array will hold the available config keys and default values.
+	 * @var  array
+	 */
+	private $config_vars = array(
+		'version' => '#',
+		// General configuration.
+		'title' => 'Faktura',
+		'theme' => 'default',
+		// Used for the Kohana bootstrap.
+		'timezone' => 'America/Chicago',
+		'locale' => 'en_US.utf-8',
+		'language' => 'en_US',
+		// Mailer configuration, will be used for "reset password" function
+		'mail_faktura' => '#',
+		'mail_transport' => 'mail',
+		'mail_smtp_host' => 'localhost',
+		'mail_smtp_port' => 25,
+		'mail_smtp_user' => '',
+		'mail_smtp_pass' => '',
+		'mail_sendmail_command' => '/usr/sbin/sendmail -bs',
+		// @see  http://php.net/strftime for more information.
+		// 'date_format_list' => '%d.%B %Y',
+		// 'date_format_list_with_time' => '%d.%B %Y %H:%m',
+		// 'date_format_form' => '%d.%m.%Y',
+		// Some search and list options.
+		'search_minlength' => 3,
+		'search_wordsplit' => ' ',
+		'rows_per_page' => 40,
+		'invoice_start_no' => 1,
+		// Define the user min-length.
+		'password_minlength' => 5,
+		'password_prevent_copynpaste' => true
+	);
+
 
 	/**
 	 * The index action will start the update process.
@@ -94,6 +129,10 @@ class Controller_Update extends Controller_Template
 					break;
 
 				case 3:
+					$this->input_user_config();
+					break;
+
+				case 4:
 					$this->init_update();
 					break;
 			} // switch
@@ -152,6 +191,42 @@ class Controller_Update extends Controller_Template
 
 
 	/**
+	 * This is the third step where the user can update his configuration.
+	 */
+	private function input_user_config ()
+	{
+		// Set some generic defaults.
+		$this->config_vars['mail_faktura'] = 'noreply@' . $_SERVER['SERVER_NAME'];
+
+		$base_config = Kohana::$config->load('base')->as_array();
+		$form_config = array();
+
+		foreach ($this->config_vars as $key => $default)
+		{
+			$form_config[$key] = (isset($base_config[$key])) ? $base_config[$key] : $default;
+		} // foreach
+
+		$this->content = View::factory('update/input_user_config', array(
+			'values' => $form_config,
+			'themes' => Model_User::get_themes(),
+			'languages' => array(
+				'de-DE' => 'German',
+				'en_US' => 'English'
+			),
+			'mail_transports' => array(
+				'mail' => 'Standard PHP mail',
+				'smtp' => 'SMTP server',
+				'sendmail' => 'Sendmail'
+			),
+			'boolean' => array(
+				1 => 'Yes',
+				0 => 'No'
+			)
+		));
+	} // function
+
+
+	/**
 	 * This is the final step where we update the database and create clean up the installation.
 	 */
 	private function init_update ()
@@ -175,31 +250,33 @@ class Controller_Update extends Controller_Template
 	{
 		$config_path = APPPATH . 'config' . DS;
 
-		$base_config = include $config_path . 'base.php';
+		$search = $replace = array();
+
+		foreach ($this->faktura_data['form_data'] as $key => $value)
+		{
+			// Used to change "inputLanguage" to "language".
+			$key = substr(strtolower($key), 5);
+
+			if (in_array($key, array('password_minlength', 'mail_smtp_port', 'search_minlength', 'rows_per_page', 'invoice_start_no')))
+			{
+				$value = (int) $value;
+			} // if
+
+			if ($key == 'password_prevent_copynpaste')
+			{
+				$value = $value ? 'true' : 'false';
+			} // if
+
+			$search[] = '%' . $key . '%';
+			$replace[] = $value;
+		} // foreach
+
+		$search[] = '%version%';
+		$replace[] = $this->update['version'];
 
 		// Writing the base.php with the input data (or default values).
-		$base_tpl = file_get_contents($config_path . 'base.tpl');
-		$base_content = str_replace(array(
-			'%version%',
-			'%title%',
-			'%theme%',
-			'%timezone%',
-			'%locale%',
-			'%language%',
-			'%search_wordsplit%',
-			'%rows_per_page%',
-			'%invoice_start_no%'
-		), array(
-			$this->update['version'],
-			(isset($base_config['title']) ? $base_config['title'] : 'Faktura'),
-			(isset($base_config['theme']) ? $base_config['theme'] : 'default'),
-			(isset($base_config['timezone']) ? $base_config['timezone'] : 'Europe/Berlin'),
-			(isset($base_config['locale']) ? $base_config['locale'] : 'de_DE.utf-8'),
-			(isset($base_config['language']) ? $base_config['language'] : 'de-DE'),
-			(isset($base_config['search_wordsplit']) ? $base_config['search_wordsplit'] : ' '),
-			(isset($base_config['rows_per_page']) ? $base_config['rows_per_page'] : 40),
-			(isset($base_config['invoice_no_start']) ? $base_config['invoice_no_start'] : 1),
-		), $base_tpl);
+		$base_content = str_replace($search, $replace, file_get_contents($config_path . 'base.tpl'));
+
 		file_put_contents($config_path . 'base.php', $base_content);
 
 		return $this;

@@ -17,13 +17,13 @@
 
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="inputTheme">Default theme</label>
-							<div class="col-md-8"><?=Form::select('inputTheme', $themes, 'default', array('type' => 'text', 'class' => 'form-control')) ?></div>
+							<div class="col-md-8"><?=Form::select('inputTheme', $themes, 'default', array('class' => 'form-control')) ?></div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="inputTimezone">Timezone<span class="text-danger">*</span></label>
 							<div class="col-md-8">
-								<?=Form::input('inputTimezone', '', array('type' => 'text', 'placeholder' => 'Europe/Berlin', 'class' => 'form-control')) ?>
+								<?=Form::input('inputTimezone', '', array('type' => 'text', 'placeholder' => 'America/Chicago', 'class' => 'form-control')) ?>
 								<p class="text-muted">Please check the <a target="_blank" href="https://php.net/manual/en/timezones.php">PHP documentation</a>.</p>
 							</div>
 						</div>
@@ -31,14 +31,14 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="inputLocale">Locale<span class="text-danger">*</span></label>
 							<div class="col-md-8">
-								<?=Form::input('inputLocale', '', array('type' => 'text', 'placeholder' => 'de_DE.utf-8', 'class' => 'form-control')) ?>
+								<?=Form::input('inputLocale', '', array('type' => 'text', 'placeholder' => 'en_US.utf-8', 'class' => 'form-control')) ?>
 								<p class="text-muted">Please check the <a target="_blank" href="http://www.w3.org/WAI/ER/IG/ert/iso639.htm">ISO 639 Specification</a> for more information.</p>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="inputLanguage">Language</label>
-							<div class="col-md-8"><?=Form::select('inputLanguage', $languages, 'en_US', array('type' => 'text', 'class' => 'form-control')) ?></div>
+							<div class="col-md-8"><?=Form::select('inputLanguage', $languages, 'en_US', array('class' => 'form-control')) ?></div>
 						</div>
 					</div>
 
