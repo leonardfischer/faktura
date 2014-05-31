@@ -37,7 +37,7 @@ class Controller_Supplier extends Controller_Base
 			$this->redirect(Route::url('supplier', array('action' => 'edit', 'id' => $id)));
 		} // if
 
-		$model = ORM::factory('supplier');
+		$model = ORM::factory('Supplier');
 
 		$this->content = View::factory('supplier/form', array(
 			'title' => __('Create new supplier'),
@@ -60,7 +60,7 @@ class Controller_Supplier extends Controller_Base
 			$this->redirect(Route::url('supplier', array('action' => 'new')));
 		} // if
 
-		$model = ORM::factory('supplier')->where('id', '=', $id)->find();
+		$model = ORM::factory('Supplier')->where('id', '=', $id)->find();
 
 		$this->content = View::factory('supplier/form', array(
 			'title' => __('Edit supplier ":supplier"', array(':supplier' => $model->company)),
@@ -76,7 +76,7 @@ class Controller_Supplier extends Controller_Base
 	 */
 	public function action_list()
 	{
-		$suppliers = ORM::factory('supplier')->order_by('company', 'ASC');
+		$suppliers = ORM::factory('Supplier')->order_by('company', 'ASC');
 
 		if ($this->request->is_ajax())
 		{
@@ -102,7 +102,7 @@ class Controller_Supplier extends Controller_Base
 		} // if
 
 		$values = array();
-		$model = ORM::factory('supplier');
+		$model = ORM::factory('Supplier');
 
 		if ($this->request->param('id', 0) > 0)
 		{
@@ -175,7 +175,7 @@ class Controller_Supplier extends Controller_Base
 		if (! empty($search) && strlen($search) >= $minlength)
 		{
 			// Here we collect the data from all necessary tables.
-			$suppliers = ORM::factory('supplier')->search($search, true);
+			$suppliers = ORM::factory('Supplier')->search($search, true);
 
 			foreach ($suppliers as $supplier)
 			{

@@ -58,7 +58,7 @@ class Widgets_NewInvoices extends Widgets_Base
 	public function init()
 	{
 		$this->template_data = array(
-			'invoices' => ORM::factory('invoice')->where('created_at', 'BETWEEN', array(date('Y-m-01', strtotime('-1 MONTH')), date('Y-m-00')))->count_all()
+			'invoices' => ORM::factory('Invoice')->where('created_at', 'BETWEEN', array(date('Y-m-01', strtotime('-1 MONTH')), date('Y-m-00')))->count_all()
 		);
 
 		return $this;

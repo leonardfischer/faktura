@@ -41,7 +41,7 @@ class Widgets_LastInvoices extends Widgets_Base
 	public function init()
 	{
 		$this->template_data = array(
-			'invoices' => ORM::factory('invoice')->order_by('id', 'DESC')->limit(5)->find_all()
+			'invoices' => ORM::factory('Invoice')->order_by('id', 'DESC')->limit(5)->find_all()
 		);
 
 		return $this;

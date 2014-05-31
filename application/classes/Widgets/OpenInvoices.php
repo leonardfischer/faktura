@@ -40,7 +40,7 @@ class Widgets_OpenInvoices extends Widgets_Base
 	public function init()
 	{
 		$this->template_data = array(
-			'invoices' => ORM::factory('invoice')->where('paid_on_date', '=', null)->order_by('id', 'DESC')->find_all()
+			'invoices' => ORM::factory('Invoice')->where('paid_on_date', '=', null)->order_by('id', 'DESC')->find_all()
 		);
 
 		return $this;

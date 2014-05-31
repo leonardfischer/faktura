@@ -56,7 +56,7 @@ class Controller_Print extends Controller_Base
 			throw new HTTP_Exception_404('No invoice ID was given!');
 		} // if
 
-		$model = ORM::factory('invoice')->where('id', '=', $id)->find();
+		$model = ORM::factory('Invoice')->where('id', '=', $id)->find();
 
 		$pages = $carryover = array();
 		$page = 1;
@@ -109,7 +109,7 @@ class Controller_Print extends Controller_Base
 			throw new HTTP_Exception_404('No invoice ID was given!');
 		} // if
 
-		$model = ORM::factory('invoice')->where('id', '=', $id)->find();
+		$model = ORM::factory('Invoice')->where('id', '=', $id)->find();
 
 		$pages = array();
 		$page = 1;
@@ -155,7 +155,7 @@ class Controller_Print extends Controller_Base
 			throw new HTTP_Exception_404('No invoice ID was given!');
 		} // if
 
-		$model = ORM::factory('invoice')->where('id', '=', $id)->find();
+		$model = ORM::factory('Invoice')->where('id', '=', $id)->find();
 
 		$pages = $carryover = array();
 		$page = 1;
@@ -217,7 +217,7 @@ class Controller_Print extends Controller_Base
 
 		$position_ids = explode(',', $position_ids);
 
-		$model = ORM::factory('invoice')->where('id', '=', $id)->find();
+		$model = ORM::factory('Invoice')->where('id', '=', $id)->find();
 
 		$pages = $carryover = array();
 		$page = 1;
@@ -270,7 +270,7 @@ class Controller_Print extends Controller_Base
 			throw new HTTP_Exception_404('No invoice ID was given!');
 		} // if
 
-		$model = ORM::factory('invoice')->where('id', '=', $id)->find();
+		$model = ORM::factory('Invoice')->where('id', '=', $id)->find();
 
 		$pages = $carryover = array();
 		$page = 1;

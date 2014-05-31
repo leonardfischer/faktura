@@ -58,7 +58,7 @@ class Widgets_NewCustomers extends Widgets_Base
 	public function init()
 	{
 		$this->template_data = array(
-			'customers' => ORM::factory('customer')->where('created_at', 'BETWEEN', array(date('Y-m-01', strtotime('-1 MONTH')), date('Y-m-00')))->count_all()
+			'customers' => ORM::factory('Customer')->where('created_at', 'BETWEEN', array(date('Y-m-01', strtotime('-1 MONTH')), date('Y-m-00')))->count_all()
 		);
 
 		return $this;

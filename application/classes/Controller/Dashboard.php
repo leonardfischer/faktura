@@ -134,7 +134,7 @@ class Controller_Dashboard extends Controller_Base
 				{
 					$sorting = (int) substr($i, 5);
 
-					$widget_orm = ORM::factory('widget');
+					$widget_orm = ORM::factory('Widget');
 
 					if (is_numeric($widget['id']))
 					{

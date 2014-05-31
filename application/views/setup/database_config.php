@@ -23,7 +23,7 @@
 
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="inputPassword">Password</label>
-							<div class="col-md-8"><?=Form::input('inputPassword', '', array('type' => 'text', 'placeholder' => 'Password', 'class' => 'form-control')) ?></div>
+							<div class="col-md-8"><?=Form::password('inputPassword', '', array('type' => 'text', 'placeholder' => 'Password', 'class' => 'form-control')) ?></div>
 						</div>
 
 						<div class="form-group">

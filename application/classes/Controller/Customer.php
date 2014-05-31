@@ -36,7 +36,7 @@ class Controller_Customer extends Controller_Base
 			$this->redirect(Route::url('customer', array('action' => 'edit', 'id' => $id)));
 		} // if
 
-		$model = ORM::factory('customer');
+		$model = ORM::factory('Customer');
 
 		$this->content = View::factory('customer/form', array(
 			'title' => __('Create new customer'),
@@ -59,7 +59,7 @@ class Controller_Customer extends Controller_Base
 			$this->redirect(Route::url('customer', array('action' => 'new')));
 		} // if
 
-		$model = ORM::factory('customer')->where('id', '=', $id)->find();
+		$model = ORM::factory('Customer')->where('id', '=', $id)->find();
 
 		$this->content = View::factory('customer/form', array(
 			'title' => __('Edit customer ":customer"', array(':customer' => $model->company ?: $model->name)),
@@ -76,7 +76,7 @@ class Controller_Customer extends Controller_Base
 	 */
 	public function action_list()
 	{
-		$customers = ORM::factory('customer')->order_by('company', 'ASC');
+		$customers = ORM::factory('Customer')->order_by('company', 'ASC');
 
 		if ($this->request->is_ajax())
 		{
@@ -102,7 +102,7 @@ class Controller_Customer extends Controller_Base
 		} // if
 
 		$values = array();
-		$model = ORM::factory('customer');
+		$model = ORM::factory('Customer');
 
 		if ($this->request->param('id', 0) > 0)
 		{
@@ -158,7 +158,7 @@ class Controller_Customer extends Controller_Base
 
 		$this->auto_render = false;
 
-		$orm = ORM::factory('customer');
+		$orm = ORM::factory('Customer');
 		$labels = $orm->labels();
 
 		$browser_content = View::factory('popups/browser', array(
@@ -200,7 +200,7 @@ class Controller_Customer extends Controller_Base
 
 		if (! empty($search) && strlen($search) >= $minlength)
 		{
-			$customers = ORM::factory('customer')->search($search, true);
+			$customers = ORM::factory('Customer')->search($search, true);
 
 			foreach ($customers as $customer)
 			{

@@ -40,7 +40,7 @@ class Widgets_OpenReminders extends Widgets_Base
 	public function init()
 	{
 		$this->template_data = array(
-			'invoices' => ORM::factory('invoice')->get_reminder_invoices()->find_all()
+			'invoices' => ORM::factory('Invoice')->get_reminder_invoices()->find_all()
 		);
 
 		return $this;

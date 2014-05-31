@@ -37,10 +37,10 @@ class Controller_Invoice extends Controller_Base
 			$this->redirect(Route::url('invoice', array('action' => 'edit', 'id' => $id)));
 		} // if
 
-		$model = ORM::factory('invoice')->set('customer_id', $this->request->query('customer_id'));
+		$model = ORM::factory('Invoice')->set('customer_id', $this->request->query('customer_id'));
 
 		// Simulate auto increment.
-		$model->invoice_no = ORM::factory('invoice')->order_by('id', 'DESC')->find()->id + $this->config->get('invoice_no_start', 1);
+		$model->invoice_no = ORM::factory('Invoice')->order_by('id', 'DESC')->find()->id + $this->config->get('invoice_no_start', 1);
 
 		// Set the "created at" date to today.
 		$model->invoice_date = date('Y-m-d');
@@ -48,7 +48,7 @@ class Controller_Invoice extends Controller_Base
 		$this->content = View::factory('invoice/form', array(
 			'title' => __('Create new invoice'),
 			'invoice' => $model,
-			'customers' => ORM::factory('customer')->get_customers_for_selection(),
+			'customers' => ORM::factory('Customer')->get_customers_for_selection(),
 			'properties' => $model->get_properties(),
 			'ajax_url' => Route::url('invoice', array('action' => 'save')),
 			'credit_popup_ajax_url' => Route::url('invoice', array('action' => 'get_positions', 'id' => $id))
@@ -68,12 +68,12 @@ class Controller_Invoice extends Controller_Base
 			$this->redirect(Route::url('invoice', array('action' => 'new')));
 		} // if
 
-		$model = ORM::factory('invoice')->where('id', '=', $id)->find();
+		$model = ORM::factory('Invoice')->where('id', '=', $id)->find();
 
 		$this->content = View::factory('invoice/form', array(
 			'title' => __('Create new invoice'),
 			'invoice' => $model,
-			'customers' => ORM::factory('customer')->get_customers_for_selection(),
+			'customers' => ORM::factory('Customer')->get_customers_for_selection(),
 			'properties' => $model->get_properties(),
 			'ajax_url' => Route::url('invoice', array('action' => 'save', 'id' => $id)),
 			'credit_popup_ajax_url' => Route::url('invoice', array('action' => 'get_positions', 'id' => $id))
@@ -91,11 +91,11 @@ class Controller_Invoice extends Controller_Base
 	{
 		if ($orm_result === null)
 		{
-			$orm_result = ORM::factory('invoice')
+			$orm_result = ORM::factory('Invoice')
 				->order_by('id', 'DESC');
 		} // if
 
-		$types = ORM::factory('invoice')->get_types();
+		$types = ORM::factory('Invoice')->get_types();
 		$selected_filter = $types[$filter_type];
 
 		if ($this->request->is_ajax())
@@ -123,13 +123,13 @@ class Controller_Invoice extends Controller_Base
 		switch ($filter_type)
 		{
 			case INVOICE_FILTER_OPEN:
-				$orm_result = ORM::factory('invoice')
+				$orm_result = ORM::factory('Invoice')
 					->where('paid_on_date', '=', null)
 					->order_by('id', 'DESC');
 				break;
 
 			case INVOICE_FILTER_REMINDER:
-				$orm_result = ORM::factory('invoice')
+				$orm_result = ORM::factory('Invoice')
 					->get_reminder_invoices()
 					->order_by('id', 'DESC');
 				break;
@@ -155,7 +155,7 @@ class Controller_Invoice extends Controller_Base
 		} // if
 
 		$values = array();
-		$model = ORM::factory('invoice');
+		$model = ORM::factory('Invoice');
 
 		if ($this->request->param('id', 0) > 0)
 		{
@@ -196,7 +196,7 @@ class Controller_Invoice extends Controller_Base
 		{
 			// This is used for the positions.
 			$posts = $this->request->post();
-			$position_model = ORM::factory('invoicePosition');
+			$position_model = ORM::factory('InvoicePosition');
 
 			// First we delete all positions - they will be added in the next step.
 			DB::delete('invoice_positions')->where('invoice_id', '=', $model->id)->execute();
@@ -261,9 +261,9 @@ class Controller_Invoice extends Controller_Base
 			$invoice_result = array();
 
 			// Here we collect the data from all necessary tables.
-			$invoices = ORM::factory('invoice')->search($search, true);
-			$customer_invoices = ORM::factory('customer')->search($search, false);
-			$positions = ORM::factory('invoicePosition')->where('description', 'LIKE', '%' . $search . '%')->find_all();
+			$invoices = ORM::factory('Invoice')->search($search, true);
+			$customer_invoices = ORM::factory('Customer')->search($search, false);
+			$positions = ORM::factory('InvoicePosition')->where('description', 'LIKE', '%' . $search . '%')->find_all();
 
 			foreach ($invoices as $invoice)
 			{
@@ -343,7 +343,7 @@ class Controller_Invoice extends Controller_Base
 				'data' => array()
 			);
 
-			$positions = ORM::factory('invoice')->where('id', '=', $id)->find()->positions->find_all();
+			$positions = ORM::factory('Invoice')->where('id', '=', $id)->find()->positions->find_all();
 
 			foreach ($positions as $position)
 			{
@@ -379,8 +379,8 @@ class Controller_Invoice extends Controller_Base
 		if ($this->auto_render)
 		{
 			$this->content
-				->set('open_invoices', ORM::factory('invoice')->where('paid_on_date', '=', null)->order_by('id', 'DESC')->count_all())
-				->set('reminder_invoices', ORM::factory('invoice')->get_reminder_invoices()->count_all());
+				->set('open_invoices', ORM::factory('Invoice')->where('paid_on_date', '=', null)->order_by('id', 'DESC')->count_all())
+				->set('reminder_invoices', ORM::factory('Invoice')->get_reminder_invoices()->count_all());
 		} // if
 
 		parent::after();
