@@ -10,6 +10,23 @@ class ORM extends Kohana_ORM
 
 
 	/**
+	 * Creates and returns a new model.
+	 * Model name must be passed with its' original casing, e.g.
+	 *
+	 *    $model = ORM::factory('User_Token');
+	 *
+	 * @chainable
+	 * @param   string  $model  Model name
+	 * @param   mixed   $id     Parameter for find()
+	 * @return  ORM
+	 */
+	public static function factory($model, $id = NULL)
+	{
+		return parent::factory(ucfirst($model), $id);
+	} // function
+
+
+	/**
 	 * Constructs a new model and loads a record if given
 	 *
 	 * @param   mixed $id Parameter for find or object to load
