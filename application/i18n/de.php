@@ -41,6 +41,8 @@ return array(
 	'The password-reset mail could not be sent. Please contact your administrator!' => 'Die Passwort-zurücksetzen Mail konnte nicht gesendet werden. Bitte kontaktieren Sie Ihren Administrator.',
 	'The necessary "proc_*" functions are not available in your PHP environment.' => 'Die notwendigen "proc_*" Funktionen sind in Ihrer PHP Installation nicht verfügbar.',
 	'The given email address could not be found!' => 'Die eingegebene E-Mail-Adresse konnte im System nicht gefunden werden!',
+	'Your Faktura password reset mail' => 'Ihre Faktura Passwort-Reset E-Mail',
+	"Hello :user\n\nyou receive this email, because you triggered the 'reset password' function of your Faktura application.\n\nThe password has been reset to: :password\n\nPlease login to your account and change the password for security reasons!" => "Hallo :user\n\nSie erhalten diese E-Mail, weil Sie die 'Passwort zurücksetzen' Funktion Ihrer Faktura Anwendung ausgeführt haben.\n\nDas Passwort wurde zurückgesetzt auf: :password\n\nBitte loggen Sie sich ein und ändern zur Sicherheit das Passwort!",
 
 	// Invoice form translations.
 	'Create new invoice' => 'Neue Rechnung erfassen',

@@ -65,7 +65,7 @@ class Controller_User extends Controller_Base
 			$this->redirect(Route::url('user', array('action' => 'edit', 'id' => $id)));
 		} // if
 
-		$model = ORM::factory('user');
+		$model = ORM::factory('User');
 		$model->theme = $this->config->get('theme', 'default');
 		$model->theme_options = json_encode($this->config->get('theme_options', array()));
 
@@ -83,7 +83,7 @@ class Controller_User extends Controller_Base
 
 		if ($is_admin)
 		{
-			$this->content->roles = ORM::factory('role')->find_all();
+			$this->content->roles = ORM::factory('Role')->find_all();
 		} // if
 	} // function
 
@@ -105,7 +105,7 @@ class Controller_User extends Controller_Base
 			throw new HTTP_Exception_403('You are not allowed to view the page ":page"', array(':page' => __('User')));
 		} // if
 
-		$model = ORM::factory('user')->where('id', '=', $id)->find();
+		$model = ORM::factory('User')->where('id', '=', $id)->find();
 		$is_admin = in_array('admin', $this->user_roles);
 
 		$model->theme_options = $model->theme_options ?: json_encode($this->config->get('theme_options', array()));
@@ -122,7 +122,7 @@ class Controller_User extends Controller_Base
 
 		if ($is_admin)
 		{
-			$this->content->roles = ORM::factory('role')->find_all();
+			$this->content->roles = ORM::factory('Role')->find_all();
 		} // if
 	} // function
 
@@ -137,7 +137,7 @@ class Controller_User extends Controller_Base
 			throw new HTTP_Exception_403('You are not allowed to view the page ":page"', array(':page' => __('User')));
 		} // if
 
-		$users = ORM::factory('user')->order_by('username', 'ASC');
+		$users = ORM::factory('User')->order_by('username', 'ASC');
 
 		if ($this->request->is_ajax())
 		{
@@ -162,7 +162,7 @@ class Controller_User extends Controller_Base
 			throw new HTTP_Exception_403(__('This action may only be called via ajax!'));
 		} // if
 
-		$model = ORM::factory('user');
+		$model = ORM::factory('User');
 		$id = $this->request->param('id', 0);
 
 		if ($id != $this->auth->get_user()->id && ! in_array('admin', $this->user_roles))
@@ -191,10 +191,10 @@ class Controller_User extends Controller_Base
 			else
 			{
 				// User shall always receive the "login" role.
-				$model->create_user($values, null)->add('roles', ORM::factory('role')->where('name', '=', 'login')->find());
+				$model->create_user($values, null)->add('roles', ORM::factory('Role')->where('name', '=', 'login')->find());
 			} // if
 
-			$roles = ORM::factory('role')->find_all();
+			$roles = ORM::factory('Role')->find_all();
 
 			// We iterate over all roles and add / remove them if needed.
 			foreach ($roles as $role)
@@ -267,7 +267,7 @@ class Controller_User extends Controller_Base
 
 		if (! empty($search) && strlen($search) >= $minlength)
 		{
-			$customers = ORM::factory('user')->search($search, true);
+			$customers = ORM::factory('User')->search($search, true);
 
 			foreach ($customers as $customer)
 			{
@@ -296,7 +296,7 @@ class Controller_User extends Controller_Base
 			$this->redirect(Route::url('user', array('action' => 'login')));
 		} // if
 
-		$user = ORM::factory('user')->where('email', 'like', $email)->find();
+		$user = ORM::factory('User')->where('email', 'like', $email)->find();
 		$success = $user->loaded();
 		$error_message = '';
 
@@ -324,13 +324,25 @@ class Controller_User extends Controller_Base
 					break;
 			} // switch
 
-			$message = Swift_Message::newInstance('Subject', 'body')
+			$password = Text::random(null, $this->config->get('password_minlength', 8));
+
+			$message_body = __("Hello :user\n\nyou receive this email, because you triggered the 'reset password' function of your Faktura application.\n\nThe password has been reset to: :password\n\nPlease login to your account and change the password for security reasons!", array(':user' => $user->username, ':password' => $password));
+
+			$message = Swift_Message::newInstance(__('Your Faktura password reset mail'), $message_body)
 				->setFrom(array($this->config->get('mail_faktura', 'noreply@example.com') => $this->config->get('title', 'Faktura')))
 				->setTo(array($user->email => $user->username));
 
 			if ($success)
 			{
-				if (! Swift_Mailer::newInstance($transport)->send($message))
+				if (Swift_Mailer::newInstance($transport)->send($message))
+				{
+					// Update the user, as soon as the email has been sent.
+					$user->update_user(array(
+						'password' => $password,
+						'password_confirm' => $password
+					));
+				}
+				else
 				{
 					$success = false;
 					$error_message = 'The password-reset mail could not be sent. Please contact your administrator!';
