@@ -42,41 +42,6 @@ class Controller_Update extends Controller_Template
 	 */
 	private $update = array();
 
-	/**
-	 * This array will hold the available config keys and default values.
-	 * @var  array
-	 */
-	private $config_vars = array(
-		'version' => '#',
-		// General configuration.
-		'title' => 'Faktura',
-		'theme' => 'default',
-		// Used for the Kohana bootstrap.
-		'timezone' => 'America/Chicago',
-		'locale' => 'en_US.utf-8',
-		'language' => 'en_US',
-		// Mailer configuration, will be used for "reset password" function
-		'mail_faktura' => '#',
-		'mail_transport' => 'mail',
-		'mail_smtp_host' => 'localhost',
-		'mail_smtp_port' => 25,
-		'mail_smtp_user' => '',
-		'mail_smtp_pass' => '',
-		'mail_sendmail_command' => '/usr/sbin/sendmail -bs',
-		// @see  http://php.net/strftime for more information.
-		// 'date_format_list' => '%d.%B %Y',
-		// 'date_format_list_with_time' => '%d.%B %Y %H:%m',
-		// 'date_format_form' => '%d.%m.%Y',
-		// Some search and list options.
-		'search_minlength' => 3,
-		'search_wordsplit' => ' ',
-		'rows_per_page' => 40,
-		'invoice_start_no' => 1,
-		// Define the user min-length.
-		'password_minlength' => 5,
-		'password_prevent_copynpaste' => true
-	);
-
 
 	/**
 	 * The index action will start the update process.
@@ -195,13 +160,15 @@ class Controller_Update extends Controller_Template
 	 */
 	private function input_user_config ()
 	{
+		$l_base_config = Update::$base_vars;
+
 		// Set some generic defaults.
-		$this->config_vars['mail_faktura'] = 'noreply@' . $_SERVER['SERVER_NAME'];
+		$l_base_config['mail_faktura'] = 'noreply@' . $_SERVER['SERVER_NAME'];
 
 		$base_config = Kohana::$config->load('base')->as_array();
 		$form_config = array();
 
-		foreach ($this->config_vars as $key => $default)
+		foreach ($l_base_config as $key => $default)
 		{
 			$form_config[$key] = (isset($base_config[$key])) ? $base_config[$key] : $default;
 		} // foreach
@@ -248,36 +215,17 @@ class Controller_Update extends Controller_Template
 	 */
 	private function update_config ()
 	{
-		$config_path = APPPATH . 'config' . DS;
-
-		$search = $replace = array();
+		$data = array();
 
 		foreach ($this->faktura_data['form_data'] as $key => $value)
 		{
-			// Used to change "inputLanguage" to "language".
-			$key = substr(strtolower($key), 5);
-
-			if (in_array($key, array('password_minlength', 'mail_smtp_port', 'search_minlength', 'rows_per_page', 'invoice_start_no')))
-			{
-				$value = (int) $value;
-			} // if
-
-			if ($key == 'password_prevent_copynpaste')
-			{
-				$value = $value ? 'true' : 'false';
-			} // if
-
-			$search[] = '%' . $key . '%';
-			$replace[] = $value;
+			// We use "substr" because our keys look like "inputTitle".
+			$data[strtolower(substr($key, 5))] = $value;
 		} // foreach
 
-		$search[] = '%version%';
-		$replace[] = $this->update['version'];
+		$data['version'] = $this->update['version'];
 
-		// Writing the base.php with the input data (or default values).
-		$base_content = str_replace($search, $replace, file_get_contents($config_path . 'base.tpl'));
-
-		file_put_contents($config_path . 'base.php', $base_content);
+		Update::update_base_config($data);
 
 		return $this;
 	} // function

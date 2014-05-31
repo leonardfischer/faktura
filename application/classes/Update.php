@@ -3,6 +3,42 @@
 class Update
 {
 	/**
+	 * This array will hold the available config keys and default values.
+	 * @var  array
+	 */
+	public static $base_vars = array(
+		'version' => '#',
+		// General configuration.
+		'title' => 'Faktura',
+		'theme' => 'default',
+		// Used for the Kohana bootstrap.
+		'timezone' => 'America/Chicago',
+		'locale' => 'en_US.utf-8',
+		'language' => 'en_US',
+		// Mailer configuration, will be used for "reset password" function
+		'mail_faktura' => '#',
+		'mail_transport' => 'mail',
+		'mail_smtp_host' => 'localhost',
+		'mail_smtp_port' => 25,
+		'mail_smtp_user' => '',
+		'mail_smtp_pass' => '',
+		'mail_sendmail_command' => '/usr/sbin/sendmail -bs',
+		// @see  http://php.net/strftime for more information.
+		// 'date_format_list' => '%d.%B %Y',
+		// 'date_format_list_with_time' => '%d.%B %Y %H:%m',
+		// 'date_format_form' => '%d.%m.%Y',
+		// Some search and list options.
+		'search_minlength' => 3,
+		'search_wordsplit' => ' ',
+		'rows_per_page' => 40,
+		'invoice_start_no' => 1,
+		// Define the user min-length.
+		'password_minlength' => 3,
+		'password_prevent_copynpaste' => true
+	);
+
+
+	/**
 	 * This method will take the "queries" array from the update file and return necessary SQL Queries.
 	 *
 	 * @param   array  $queries
@@ -80,5 +116,39 @@ class Update
 
 				return (count($result) > 0);
 		} // switch
+	} // function
+
+
+	/**
+	 * Static method for updating the base configuration file.
+	 *
+	 * @param  array  $p_data
+	 */
+	public static function update_base_config (array $p_data = array())
+	{
+		$config_path = APPPATH . 'config' . DS;
+
+		$search = $replace = array();
+
+		foreach ($p_data as $key => $value)
+		{
+			if (in_array($key, array('password_minlength', 'mail_smtp_port', 'search_minlength', 'rows_per_page', 'invoice_start_no')))
+			{
+				$value = (int) $value;
+			} // if
+
+			if ($key == 'password_prevent_copynpaste')
+			{
+				$value = $value ? 'true' : 'false';
+			} // if
+
+			$search[] = '%' . $key . '%';
+			$replace[] = $value;
+		} // foreach
+
+		// Writing the base.php with the input data (or default values).
+		$base_content = str_replace($search, $replace, file_get_contents($config_path . 'base.tpl'));
+
+		file_put_contents($config_path . 'base.php', $base_content);
 	} // function
 } // class

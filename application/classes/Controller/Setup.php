@@ -225,29 +225,28 @@ class Controller_Setup extends Controller_Template
 			// If we have not thrown any exceptions yet, we're good to go!
 			$res = $mysqli->query('SHOW DATABASES LIKE "' . $mysqli->escape_string($database) . '";');
 
+			// And finally close connection.
+			$mysqli->close();
+
 			if ($res->num_rows === 0)
 			{
-				$this->content = json_encode(array(
-					'success' => true,
-					'data' => array(
-						'hostname' => $hostname,
-						'username' => $username,
-						'password' => $password,
-						'database' => $database
-					),
-					'message' => 'Everything seems okay!'
-				));
-
-				// And finally close connection.
-				$mysqli->close();
+				$message = 'Everything seems okay!';
 			}
 			else
 			{
-				// And finally close connection.
-				$mysqli->close();
-
-				throw new Exception('The given database "' . $database . '" already exists. Please drop it first or choose another name.');
+				$message = 'The database already exists, existing tables will be truncated!';
 			} // if
+
+			$this->content = json_encode(array(
+				'success' => true,
+				'data' => array(
+					'hostname' => $hostname,
+					'username' => $username,
+					'password' => $password,
+					'database' => $database
+				),
+				'message' => $message
+			));
 		}
 		catch (Exception $e)
 		{
@@ -273,25 +272,14 @@ class Controller_Setup extends Controller_Template
 		$config_path = APPPATH . 'config' . DS;
 
 		// Writing the base.php with the input data (or default values).
-		$base_tpl = file_get_contents($config_path . 'base.tpl');
-		$base_content = str_replace(array(
-			'%title%',
-			'%theme%',
-			'%timezone%',
-			'%locale%',
-			'%language%',
-			'%rows_per_page%',
-			'%invoice_start_no%'
-		), array(
-			$this->faktura_data['base']['inputName'] ?: 'Faktura',
-			$this->faktura_data['base']['inputTheme'] ?: 'default',
-			$this->faktura_data['base']['inputTimezone'],
-			$this->faktura_data['base']['inputLocale'],
-			$this->faktura_data['base']['inputLanguage'],
-			intval($this->faktura_data['base']['inputRowsPerPage']),
-			intval($this->faktura_data['base']['inputInvoiceStartNo'])
-		), $base_tpl);
-		file_put_contents($config_path . 'base.php', $base_content);
+		foreach (Update::$base_vars as $key => $default)
+		{
+			$l_base_var[$key] = $this->faktura_data['base']['input' . ucfirst($key)] ?: $default;
+		} // foreach
+
+		$l_base_var['version'] = '1.2';
+
+		Update::update_base_config($l_base_var);
 
 		// Writing the auth.php with a random "hash_key".
 		$auth_tpl = file_get_contents($config_path . 'auth.tpl');
@@ -327,7 +315,7 @@ class Controller_Setup extends Controller_Template
 		$mysqli = $this->connect_db();
 
 		// If we have not thrown any exceptions yet, we're good to go!
-		$success = $mysqli->query('CREATE DATABASE IF NOT EXISTS ' . $mysqli->escape_string($this->faktura_data['db_config']['database']) . ' CHARACTER SET utf8 COLLATE utf8_general_ci;;');
+		$success = $mysqli->query('CREATE DATABASE IF NOT EXISTS ' . $mysqli->escape_string($this->faktura_data['db_config']['database']) . ' CHARACTER SET utf8 COLLATE utf8_general_ci;');
 
 		if (! $success)
 		{
@@ -385,7 +373,7 @@ class Controller_Setup extends Controller_Template
 	{
 		try
 		{
-			$admin = ORM::factory('user')->create_user(array(
+			$admin = ORM::factory('User')->create_user(array(
 				'username' => $this->faktura_data['adminuser']['username'],
 				'password' => $this->faktura_data['adminuser']['password'],
 				'password_confirm' => $this->faktura_data['adminuser']['password'],
@@ -398,12 +386,20 @@ class Controller_Setup extends Controller_Template
 
 			// After the user has been created, we add the login and admin role.
 			$admin
-				->add('roles', ORM::factory('role')->where('name', '=', 'login')->find())
-				->add('roles', ORM::factory('role')->where('name', '=', 'admin')->find());
+				->add('roles', ORM::factory('Role')->where('name', '=', 'login')->find())
+				->add('roles', ORM::factory('Role')->where('name', '=', 'admin')->find());
 		}
 		catch (ORM_Validation_Exception $e)
 		{
-			$this->setup_errors[] = $e->getMessage() . ': ' . implode(',', $e->errors(''));
+			$errors = $e->errors('');
+
+			if (isset($errors['_external']))
+			{
+				$errors[] = implode(', ', $errors['_external']);
+				unset($errors['_external']);
+			} // if
+
+			$this->setup_errors[] = $e->getMessage() . ': ' . implode(',', $errors);
 		}
 		catch (Database_Exception $e)
 		{
