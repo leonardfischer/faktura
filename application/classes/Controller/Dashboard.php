@@ -48,7 +48,7 @@ class Controller_Dashboard extends Controller_Base
 			$widget_class = $this->request->post('identifier');
 			$widget_config = $this->request->post('config') ?: array();
 
-			$return['data'] = trim(utf8_encode(Widgets_Base::factory($widget_class, $widget_config)->init()->render()));
+			$return['data'] = trim(Widgets_Base::factory($widget_class, $widget_config)->init()->render());
 		}
 		catch (Exception $e)
 		{

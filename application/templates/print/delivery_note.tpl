@@ -1,7 +1,7 @@
 <header>
 	<small>Company address</small><br />
 	{if !empty($invoice->shipping_address)}
-		<?=nl2br($invoice->shipping_address) ?>
+		{$invoice->shipping_address|nl2br}
 	{else}
 		{if !empty($customer->company)}{$customer->company}<br />{/if}
 		{if !empty($customer->name)}{$customer->name}<br />{/if}

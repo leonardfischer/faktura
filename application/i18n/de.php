@@ -172,6 +172,9 @@ return array(
 	'Select a widget' => 'Widget auswahl',
 	'Add this widget' => 'Widget hinzufügen',
 
+	'System settings' => 'Systemeinstellungen',
+	'Default value' => 'Standardwert',
+
 	// Some exception messages
 	'This action may only be called via ajax!' => 'Diese Aktion darf nur via Ajax aufgerufen werden!',
 	'Attention - a error has occurred' => 'Achtung - Ein Fehler ist aufgetreten!',

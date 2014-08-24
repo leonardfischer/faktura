@@ -104,7 +104,7 @@
 	</tbody>
 </table>
 
-{if !$customer->allowance}
+{if $customer->allowance}
 	<table>
 		<colgroup>
 			<col width="10%">

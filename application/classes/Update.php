@@ -130,6 +130,11 @@ class Update
 
 		$search = $replace = array();
 
+		if (empty($p_data['mail_faktura']) || $p_data['mail_faktura'] == '#')
+		{
+			$p_data['mail_faktura'] = 'noreply@' . $_SERVER['SERVER_NAME'];
+		} // if
+
 		foreach ($p_data as $key => $value)
 		{
 			if (in_array($key, array('password_minlength', 'mail_smtp_port', 'search_minlength', 'rows_per_page', 'invoice_start_no')))

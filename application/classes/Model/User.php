@@ -101,7 +101,7 @@ class Model_User extends Model_Auth_User
 	public static function get_password_validation($values)
 	{
 		return Validation::factory($values)
-			->rule('password', 'min_length', array(':value', Kohana::$config->load('base')->get('password_minlength', 6)))
+			->rule('password', 'min_length', array(':value', Kohana::$config->load('base')->get('password_minlength', 3)))
 			->rule('password_confirm', 'matches', array(':validation', ':field', 'password'));
 	} // function
 
