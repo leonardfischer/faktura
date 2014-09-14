@@ -33,6 +33,16 @@ class Widgets_OpenReminders extends Widgets_Base
 	const WIDTH = 1;
 
 	/**
+	 * Defines the widget color.
+	 */
+	const COLOR = '#e74c3c';
+
+	/**
+	 * Defines the widget font-color.
+	 */
+	const FONTCOLOR = '#fff';
+
+	/**
 	 * Method for initializing the widget.
 	 *
 	 * @return  self

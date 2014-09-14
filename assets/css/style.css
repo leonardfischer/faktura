@@ -159,6 +159,38 @@ div.searchable-plugin ul input.filter {
 	top: 5px;
 }
 
+.widget {
+	border: 1px solid rgba(0, 0, 0, .2);
+	border-radius: 0;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+	margin-bottom: 20px;
+	min-height: 20px;
+	padding: 10px;
+}
+
+.widget .inherit-font-color {
+	color:inherit;
+}
+
+.widget .table.opacity > thead > tr > th {
+	border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.widget .table.opacity > thead > tr > th,
+.widget .table.opacity > tbody > tr > th,
+.widget .table.opacity > tfoot > tr > th,
+.widget .table.opacity > thead > tr > td,
+.widget .table.opacity > tbody > tr > td,
+.widget .table.opacity > tfoot > tr > td {
+	border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.widget .table-striped.opacity > tbody > tr:nth-child(2n+1) > td,
+.widget .table-striped.opacity > tbody > tr:nth-child(2n+1) > th {
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+
 /* Some helper classes from lil'b - https://github.com/ItsJonQ/lil-b */
 
 /**

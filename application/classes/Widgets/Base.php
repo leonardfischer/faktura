@@ -13,6 +13,17 @@
 abstract class Widgets_Base
 {
 	/**
+	 * This constant will hold the widget color.
+	 * @var  string
+	 */
+	const COLOR = '#f5f5f5';
+	/**
+	 * This constant will hold the widget color.
+	 * @var  string
+	 */
+	const FONTCOLOR = '#000';
+
+	/**
 	 * This variable will hold the widget configuration.
 	 * @var  array
 	 */
@@ -140,6 +151,28 @@ abstract class Widgets_Base
 
 
 	/**
+	 * This method returns the color of the current widget.
+	 *
+	 * @return  string
+	 */
+	public function get_color()
+	{
+		return static::COLOR;
+	} // function
+
+
+	/**
+	 * This method returns the font-color of the current widget.
+	 *
+	 * @return  string
+	 */
+	public function get_font_color()
+	{
+		return static::FONTCOLOR;
+	} // function
+
+
+	/**
 	 * Method for initializing the widget.
 	 *
 	 * @return  self
@@ -161,10 +194,13 @@ abstract class Widgets_Base
 	/**
 	 * Method for rendering the complete widget
 	 *
+	 * @param   integer  $id
 	 * @return  string
 	 */
-	public function render()
+	public function render($id)
 	{
-		return View::factory(static::TEMPLATE, $this->template_data)->set('self', $this);
+		return View::factory(static::TEMPLATE, $this->template_data)
+			->set('id', $id)
+			->set('self', $this);
 	} // function
 } // class

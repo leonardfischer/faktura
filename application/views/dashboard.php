@@ -12,7 +12,7 @@
 
 <div id="dashboard" class="row">
 	<?php foreach ($widgets as $widget): ?>
-		<div class="col-xs-12 col-sm-<?=($widget['instance']->get_width() * 6) ?> col-md-<?=($widget['instance']->get_width() * 4) ?> widget-container">
+		<div class="col-xs-12 col-md-<?=($widget['instance']->get_width() * 4) ?> widget-container">
 			<? if ($widget['instance']->is_configurable()): ?>
 			<div class="controls">
 				<button class="btn btn-sm btn-primary" type="button" title="<?=__('Configure this widget') ?>">
@@ -21,7 +21,7 @@
 			</div>
 			<? endif; ?>
 
-			<div class="well well-sm widget" data-widget="<?= $widget['data']->widget ?>">
+			<div id="widget-<?=$widget['id'] ?>" class="widget" data-widget="<?= $widget['data']->widget ?>" style="background:<?=$widget['instance']->get_color() ?>; color:<?=$widget['instance']->get_font_color() ?>;">
 				<img src="<?=$basedir; ?>assets/img/loading.gif" /> <?=__('Loading, please wait...') ?>
 			</div>
 		</div>
@@ -33,11 +33,15 @@
 		new Request.JSON({
 			url:'<?=Route::url('default', array('action' => 'ajax'))?>',
 			data:{
-				identifier:$widget.get('data-widget')
+				identifier:$widget.get('data-widget'),
+				id:$widget.get('id')
 			},
 			onComplete:function(json) {
 				if (json.success) {
-					$widget.set('html', json.data);
+					$widget.set('html', json.data.stripScripts());
+
+					// After inserting the HTML we evaluate the javascript.
+					json.data.stripScripts(true);
 				} else {
 					$widget.set('html', new Element('p.alert.alert-danger').set('html', json.message));
 				}

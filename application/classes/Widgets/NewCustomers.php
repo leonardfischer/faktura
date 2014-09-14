@@ -32,6 +32,16 @@ class Widgets_NewCustomers extends Widgets_Base
 	 */
 	const WIDTH = 1;
 
+	/**
+	 * Defines the widget color.
+	 */
+	const COLOR = '#3498db';
+
+	/**
+	 * Defines the widget font-color.
+	 */
+	const FONTCOLOR = '#fff';
+
 
 	/**
 	 * Method for returning the widget name.

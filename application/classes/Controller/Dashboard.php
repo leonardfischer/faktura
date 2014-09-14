@@ -45,10 +45,11 @@ class Controller_Dashboard extends Controller_Base
 				throw new HTTP_Exception_304('__This is a AJAX action only!');
 			} // if
 
+			$id = $this->request->post('id');
 			$widget_class = $this->request->post('identifier');
 			$widget_config = $this->request->post('config') ?: array();
 
-			$return['data'] = trim(Widgets_Base::factory($widget_class, $widget_config)->init()->render());
+			$return['data'] = trim(Widgets_Base::factory($widget_class, $widget_config)->init()->render($id));
 		}
 		catch (Exception $e)
 		{
@@ -169,11 +170,12 @@ class Controller_Dashboard extends Controller_Base
 		$return = array();
 		$widgets = $this->auth->get_user()->widgets->order_by('sorting', 'ASC')->find_all();
 
-		foreach ($widgets as $widget)
+		foreach ($widgets as $id => $widget)
 		{
 			$return[] = array(
 				'instance' => Widgets_Base::factory($widget->widget, $widget->config),
-				'data' => $widget
+				'data' => $widget,
+				'id' => $id
 			);
 		} // foreach
 

@@ -32,6 +32,16 @@ class Widgets_NewInvoices extends Widgets_Base
 	 */
 	const WIDTH = 1;
 
+	/**
+	 * Defines the widget color.
+	 */
+	const COLOR = '#2ecc71';
+
+	/**
+	 * Defines the widget font-color.
+	 */
+	const FONTCOLOR = '#fff';
+
 
 	/**
 	 * Method for returning the widget name.

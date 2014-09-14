@@ -30,7 +30,7 @@ class Widgets_LastInvoices extends Widgets_Base
 	/**
 	 * Defines, how wide this widget is.
 	 */
-	const WIDTH = 2;
+	const WIDTH = 3;
 
 
 	/**
