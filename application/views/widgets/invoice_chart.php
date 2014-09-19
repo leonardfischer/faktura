@@ -12,7 +12,7 @@
 		var $canvas_container = $('<?=$id ?>-canvas'),
 			ctx = $canvas_container.getContext("2d"),
 			data = {
-				labels: ['JAN', '', 'MAR', '', 'MAY', '', 'JUL'],
+				labels: JSON.decode('<?=$months ?>'),
 				datasets: [{
 					fillColor: "transparent",
 					strokeColor: "rgba(255,255,255,0.5)",

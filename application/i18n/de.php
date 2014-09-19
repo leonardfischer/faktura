@@ -165,6 +165,8 @@ return array(
 	'System status' => 'System Status',
 	'System version' => 'Faktura Version',
 	'Kohana version' => 'Kohana Version',
+	'The last half year (chart)' => 'Das letzte halbe Jahr (Diagramm)',
+	'The last half year' => 'Das letzte halbe Jahr',
 	'Average request time' => 'Durchschnittliche Ladezeit',
 	'Average memory usage' => 'Durchschnittliche Speicherbelastung',
 	'Configure the dashboard' => 'Dashboard konfigurieren',

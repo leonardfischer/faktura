@@ -19,6 +19,8 @@
 	<script src="<?=$basedir; ?>assets/js/mootools-more-1.4.0.1.js"></script>
 	<script src="<?=$basedir; ?>assets/js/respond.js"></script>
 
+	<script src="<?=$basedir; ?>assets/js/Chart.min.js"></script>
+
 	<script src="<?=$basedir; ?>assets/js/datepicker/Locale.de-DE.DatePicker.js"></script>
 	<script src="<?=$basedir; ?>assets/js/datepicker/Picker.js"></script>
 	<script src="<?=$basedir; ?>assets/js/datepicker/Picker.Attach.js"></script>

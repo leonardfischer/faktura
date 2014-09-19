@@ -56,7 +56,8 @@ class Widgets_InvoiceChart extends Widgets_Base
 			$start += 12;
 		} // if
 
-		$data = array_fill($start, 6, 0);
+		$data = array_fill($start + 1, 6, 0);
+
 		$invoices = ORM::factory('Invoice')->where('paid_on_date', '>', DB::expr('NOW() - INTERVAL 6 MONTH'))->find_all();
 
 		foreach ($invoices as $invoice)
@@ -65,7 +66,8 @@ class Widgets_InvoiceChart extends Widgets_Base
 		} // foreach
 
 		$this->template_data = array(
-			'data' => json_encode(array_values($data))
+			'data' => json_encode(array_values($data)),
+			'months' => json_encode(array_map('strtoupper', array_slice(Date::months(Date::MONTHS_SHORT), $start, 6)))
 		);
 
 		return $this;
