@@ -172,11 +172,18 @@ class Controller_Dashboard extends Controller_Base
 
 		foreach ($widgets as $id => $widget)
 		{
-			$return[] = array(
-				'instance' => Widgets_Base::factory($widget->widget, $widget->config),
-				'data' => $widget,
-				'id' => $id
-			);
+			try
+			{
+				$return[] = array(
+					'instance' => Widgets_Base::factory($widget->widget, $widget->config),
+					'data' => $widget,
+					'id' => $id
+				);
+			}
+			catch (Exception $e)
+			{
+				; // Silently fail.
+			} // try
 		} // foreach
 
 		return $return;
