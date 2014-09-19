@@ -23,10 +23,10 @@
 	<div class="alert alert-success mb0"><?= __('No open invoices')?>!</div>
 <? endif; ?> -->
 
-<? if($invoices->count()): ?><i class="pull-right fa fa-plus-square mouse-pointer toggle-button"></i><? endif; ?>
+<i class="widget-icon fa fa-5x fa-file-text-o"></i>
 <h4 class="h1 mt0"><?=$invoices->count() ?></h4>
 
-<p><?=$self->get_name() ?></p>
+<p><? if($invoices->count()): ?><i class="fa fa-plus-square mouse-pointer toggle-button mr10"></i><? endif; ?><?=$self->get_name() ?></p>
 
 <? if($invoices->count()): ?>
 <table class="table table-striped opacity hide">

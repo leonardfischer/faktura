@@ -1,3 +1,4 @@
+<i class="widget-icon fa fa-5x fa-cogs"></i>
 <h4 class="mt0"><?=$self->get_name() ?></h4>
 
 <table class="table table-striped">

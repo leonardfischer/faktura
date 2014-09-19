@@ -160,12 +160,25 @@ div.searchable-plugin ul input.filter {
 }
 
 .widget {
+	position: relative;
 	border: 1px solid rgba(0, 0, 0, .2);
 	border-radius: 0;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
 	margin-bottom: 20px;
 	min-height: 20px;
 	padding: 10px;
+}
+
+.widget .widget-icon {
+	position: absolute;
+	right: 15px;
+	opacity:0.2;
+	filter: alpha(opacity = 20);
+}
+
+.widget:hover .widget-icon {
+	opacity:0.4;
+	filter: alpha(opacity = 40);
 }
 
 .widget .inherit-font-color {
