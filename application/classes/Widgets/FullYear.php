@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Widget class "Invoice chart"
+ * Widget class "Full Year"
  *
  * @category    Widgets
  * @package     Faktura

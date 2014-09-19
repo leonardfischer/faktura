@@ -1,7 +1,7 @@
-<i class="widget-icon fa fa-5x fa-bar-chart-o" style="color:#2c3e50;"></i>
+<i class="widget-icon fa fa-5x fa-bar-chart-o" style="color:#34495e;"></i>
 
-<h4 class="h3 mt0"><?=__('Full year') ?> <?=date('Y') ?></h4>
-<p><?=__('Paid invoices of the current year') ?></p>
+<h4 class="h3 mt0"><?=__('Full year') ?> <?=(date('Y') - 1) ?></h4>
+<p><?=__('Paid invoices of the last year') ?></p>
 
 <div class="mr10">
 	<canvas id="<?=$id ?>-canvas"></canvas>

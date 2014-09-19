@@ -16,7 +16,7 @@
 				labels: JSON.decode('<?=$months ?>'),
 				datasets: [{
 					fillColor: "transparent",
-					strokeColor: "rgba(255,255,255,0.5)",
+					strokeColor: "rgba(255,255,255,0.3)",
 					pointColor: "#fff",
 					pointStrokeColor: "#fff",
 					data: JSON.decode('<?=$data ?>')

@@ -11,7 +11,7 @@
 </div>
 
 <div id="dashboard" class="row">
-	<?php foreach ($widgets as $i => $widget): ?>
+	<?php $i = 0; foreach ($widgets as $widget): $i += $widget['instance']->get_width() * 4; ?>
 		<div class="col-xs-12 col-md-<?=($widget['instance']->get_width() * 4) ?> widget-container">
 			<? if ($widget['instance']->is_configurable()): ?>
 			<div class="controls">
@@ -26,7 +26,7 @@
 			</div>
 		</div>
 
-		<? if ((1+$i) % 3 === 0): ?><div class="visible-md visible-lg clearfix"></div><? endif; ?>
+		<? if ($i % 12 === 0): ?><div class="visible-md visible-lg clearfix"></div><? endif; ?>
 
 	<?php endforeach; ?>
 </div>

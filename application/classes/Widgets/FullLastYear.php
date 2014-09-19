@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Widget class "Last half year"
+ * Widget class "Full Last Year"
  *
  * @category    Widgets
  * @package     Faktura
@@ -10,17 +10,17 @@
  * @version     1.0
  * @since       1.2
  */
-class Widgets_LastHalfYear extends Widgets_Base
+class Widgets_FullLastYear extends Widgets_Base
 {
 	/**
 	 * The widgets name.
 	 */
-	const NAME = 'The last half year (chart)';
+	const NAME = 'Full last year (chart)';
 
 	/**
 	 * The widgets template
 	 */
-	const TEMPLATE = 'widgets/last_half_year';
+	const TEMPLATE = 'widgets/full_last_year';
 
 	/**
 	 * Defines, if this widget is configurable.
@@ -35,7 +35,7 @@ class Widgets_LastHalfYear extends Widgets_Base
 	/**
 	 * Defines the widget color.
 	 */
-	const COLOR = '#9b59b6';
+	const COLOR = '#2c3e50';
 
 	/**
 	 * Defines the widget font-color.
@@ -50,24 +50,20 @@ class Widgets_LastHalfYear extends Widgets_Base
 	 */
 	public function init()
 	{
-		$start = date('n') - 6;
-		if ($start < 1)
-		{
-			$start += 12;
-		} // if
+		$current_year_data = array_fill(1, 12, 0);
 
-		$data = array_fill($start + 1, 6, 0);
-
-		$invoices = ORM::factory('Invoice')->where('paid_on_date', '>', DB::expr('NOW() - INTERVAL 6 MONTH'))->find_all();
+		$invoices = ORM::factory('Invoice')->where(DB::expr('year(paid_on_date)'), '=', (date('Y') - 1))->find_all();
 
 		foreach ($invoices as $invoice)
 		{
-			$data[(int) date('n', strtotime($invoice->paid_on_date))] += $invoice->calculate_total(true, true);
+			$current_year_data[(int) date('n', strtotime($invoice->paid_on_date))] += $invoice->calculate_total(true, true);
 		} // foreach
 
+		$months = array_map('strtoupper', Date::months(Date::MONTHS_SHORT));
+
 		$this->template_data = array(
-			'data' => json_encode(array_values($data)),
-			'months' => json_encode(array_map('strtoupper', array_slice(Date::months(Date::MONTHS_SHORT), $start, 6)))
+			'this_year' => json_encode(array_values($current_year_data)),
+			'months' => json_encode(array_values($months))
 		);
 
 		return $this;
