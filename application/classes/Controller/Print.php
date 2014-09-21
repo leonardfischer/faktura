@@ -49,6 +49,7 @@ class Controller_Print extends Controller_Base
 	 */
 	public function action_invoice()
 	{
+		$template = 'invoice.tpl';
 		$id = $this->request->param('id');
 
 		if ($id === null)
@@ -93,7 +94,14 @@ class Controller_Print extends Controller_Base
 			'total' => $model->calculate_total(true)
 		));
 
-		$this->content = $smarty->fetch('print/invoice.tpl');
+		if ($smarty->templateExists('print/' . $template))
+		{
+			$this->content = $smarty->fetch('print/' . $template);
+		}
+		else
+		{
+			$this->content = $smarty->fetch('print/example/' . $template);
+		} // if
 	} // function
 
 
@@ -102,6 +110,7 @@ class Controller_Print extends Controller_Base
 	 */
 	public function action_delivery_note()
 	{
+		$template = 'delivery_note.tpl';
 		$id = $this->request->param('id');
 
 		if ($id === null)
@@ -139,7 +148,14 @@ class Controller_Print extends Controller_Base
 			'pages' => $pages
 		));
 
-		$this->content = $smarty->fetch('print/delivery_note.tpl');
+		if ($smarty->templateExists('print/' . $template))
+		{
+			$this->content = $smarty->fetch('print/' . $template);
+		}
+		else
+		{
+			$this->content = $smarty->fetch('print/example/' . $template);
+		} // if
 	} // function
 
 
@@ -148,6 +164,7 @@ class Controller_Print extends Controller_Base
 	 */
 	public function action_order_confirmation()
 	{
+		$template = 'order_confirmation.tpl';
 		$id = $this->request->param('id');
 
 		if ($id === null)
@@ -192,7 +209,14 @@ class Controller_Print extends Controller_Base
 			'total' => $model->calculate_total(true)
 		));
 
-		$this->content = $smarty->fetch('print/order_confirmation.tpl');
+		if ($smarty->templateExists('print/' . $template))
+		{
+			$this->content = $smarty->fetch('print/' . $template);
+		}
+		else
+		{
+			$this->content = $smarty->fetch('print/example/' . $template);
+		} // if
 	} // function
 
 
@@ -201,6 +225,7 @@ class Controller_Print extends Controller_Base
 	 */
 	public function action_credit()
 	{
+		$template = 'credit.tpl';
 		$id = $this->request->param('id');
 
 		if ($id === null)
@@ -254,7 +279,14 @@ class Controller_Print extends Controller_Base
 			'total' => $model->calculate_total(true)
 		));
 
-		$this->content = $smarty->fetch('print/credit.tpl');
+		if ($smarty->templateExists('print/' . $template))
+		{
+			$this->content = $smarty->fetch('print/' . $template);
+		}
+		else
+		{
+			$this->content = $smarty->fetch('print/example/' . $template);
+		} // if
 	} // function
 
 
@@ -263,6 +295,7 @@ class Controller_Print extends Controller_Base
 	 */
 	public function action_reminder()
 	{
+		$template = 'reminder.tpl';
 		$id = $this->request->param('id');
 
 		if ($id === null)
@@ -307,6 +340,13 @@ class Controller_Print extends Controller_Base
 			'total' => $model->calculate_total(true)
 		));
 
-		$this->content = $smarty->fetch('print/reminder.tpl');
+		if ($smarty->templateExists('print/' . $template))
+		{
+			$this->content = $smarty->fetch('print/' . $template);
+		}
+		else
+		{
+			$this->content = $smarty->fetch('print/example/' . $template);
+		} // if
 	} // function
 } // class
