@@ -47,9 +47,11 @@
 							<input type="text" class="form-control form-group" placeholder="<?=__('Username') ?>" name="username" required autofocus>
 							<input type="password" class="form-control form-group" placeholder="<?=__('Password') ?>" name="password" required>
 
-							<label class="checkbox">
-								<input type="checkbox" value="remember-me" name="remember"> <?=__('Remember me') ?>
-							</label>
+							<div class="checkbox">
+								<label class="checkbox">
+									<input type="checkbox" value="remember-me" name="remember"> <?=__('Remember me') ?>
+								</label>
+							</div>
 
 							<?php if (isset($error)): ?>
 							<div class="alert alert-danger"><?=$error ?></div>
