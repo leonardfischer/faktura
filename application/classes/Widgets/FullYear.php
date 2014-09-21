@@ -62,7 +62,7 @@ class Widgets_FullYear extends Widgets_Base
 		$months = array_map('strtoupper', Date::months(Date::MONTHS_SHORT));
 
 		$this->template_data = array(
-			'this_year' => json_encode(array_values($current_year_data)),
+			'data' => json_encode(array_values($current_year_data)),
 			'months' => json_encode(array_values($months))
 		);
 

@@ -15,24 +15,21 @@
 			data = {
 				labels: JSON.decode('<?=$months ?>'),
 				datasets: [{
-					label: "A",
 					fillColor: "transparent",
 					strokeColor: "rgba(255,255,255,0.3)",
 					pointColor: "#fff",
 					pointStrokeColor: "#fff",
-					data: JSON.decode('<?=$this_year ?>')
+					data: JSON.decode('<?=$data ?>')
 				}]
 			},
 			options = {
 				scaleLineColor: "transparent",
-				scaleLineWidth: 2,
 				scaleFontColor: '#fff',
 				scaleLabel: "<%=value%> €",
 				scaleShowGridLines: false,
 				showTooltips: false,
 				responsive: true,
 				maintainAspectRatio: true,
-				animation: false,
 				bezierCurveTension: 0
 			};
 

@@ -24,14 +24,12 @@
 			},
 			options = {
 				scaleLineColor: "transparent",
-				scaleLineWidth: 2,
 				scaleFontColor: '#fff',
 				scaleLabel: "<%=value%> €",
 				scaleShowGridLines: false,
 				showTooltips: false,
 				responsive: true,
 				maintainAspectRatio: true,
-				animation: false,
 				bezierCurveTension: 0
 			};
 
