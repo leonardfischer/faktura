@@ -11,7 +11,7 @@ Currently it is not (yet) very user-friendly: meaning, while installing you can'
 ## Framework usage
 The faktura web-application makes use of the following frameworks:
  * The [Kohana PHP framework](http://kohanaframework.org/) v3.3.1
- * The [Boostrap CSS framework](http://getbootstrap.com/) v3.1.1 (+ some themes from [Bootswatch](http://bootswatch.com))
+ * The [Boostrap CSS framework](http://getbootstrap.com/) v3.2.0 (+ some themes from [Bootswatch](http://bootswatch.com))
  * The [MooTools Core javascript framework](http://mootools.net/) v1.4.5
  * The [MooTools More javascript framework](http://mootools.net/more/) v1.4.0.1
  * The [MooTools Datepicker](http://mootools.net/forge/p/mootools_datepicker) v1.6.0
