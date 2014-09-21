@@ -1,7 +1,7 @@
 <h4 class="mt0"><?=$self->get_name() ?></h4>
 
 <div class="table-responsive">
-	<table class="table table-striped">
+	<table class="table table-striped opacity">
 		<thead>
 		<tr>
 			<th><?=__('Customer / Contact person') ?></th>
