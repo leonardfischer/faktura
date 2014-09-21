@@ -58,7 +58,10 @@ class Widgets_LastHalfYear extends Widgets_Base
 
 		$data = array_fill($start + 1, 6, 0);
 
-		$invoices = ORM::factory('Invoice')->where('paid_on_date', '>', DB::expr('NOW() - INTERVAL 6 MONTH'))->find_all();
+		$invoices = ORM::factory('Invoice')
+			->where('paid_on_date', '>=', DB::expr('NOW() - INTERVAL 5 MONTH'))
+			->where('paid_on_date', '<=', DB::expr('NOW()'))
+			->find_all();
 
 		foreach ($invoices as $invoice)
 		{
