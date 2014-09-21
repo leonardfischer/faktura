@@ -1,6 +1,6 @@
 <i class="widget-icon fa fa-5x fa-bar-chart-o" style="color:#34495e;"></i>
 
-<h4 class="h3 mt0" style="color:#fff;"><?=__('Full year') ?> <?=(date('Y') - 1) ?></h4>
+<h4 class="h3 mt0 inherit-font-color"><?=__('Full year') ?> <?=(date('Y') - 1) ?></h4>
 <p><?=__('Paid invoices of the last year') ?></p>
 
 <div class="mr10">

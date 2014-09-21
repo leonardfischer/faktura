@@ -1,5 +1,5 @@
 <i class="widget-icon fa fa-5x fa-file-text-o"></i>
-<h4 class="h1 mt0" style="color:#fff;"><?=$invoices->count() ?></h4>
+<h4 class="h1 mt0 inherit-font-color"><?=$invoices->count() ?></h4>
 
 <p><? if($invoices->count()): ?><i class="fa fa-plus-square mouse-pointer toggle-button mr10"></i><? endif; ?><?=$self->get_name() ?></p>
 
