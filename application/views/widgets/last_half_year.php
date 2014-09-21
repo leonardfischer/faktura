@@ -1,6 +1,6 @@
 <i class="widget-icon fa fa-5x fa-bar-chart-o" style="color:#8e44ad;"></i>
 
-<h4 class="h3 mt0"><?=__('The last half year') ?></h4>
+<h4 class="h3 mt0" style="color:#fff;"><?=__('The last half year') ?></h4>
 <p><?=__('Paid invoices of the last six months') ?></p>
 
 <div class="mr10">

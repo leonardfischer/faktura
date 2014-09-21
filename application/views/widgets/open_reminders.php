@@ -1,30 +1,5 @@
-<!-- <h4 class="mt0"><?=$self->get_name() ?></h4>
-
-<? if($invoices->count()): ?>
-	<div class="alert alert-danger mb0"><?=$invoices->count() ?> <?= __('Open reminders') ?>!</div>
-
-	<table class="table table-striped">
-		<thead>
-		<tr>
-			<th><?= __('Invoice no.') ?></th>
-			<th><?= __('Created at') ?></th>
-		</tr>
-		</thead>
-		<tbody>
-		<? foreach ($invoices as $invoice): ?>
-		<tr>
-			<td><a href="<?= Route::url('invoice', array('action' => 'edit', 'id' => $invoice->id)) ?>"><?= $invoice->invoice_no ?></a></td>
-			<td><?= $invoice->invoice_date() ?></td>
-		</tr>
-		<? endforeach; ?>
-		</tbody>
-	</table>
-<? else: ?>
-	<div class="alert alert-success mb0"><?= __('No open reminders')?>!</div>
-<? endif; ?> -->
-
 <i class="widget-icon fa fa-5x fa-exclamation-circle"></i>
-<h4 class="h1 mt0"><?=$invoices->count() ?></h4>
+<h4 class="h1 mt0" style="color:#fff;"><?=$invoices->count() ?></h4>
 
 <p><? if($invoices->count()): ?><i class="fa fa-plus-square mouse-pointer toggle-button mr10"></i><? endif; ?><?=$self->get_name() ?></p>
 
