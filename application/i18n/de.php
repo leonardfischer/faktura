@@ -159,6 +159,7 @@ return array(
 	'Open invoices' => 'Offene Rechnungen',
 	'Summed up costs of open invoices' => 'Summierte Kosten aller offenen Rechnungen',
 	'No open invoices' => 'Keine offene Rechnungen',
+	'Summed up costs of all reminders' => 'Summierte Kosten aller Mahnungen',
 	'Open reminders' => 'Offene Mahnungen',
 	'No open reminders' => 'Keine offene Mahnungen',
 	'Invoice value of :month' => 'Wert der Rechnungen aus :month',
