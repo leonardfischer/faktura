@@ -117,7 +117,7 @@ $right_column = array_slice($properties, $property_count);
 					<td><?=$invoice->invoice_no ?></td>
 					<td><?=$invoice->invoice_date() ?></td>
 					<td><?=$invoice->paid_on_date() ?></td>
-					<td><?=$invoice->calculate_total() ?></td>
+					<td><?=$invoice->calculate_total(0,1) ?></td>
 					<td>
 						<div class="btn-group">
 							<a class="btn btn-primary btn-sm" href="<?=Route::url('invoice', array('action' => 'edit', 'id' => $invoice->id)) ?>"><?=__('Edit') ?></a>
