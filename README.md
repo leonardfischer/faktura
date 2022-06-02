@@ -1,3 +1,8 @@
+# ATTENTION 
+This project is outdated and archived, it does not work with current PHP versions. It won't receive any updates.
+
+---
+
 # Faktura
 This small faktura web-application is built with Kohana in the backend and bootstrap and mootools in the frontend.
 
